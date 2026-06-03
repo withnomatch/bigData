@@ -1,0 +1,247 @@
+[root@node5 ~]# spark-submit \
+>     --master spark://10.176.62.230:7077 \
+>     --driver-memory 2g \
+>     --executor-memory 4g \
+>     --executor-cores 2 \
+>     --num-executors 2 \
+>     baseline_clustering.py \
+>     --input hdfs://node5:9000/user/root/data/oracle_database_questions_jsonlines.json \
+>     --output hdfs://node5:9000/user/root/output/baseline_clustering \
+>     --k 50 \
+>     --max-features 5000 \
+>     --sample-ratio 0.1
+
+============================================================
+StackOverflow Question Clustering - Baseline
+============================================================
+Input path: hdfs://node5:9000/user/root/data/oracle_database_questions_jsonlines.json
+Output path: hdfs://node5:9000/user/root/output/baseline_clustering
+Number of clusters K: 50
+Max vocabulary: 5000
+Sampling ratio: 0.100000
+============================================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+26/06/02 14:14:47 INFO SparkContext: Running Spark version 2.0.0
+26/06/02 14:14:47 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/02 14:14:48 INFO SecurityManager: Changing view acls to: root
+26/06/02 14:14:48 INFO SecurityManager: Changing modify acls to: root
+26/06/02 14:14:48 INFO SecurityManager: Changing view acls groups to: 
+26/06/02 14:14:48 INFO SecurityManager: Changing modify acls groups to: 
+26/06/02 14:14:48 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+26/06/02 14:14:48 INFO Utils: Successfully started service 'sparkDriver' on port 55769.
+26/06/02 14:14:48 INFO SparkEnv: Registering MapOutputTracker
+26/06/02 14:14:48 INFO SparkEnv: Registering BlockManagerMaster
+26/06/02 14:14:48 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-b13be27d-1fec-4996-9338-ca9a61b75d49
+26/06/02 14:14:48 INFO MemoryStore: MemoryStore started with capacity 912.3 MB
+26/06/02 14:14:48 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/02 14:14:48 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/02 14:14:48 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://10.176.62.230:4040
+26/06/02 14:14:48 INFO Utils: Copying /root/baseline_clustering.py to /tmp/spark-85857359-ff15-4cd3-9ac0-81e080b250eb/userFiles-7cb9a82f-a50a-4c3a-97a1-a0b3267794a0/baseline_clustering.py
+26/06/02 14:14:48 INFO SparkContext: Added file file:/root/baseline_clustering.py at spark://10.176.62.230:55769/files/baseline_clustering.py with timestamp 1780424088828
+26/06/02 14:14:48 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://10.176.62.230:7077...
+26/06/02 14:14:48 INFO TransportClientFactory: Successfully created connection to /10.176.62.230:7077 after 24 ms (0 ms spent in bootstraps)
+26/06/02 14:14:49 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20260602141449-0012
+26/06/02 14:14:49 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260602141449-0012/0 on worker-20260602030846-10.176.62.232-49287 (10.176.62.232:49287) with 2 cores
+26/06/02 14:14:49 INFO StandaloneSchedulerBackend: Granted executor ID app-20260602141449-0012/0 on hostPort 10.176.62.232:49287 with 2 cores, 4.0 GB RAM
+26/06/02 14:14:49 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260602141449-0012/1 on worker-20260602113256-10.176.62.231-59864 (10.176.62.231:59864) with 2 cores
+26/06/02 14:14:49 INFO StandaloneSchedulerBackend: Granted executor ID app-20260602141449-0012/1 on hostPort 10.176.62.231:59864 with 2 cores, 4.0 GB RAM
+26/06/02 14:14:49 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 59202.
+26/06/02 14:14:49 INFO NettyBlockTransferService: Server created on 10.176.62.230:59202
+26/06/02 14:14:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10.176.62.230, 59202)
+26/06/02 14:14:49 INFO BlockManagerMasterEndpoint: Registering block manager 10.176.62.230:59202 with 912.3 MB RAM, BlockManagerId(driver, 10.176.62.230, 59202)
+26/06/02 14:14:49 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260602141449-0012/0 is now RUNNING
+26/06/02 14:14:49 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260602141449-0012/1 is now RUNNING
+26/06/02 14:14:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10.176.62.230, 59202)
+26/06/02 14:14:49 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+26/06/02 14:14:49 INFO SharedState: Warehouse path is 'file:/root/spark-warehouse'.
+
+============================================================
+[Step 1] Loading Data
+============================================================
+Total records: 152758
+Sampled records: 15344 (ratio: 0.100000)
+
+============================================================
+[Step 2] Text Preprocessing
+============================================================
+Steps: HTML cleaning -> Combine title&body -> Lowercase -> Remove special chars
+Valid records: 15344
+
+============================================================
+[Step 3] Building Feature Extraction Pipeline
+============================================================
+Pipeline: Tokenizer -> StopWordsRemover -> CountVectorizer -> IDF -> Normalizer
+Params: max_features=5000, min_df=5
+
+Fitting Pipeline...
+Pipeline fitting complete, time: 66.92s
+Actual vocabulary size: 5000
+
+============================================================
+[Step 4] K-Means Clustering
+============================================================
+Params: K=50, max_iter=30
+Note: distanceMeasure not supported in Spark 2.0, using default (euclidean)
+Training K-Means model...
+26/06/02 14:16:46 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/02 14:24:55 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeSystemBLAS
+26/06/02 14:24:55 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeRefBLAS
+26/06/02 14:41:09 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+K-Means training complete, time: 1463.21s
+
+============================================================
+[Step 5] Evaluating Clustering Quality
+============================================================
+Note: ClusteringEvaluator not available in Spark 2.0
+Using cluster size distribution for evaluation...
+
+Cluster Size Distribution:
++-------+-----+
+|cluster|count|
++-------+-----+
+|0      |158  |
+|1      |140  |
+|2      |219  |
+|3      |604  |
+|4      |98   |
+|5      |136  |
+|6      |126  |
+|7      |92   |
+|8      |864  |
+|9      |119  |
+|10     |90   |
+|11     |162  |
+|12     |376  |
+|13     |144  |
+|14     |181  |
+|15     |1    |
+|16     |202  |
+|17     |136  |
+|18     |361  |
+|19     |244  |
+|20     |92   |
+|21     |430  |
+|22     |410  |
+|23     |16   |
+|24     |70   |
+|25     |4    |
+|26     |145  |
+|27     |136  |
+|28     |70   |
+|29     |386  |
+|30     |24   |
+|31     |64   |
+|32     |257  |
+|33     |321  |
+|34     |7    |
+|35     |252  |
+|36     |224  |
+|37     |90   |
+|38     |159  |
+|39     |21   |
+|40     |2    |
+|41     |126  |
+|42     |5874 |
+|43     |195  |
+|44     |160  |
+|45     |116  |
+|46     |863  |
+|47     |264  |
+|48     |88   |
+|49     |25   |
++-------+-----+
+
+Total Clusters: 50
+Total Points: 15344
+Average Cluster Size: 306.88
+
+============================================================
+[Step 6] Cluster Statistics Analysis
+============================================================
+
+Top 20 largest clusters:
++-------+------------+--------------------+
+|cluster|cluster_size|              titles|
++-------+------------+--------------------+
+|     42|        5874|[How to send valu...|
+|      8|         864|[Obtaining the de...|
+|     46|         863|[Fetch variable f...|
+|      3|         604|[Fetch the rows w...|
+|     21|         430|[Oracle sql types...|
+|     22|         410|[could not resolv...|
+|     29|         386|[Return a value f...|
+|     12|         376|[How to subtract ...|
+|     18|         361|[How to avoid sto...|
+|     33|         321|[Restricting valu...|
+|     47|         264|[PLS-00201: ident...|
+|     32|         257|[Is this implemen...|
+|     35|         252|[Oracle function ...|
+|     19|         244|[Convert number t...|
+|     36|         224|[Include rows tha...|
+|      2|         219|[Oracle - ODBC co...|
+|     16|         202|[JDBC - Oracle Ar...|
+|     43|         195|[How to start lea...|
+|     14|         181|[Filter records b...|
+|     11|         162|[Are Oracle Equi-...|
++-------+------------+--------------------+
+only showing top 20 rows
+
+
+Cluster size statistics:
+  Max cluster: 5874 questions
+  Min cluster: 1 questions
+  Average size: 306.9 questions
+
+============================================================
+[Step 7] Saving Results
+============================================================
+Cluster assignments saved: hdfs://node5:9000/user/root/output/baseline_clustering/cluster_assignments
+Cluster summary saved: hdfs://node5:9000/user/root/output/baseline_clustering/cluster_summary
+Top 10 questions per cluster saved: hdfs://node5:9000/user/root/output/baseline_clustering/top_questions_per_cluster
+
+============================================================
+[Step 8] Sample Cluster Display
+============================================================
+
+Cluster 42 (total 5874 questions):
+  1. How big would such a database be?
+  2. How to make Pro*C cope with #warning directives?
+  3. Develop on local Oracle instance
+  4. Best way to do multi-row insert in Oracle?
+  5. Microsoft T-SQL to Oracle SQL translation
+
+Cluster 8 (total 864 questions):
+  1. how to replace multiple strings together in Oracle
+  2. Connect to an Oracle 8.0 database using a 10g client
+  3. ORACLE SQL function that can be used in the where part of a select statement
+  4. Oracle Resource Manager Plan Design
+  5. Best way in Oracle to go from this data to this result
+
+Cluster 46 (total 863 questions):
+  1. Fetch variable from cursor error in oracle pl sql
+  2. Oracle DBMS - Manage concurrency between transactions
+  3. how to pass array object to a cursor in Oracle?
+  4. Commit statement after Stored Function with select query
+  5. Unable to use REPLACE function in PLSQL
+
+Cluster 3 (total 604 questions):
+  1. Fetch the rows which have the Max value for a column for each distinct value of another column
+  2. How to return a Date (not a TimeWithZone) from a Oracle date column in ActiveRecord?
+  3. Convert timestamp/date time from UTC to EST Oracle SQL
+  4. how to convert date in oracle
+  5. How to send a Timestamp field to Oracle stored proc. from Java despite the DB config?
+
+Cluster 21 (total 430 questions):
+  1. Oracle sql types over dblink
+  2. Adding redudant join conditions in Oracle results in a different plan
+  3. Is there a better way to search over a range of values in Oracle than testing against a subquery?
+  4. Oracle CASE with OR
+  5. Update large number of rows in Oracle
+
+============================================================
+Baseline Execution Complete!
+============================================================
+Silhouette Score: 0.0000
+Total time: 1894.24s
+Results saved to: hdfs://node5:9000/user/root/output/baseline_clustering
+============================================================
