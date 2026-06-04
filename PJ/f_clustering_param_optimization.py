@@ -426,6 +426,30 @@ def result_schema():
     ])
 
 
+def result_tuple(row):
+    return (
+        row["exp_id"],
+        row["stage"],
+        row["init_mode"],
+        row["spark_init_mode"],
+        row["distance_mode"],
+        row["feature_col"],
+        int(row["max_iter"]),
+        int(row["seed"]),
+        float(row["training_time_sec"]),
+        float(row["training_cost"]),
+        float(row["center_silhouette"]),
+        int(row["silhouette_samples"]),
+        long(row["total_points"]) if sys.version_info[0] < 3 else int(row["total_points"]),
+        int(row["cluster_count"]),
+        long(row["max_cluster_size"]) if sys.version_info[0] < 3 else int(row["max_cluster_size"]),
+        long(row["min_cluster_size"]) if sys.version_info[0] < 3 else int(row["min_cluster_size"]),
+        float(row["avg_cluster_size"]),
+        int(row["singleton_clusters"]),
+        float(row["largest_cluster_ratio"]),
+    )
+
+
 def choose_better(candidate, current):
     if current is None:
         return True
@@ -467,11 +491,12 @@ def save_outputs(spark, output_path, results, best_result, best_predictions):
     print("[Step 4] Saving F-task outputs")
     print("=" * 60)
 
-    result_df = spark.createDataFrame(results, schema=result_schema())
+    schema = result_schema()
+    result_df = spark.createDataFrame([result_tuple(row) for row in results], schema=schema)
     result_df.write.mode("overwrite").json(output_path + "/experiment_results")
     print("Experiment result table saved: %s/experiment_results" % output_path)
 
-    best_df = spark.createDataFrame([best_result], schema=result_schema())
+    best_df = spark.createDataFrame([result_tuple(best_result)], schema=schema)
     best_df.write.mode("overwrite").json(output_path + "/best_config")
     print("Best config saved: %s/best_config" % output_path)
 

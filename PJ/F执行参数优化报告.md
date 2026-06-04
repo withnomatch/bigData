@@ -79,6 +79,12 @@ spark-submit \
 | `best_cluster_assignments/` | 最佳配置下每个问题的聚类编号 |
 | `best_top_questions_per_cluster/` | 最佳配置下每个簇的 Top 问题，便于人工分析语义一致性 |
 
+## 运行验证记录
+
+已在 node5 的 Spark 2.0 环境上完成小样本 smoke test，验证脚本可以读取 HDFS 数据、完成 TF-IDF 特征构建、运行 K-Means 参数实验并写回 HDFS。
+
+验证命令使用 `sample-ratio=0.001`、`k=5`、`max-features=300`、`maxIter=1`、`--skip-cost`。实际读取总记录数 152758，抽样后有效记录 141；TF-IDF 构建与缓存耗时约 179.76 秒，单组 K-Means 训练耗时约 0.54 秒，结果已写入 `hdfs://node5:9000/user/root/output/f_param_optimization_smoke2`。
+
 ## 可用于 PPT 的结论表述
 
 基准方案在 10% 样本、K=50、`maxIter=30` 下，K-Means 训练耗时约 1463 秒，总耗时约 1894 秒，且最大簇包含 5874/15344 个问题，占比约 38.3%。这说明基准方案可以跑通，但存在运行时间较长、簇分布不均衡的问题。
