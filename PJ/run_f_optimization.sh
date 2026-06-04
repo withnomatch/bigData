@@ -6,6 +6,8 @@
 MASTER_NODE="10.176.62.230"
 HDFS_INPUT="/user/root/data/oracle_database_questions_jsonlines.json"
 HDFS_OUTPUT="/user/root/output/f_param_optimization"
+FULL_INPUT="hdfs://${MASTER_NODE}:9000${HDFS_INPUT}"
+FULL_OUTPUT="hdfs://${MASTER_NODE}:9000${HDFS_OUTPUT}"
 
 K=50
 MAX_FEATURES=5000
@@ -29,8 +31,8 @@ echo "============================================================"
 echo "F-task: K-Means execution parameter optimization"
 echo "============================================================"
 echo "Spark master: ${SPARK_MASTER}"
-echo "Input: hdfs://${MASTER_NODE}:9000${HDFS_INPUT}"
-echo "Output: hdfs://${MASTER_NODE}:9000${HDFS_OUTPUT}"
+echo "Input: ${FULL_INPUT}"
+echo "Output: ${FULL_OUTPUT}"
 echo "K: ${K}"
 echo "Sample ratio: ${SAMPLE_RATIO}"
 echo "Plan: ${PLAN}"
@@ -74,8 +76,8 @@ spark-submit \
     --conf spark.network.timeout=300 \
     --conf spark.executor.heartbeatInterval=30 \
     f_clustering_param_optimization.py \
-    --input ${HDFS_INPUT} \
-    --output ${HDFS_OUTPUT} \
+    --input ${FULL_INPUT} \
+    --output ${FULL_OUTPUT} \
     --k ${K} \
     --max-features ${MAX_FEATURES} \
     --min-df ${MIN_DF} \
@@ -86,6 +88,12 @@ spark-submit \
     --max-iters "${MAX_ITERS}" \
     --seeds "${SEEDS}" \
     --silhouette-sample ${SILHOUETTE_SAMPLE}
+
+SPARK_STATUS=$?
+if [ ${SPARK_STATUS} -ne 0 ]; then
+    echo "Error: spark-submit failed with status ${SPARK_STATUS}"
+    exit ${SPARK_STATUS}
+fi
 
 echo ""
 echo "============================================================"
@@ -115,5 +123,5 @@ fi
 echo ""
 echo "============================================================"
 echo "F-task optimization finished."
-echo "Result path: hdfs://${MASTER_NODE}:9000${HDFS_OUTPUT}"
+echo "Result path: ${FULL_OUTPUT}"
 echo "============================================================"
