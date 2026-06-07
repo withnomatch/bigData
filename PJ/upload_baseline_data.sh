@@ -6,8 +6,8 @@
 # ==================== 配置参数 ====================
 MASTER_NODE="10.176.62.230"
 HDFS_DATA_DIR="/user/root/data"
-LOCAL_DATA_FILE="./StackOverFlow_Oracle_Database/oracle_database_questions.json"
-HDFS_DATA_FILE="${HDFS_DATA_DIR}/oracle_database_questions.json"
+LOCAL_DATA_FILE="./oracle_database_questions_jsonlines.json"
+HDFS_DATA_FILE="${HDFS_DATA_DIR}/oracle_database_questions_jsonlines.json"
 
 # ==================== 打印配置 ====================
 echo "============================================================"

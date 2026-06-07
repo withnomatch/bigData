@@ -5,13 +5,14 @@
 
 # ==================== 配置参数 ====================
 MASTER_NODE="10.176.62.230"
-HDFS_INPUT="/user/root/data/oracle_database_questions.json"
+HDFS_INPUT="/user/root/data/oracle_database_questions_jsonlines.json"
 HDFS_OUTPUT="/user/root/output/baseline_clustering"
 
 K=50
 MAX_FEATURES=5000
 MIN_DF=5
 MAX_ITER=30
+SAMPLE_RATIO=0.1
 
 SPARK_MASTER="spark://${MASTER_NODE}:7077"
 DRIVER_MEMORY="4g"
@@ -37,7 +38,7 @@ echo "[检查] 验证输入数据..."
 hdfs dfs -test -e ${HDFS_INPUT}
 if [ $? -ne 0 ]; then
     echo "错误: 输入数据不存在: ${HDFS_INPUT}"
-    echo "请先运行 ./upload_data.sh 上传数据"
+    echo "请先运行 ./upload_baseline_data.sh 上传数据"
     exit 1
 fi
 
@@ -74,7 +75,8 @@ spark-submit \
     --k ${K} \
     --max-features ${MAX_FEATURES} \
     --min-df ${MIN_DF} \
-    --max-iter ${MAX_ITER}
+    --max-iter ${MAX_ITER} \
+    --sample-ratio ${SAMPLE_RATIO}
 
 # ==================== 检查结果 ====================
 echo ""
@@ -101,6 +103,13 @@ hdfs dfs -test -e ${HDFS_OUTPUT}/top_questions_per_cluster
 if [ $? -eq 0 ]; then
     echo ""
     echo "✓ Top问题列表已生成"
+fi
+
+hdfs dfs -test -e ${HDFS_OUTPUT}/metrics
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✓ 评价指标已生成"
+    hdfs dfs -cat ${HDFS_OUTPUT}/metrics/*
 fi
 
 echo ""

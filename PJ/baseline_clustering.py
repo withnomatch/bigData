@@ -7,6 +7,8 @@ Compatible with Python 2.7
 from __future__ import print_function
 import re
 import argparse
+import json
+import math
 import time
 import sys
 
@@ -81,12 +83,16 @@ def create_spark_session(app_name="StackOverflow_Clustering_Baseline"):
     return spark
 
 
-def load_data(spark, input_path, sample_ratio=1.0):
+def load_data(spark, input_path, sample_ratio=1.0, multi_line=False):
     print("\n" + "=" * 60)
     print("[Step 1] Loading Data")
     print("=" * 60)
-    
-    df = spark.read.json(input_path)
+
+    # multi_line=True is needed when the input file is a JSON array ([{...},...]).
+    # For HDFS distributed reading, prefer JSONLines (one object per line) and
+    # keep multi_line=False (default).  Convert with convert_json.py first.
+    reader = spark.read.option("multiLine", "true") if multi_line else spark.read
+    df = reader.json(input_path)
     total_count = df.count()
     print("Total records: %d" % total_count)
     
@@ -185,27 +191,57 @@ def run_kmeans(processed_df, k=50, max_iter=30, distance_measure="cosine"):
     return kmeans_model, predictions
 
 
-def evaluate_clustering(predictions, distance_measure="cosine"):
+def evaluate_clustering(kmeans_model, predictions):
     print("\n" + "=" * 60)
     print("[Step 5] Evaluating Clustering Quality")
     print("=" * 60)
     
-    print("Note: ClusteringEvaluator not available in Spark 2.0")
-    print("Using cluster size distribution for evaluation...")
+    print("Spark 2.0 does not provide ClusteringEvaluator.")
+    print("Reporting WSSSE and cluster-distribution metrics instead.")
     
     cluster_sizes = predictions.groupBy("cluster").count().orderBy("cluster")
     print("\nCluster Size Distribution:")
     cluster_sizes.show(50, truncate=False)
     
-    cluster_count = predictions.select("cluster").distinct().count()
-    total_points = predictions.count()
+    size_rows = cluster_sizes.collect()
+    sizes = [row["count"] for row in size_rows]
+    cluster_count = len(sizes)
+    total_points = sum(sizes)
     avg_cluster_size = float(total_points) / cluster_count
-    
+    largest_cluster_size = max(sizes)
+    smallest_cluster_size = min(sizes)
+    largest_cluster_ratio = largest_cluster_size / float(total_points)
+    variance = sum((size - avg_cluster_size) ** 2 for size in sizes) / cluster_count
+    cluster_size_cv = math.sqrt(variance) / avg_cluster_size
+    probabilities = [size / float(total_points) for size in sizes]
+    entropy = -sum(p * math.log(p) for p in probabilities if p > 0)
+    normalized_entropy = entropy / math.log(cluster_count) if cluster_count > 1 else 0.0
+    wssse = kmeans_model.computeCost(predictions)
+    wssse_per_point = wssse / float(total_points)
+
+    metrics = {
+        "total_points": total_points,
+        "cluster_count": cluster_count,
+        "average_cluster_size": avg_cluster_size,
+        "largest_cluster_size": largest_cluster_size,
+        "smallest_cluster_size": smallest_cluster_size,
+        "largest_cluster_ratio": largest_cluster_ratio,
+        "cluster_size_cv": cluster_size_cv,
+        "normalized_cluster_entropy": normalized_entropy,
+        "wssse": wssse,
+        "wssse_per_point": wssse_per_point,
+    }
+
     print("Total Clusters: %d" % cluster_count)
     print("Total Points: %d" % total_points)
     print("Average Cluster Size: %.2f" % avg_cluster_size)
-    
-    return 0.0
+    print("Largest Cluster Ratio: %.4f" % largest_cluster_ratio)
+    print("Cluster Size CV: %.4f" % cluster_size_cv)
+    print("Normalized Cluster Entropy: %.4f" % normalized_entropy)
+    print("WSSSE: %.4f" % wssse)
+    print("WSSSE per Point: %.6f" % wssse_per_point)
+
+    return metrics
 
 
 def analyze_clusters(predictions, top_n=20):
@@ -232,7 +268,7 @@ def analyze_clusters(predictions, top_n=20):
     return cluster_stats
 
 
-def save_results(predictions, output_path):
+def save_results(predictions, output_path, metrics):
     print("\n" + "=" * 60)
     print("[Step 7] Saving Results")
     print("=" * 60)
@@ -265,6 +301,12 @@ def save_results(predictions, output_path):
     top_per_cluster.write.mode("overwrite").json(output_path + "/top_questions_per_cluster")
     print("Top 10 questions per cluster saved: %s/top_questions_per_cluster" % output_path)
 
+    metrics_json = json.dumps(metrics, sort_keys=True)
+    predictions.rdd.context.parallelize(
+        [metrics_json], 1
+    ).saveAsTextFile(output_path + "/metrics")
+    print("Evaluation metrics saved: %s/metrics" % output_path)
+
 
 def show_sample_clusters(predictions, n_clusters=5, n_questions=5):
     print("\n" + "=" * 60)
@@ -295,7 +337,10 @@ def main():
     parser.add_argument("--min-df", type=int, default=5, help="Min document frequency (default: 5)")
     parser.add_argument("--sample-ratio", type=float, default=1.0, help="Sampling ratio (default: 1.0)")
     parser.add_argument("--max-iter", type=int, default=30, help="Max iterations (default: 30)")
-    
+    parser.add_argument("--multi-line", action="store_true",
+                        help="Set if input file is a JSON array (not JSONLines). "
+                             "Avoid on large HDFS files; prefer convert_json.py instead.")
+
     args = parser.parse_args()
     
     total_start = time.time()
@@ -313,7 +358,7 @@ def main():
     spark = create_spark_session()
     
     try:
-        df = load_data(spark, args.input, args.sample_ratio)
+        df = load_data(spark, args.input, args.sample_ratio, args.multi_line)
         
         df = preprocess_data(df)
         
@@ -324,11 +369,11 @@ def main():
             processed_df, args.k, args.max_iter, "cosine"
         )
         
-        silhouette = evaluate_clustering(predictions, "cosine")
+        metrics = evaluate_clustering(kmeans_model, predictions)
         
         analyze_clusters(predictions)
         
-        save_results(predictions, args.output)
+        save_results(predictions, args.output, metrics)
         
         show_sample_clusters(predictions)
         
@@ -337,7 +382,8 @@ def main():
         print("\n" + "=" * 60)
         print("Baseline Execution Complete!")
         print("=" * 60)
-        print("Silhouette Score: %.4f" % silhouette)
+        print("WSSSE per Point: %.6f" % metrics["wssse_per_point"])
+        print("Largest Cluster Ratio: %.4f" % metrics["largest_cluster_ratio"])
         print("Total time: %.2fs" % total_elapsed)
         print("Results saved to: %s" % args.output)
         print("=" * 60)

@@ -1,0 +1,20 @@
+metric,value,description
+dataset_total_records,152758,Oracle-related StackOverflow questions
+sample_ratio,0.1,Fixed random sampling with seed 42
+sample_records,15344,Records used by the cluster experiment
+k,50,Number of KMeans clusters
+max_features,5000,Maximum TF-IDF vocabulary size
+min_df,5,Minimum document frequency
+max_iter,30,Maximum KMeans iterations
+feature_pipeline,Tokenizer-StopWordsRemover-CountVectorizer-IDF-L2Normalizer,Baseline feature extraction
+kmeans_training_seconds,1463.21,Measured on the Spark 2.0 cluster
+total_runtime_seconds,1894.24,End-to-end measured runtime
+largest_cluster_size,5874,Largest observed cluster
+smallest_cluster_size,1,Smallest observed cluster
+average_cluster_size,306.88,15344 divided by 50
+largest_cluster_ratio,0.382817,5874 divided by 15344
+cluster_size_cv,2.660947,Cluster-size coefficient of variation
+normalized_cluster_entropy,0.722661,Normalized entropy of the cluster-size distribution
+output_cluster_assignments,generated,Question-to-cluster output
+output_cluster_summary,generated,Cluster-size output
+output_top_questions,generated,Top ten questions per cluster
