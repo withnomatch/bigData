@@ -451,7 +451,22 @@ def result_tuple(row):
 
 
 def choose_better(candidate, current):
+    # Reject visibly degenerate clusterings before comparing compactness.
+    # A high center-based silhouette can be misleading when nearly every point
+    # collapses into one cluster, as observed in experiment F03.
+    candidate_valid = (
+        candidate["largest_cluster_ratio"] <= 0.50
+        and candidate["singleton_clusters"] <= max(1, candidate["cluster_count"] // 10)
+    )
+    if not candidate_valid:
+        return False
     if current is None:
+        return True
+    current_valid = (
+        current["largest_cluster_ratio"] <= 0.50
+        and current["singleton_clusters"] <= max(1, current["cluster_count"] // 10)
+    )
+    if not current_valid:
         return True
     if candidate["center_silhouette"] > current["center_silhouette"]:
         return True
