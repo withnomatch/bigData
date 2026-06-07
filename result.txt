@@ -1,0 +1,445 @@
+[root@node5 ~]# /opt/spark-2.0.0-bin-hadoop2.7/bin/spark-submit \
+>     --master spark://10.176.62.230:7077 \
+>     --driver-memory 4g \
+>     --executor-memory 4g \
+>     --executor-cores 2 \
+>     --num-executors 2 \
+>     /root/word2vec_experiment.py \
+>     --input hdfs://node5:9000/user/root/data/oracle_database_questions_jsonlines.json \
+>     --output hdfs://node5:9000/user/root/output/word2vec_experiment \
+>     --k 50 \
+>     --max-features 5000 \
+>     --sample-ratio 0.1 \
+>     --vector-size 50 \
+>     --max-iter 20
+
+============================================================
+Word2Vec Feature Extraction Comparison Experiment
+============================================================
+Input: hdfs://node5:9000/user/root/data/oracle_database_questions_jsonlines.json
+Output: hdfs://node5:9000/user/root/output/word2vec_experiment
+K: 50
+Max features: 5000
+Vector size: 50
+Sample ratio: 0.100000
+============================================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+26/06/07 20:23:06 INFO SparkContext: Running Spark version 2.0.0
+26/06/07 20:23:06 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/07 20:23:06 INFO SecurityManager: Changing view acls to: root
+26/06/07 20:23:06 INFO SecurityManager: Changing modify acls to: root
+26/06/07 20:23:06 INFO SecurityManager: Changing view acls groups to: 
+26/06/07 20:23:06 INFO SecurityManager: Changing modify acls groups to: 
+26/06/07 20:23:06 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+26/06/07 20:23:07 INFO Utils: Successfully started service 'sparkDriver' on port 34246.
+26/06/07 20:23:07 INFO SparkEnv: Registering MapOutputTracker
+26/06/07 20:23:07 INFO SparkEnv: Registering BlockManagerMaster
+26/06/07 20:23:07 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-d7f3306e-5c64-4aad-8b29-08c40595cf4d
+26/06/07 20:23:07 INFO MemoryStore: MemoryStore started with capacity 2004.6 MB
+26/06/07 20:23:07 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/07 20:23:07 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/07 20:23:07 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://10.176.62.230:4040
+26/06/07 20:23:07 INFO Utils: Copying /root/word2vec_experiment.py to /tmp/spark-9c98b73a-e271-47a9-bfa9-b1e2d6da1223/userFiles-5c835e97-2fab-47c1-a40c-4ed080a52890/word2vec_experiment.py
+26/06/07 20:23:07 INFO SparkContext: Added file file:/root/word2vec_experiment.py at spark://10.176.62.230:34246/files/word2vec_experiment.py with timestamp 1780878187650
+26/06/07 20:23:07 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://10.176.62.230:7077...
+26/06/07 20:23:07 INFO TransportClientFactory: Successfully created connection to /10.176.62.230:7077 after 25 ms (0 ms spent in bootstraps)
+26/06/07 20:23:07 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20260607202307-0007
+26/06/07 20:23:07 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 33512.
+26/06/07 20:23:07 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260607202307-0007/0 on worker-20260607082851-10.176.62.232-52831 (10.176.62.232:52831) with 2 cores
+26/06/07 20:23:07 INFO NettyBlockTransferService: Server created on 10.176.62.230:33512
+26/06/07 20:23:07 INFO StandaloneSchedulerBackend: Granted executor ID app-20260607202307-0007/0 on hostPort 10.176.62.232:52831 with 2 cores, 4.0 GB RAM
+26/06/07 20:23:07 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260607202307-0007/1 on worker-20260607165308-10.176.62.231-60129 (10.176.62.231:60129) with 2 cores
+26/06/07 20:23:07 INFO StandaloneSchedulerBackend: Granted executor ID app-20260607202307-0007/1 on hostPort 10.176.62.231:60129 with 2 cores, 4.0 GB RAM
+26/06/07 20:23:07 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10.176.62.230, 33512)
+26/06/07 20:23:07 INFO BlockManagerMasterEndpoint: Registering block manager 10.176.62.230:33512 with 2004.6 MB RAM, BlockManagerId(driver, 10.176.62.230, 33512)
+26/06/07 20:23:07 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260607202307-0007/0 is now RUNNING
+26/06/07 20:23:07 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10.176.62.230, 33512)
+26/06/07 20:23:07 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260607202307-0007/1 is now RUNNING
+26/06/07 20:23:08 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+26/06/07 20:23:08 INFO SharedState: Warehouse path is 'file:/root/spark-warehouse'.
+
+============================================================
+[Step 1] Loading & Preprocessing Data
+============================================================
+Total records: 152758
+Sampled records: 15344 (ratio: 0.100000)
+Valid records after preprocessing: 15344
+
+============================================================
+[Experiment 1] Pure TF-IDF + K-Means
+============================================================
+Fitting TF-IDF pipeline...
+Vocabulary size: 5000
+Training K-Means (K=50)...
+26/06/07 20:24:37 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/07 20:24:45 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeSystemBLAS
+26/06/07 20:24:45 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeRefBLAS
+26/06/07 20:24:56 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+TF-IDF experiment complete, time: 56.87s
+
+----------------------------------------
+Evaluating: TF-IDF
+----------------------------------------
+ClusteringEvaluator not available, computing sampled silhouette...
+Computing sampled silhouette (sample_size=3000)...
+Sampled Silhouette Score: 0.0189 (computed on 1998 points)
+WCSS (computeCost): 13976.8163
+Non-empty clusters: 50 / 50
+Max cluster size: 5042
+Min cluster size: 2
+Avg cluster size: 306.9
+Std of cluster sizes: 717.4
+
+Cluster size distribution (top 10):
++-------+-----+
+|cluster|count|
++-------+-----+
+|0      |86   |
+|1      |145  |
+|2      |21   |
+|3      |842  |
+|4      |158  |
+|5      |139  |
+|6      |87   |
+|7      |85   |
+|8      |289  |
+|9      |125  |
++-------+-----+
+only showing top 10 rows
+
+Cluster size histogram:
+  0-499: 45 clusters
+  500-999: 3 clusters
+  1000-1499: 1 clusters
+  5000-5499: 1 clusters
+
+============================================================
+[Semantic Analysis] TF-IDF
+============================================================
+
+--- Cluster Keywords ---
+
+Cluster 42 (size=5042):
+  Keywords: id, table, 1, query, column, name, 2, select, 0, b
+
+Cluster 49 (size=1324):
+  Keywords: database, server, db, application, data, oracle, sql, apex, tables, using
+
+Cluster 46 (size=901):
+  Keywords: procedure, end, stored, dbms, loop, function, line, cursor, package, varchar2
+
+Cluster 3 (size=842):
+  Keywords: date, 01, dd, mm, yyyy, format, char, 02, timestamp, time
+
+Cluster 17 (size=531):
+  Keywords: connect, client, 0, windows, net, tns, database, connection, port, host
+
+--- Representative Questions ---
+  [C3] Fetch the rows which have the Max value for a column for each distinct value of another column (score=682)
+  [C3] How can I set a custom date time format in Oracle SQL Developer? (score=248)
+  [C3] Check if current date is between two dates Oracle SQL (score=61)
+  [C3] JDBC ResultSet: I need a getDateTime, but there is only getDate and getTimeStamp (score=55)
+  [C3] How to extract week number in sql (score=29)
+  [C17] ORA-12154 could not resolve the connect identifier specified (score=55)
+  [C17] How to install SQL * PLUS client in linux (score=40)
+  [C17] Does ODP.NET require Oracle Client installation (score=38)
+  [C17] Perl DBD::Oracle Module installation (score=24)
+  [C17] How do you find out the Oracle database's URL? (score=23)
+  [C42] Update a table with data from another table (score=336)
+  [C42] How to select only 1 row from oracle sql? (score=179)
+  [C42] Search All Fields In All Tables For A Specific Value (Oracle) (score=146)
+  [C42] How do I select all the columns from a table, plus additional columns like ROWNUM? (score=112)
+  [C42] How to get records randomly from the Oracle database? (score=109)
+  [C46] BEGIN - END block atomic transactions in PL/SQL (score=67)
+  [C46] PLS-00103: Encountered the symbol "CREATE" (score=48)
+  [C46] PL/SQL exception handling: do nothing (ignore exception) (score=47)
+  [C46] How to see PL/SQL Stored Function body in Oracle (score=36)
+  [C46] How to execute an Oracle stored procedure via a database link (score=35)
+  [C49] Is there any boolean type in Oracle databases? (score=349)
+  [C49] Cleanest way to build an SQL string in Java (score=123)
+  [C49] How to display databases in Oracle 11g using SQL*Plus (score=98)
+  [C49] MySQL vs. SQL Server vs. Oracle (score=79)
+  [C49] Find the server name for an Oracle database (score=60)
+
+--- Semantic Coherence Analysis ---
+Average within-cluster cosine similarity: 0.4063
+
+============================================================
+[Experiment 2] Pure Word2Vec (Simple Average) + K-Means
+============================================================
+Fitting Word2Vec pipeline (vectorSize=50, minCount=5)...
+Word2Vec vocabulary size: 20224
+Training K-Means (K=50)...
+26/06/07 20:32:42 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/07 20:32:53 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+Word2Vec experiment complete, time: 378.41s
+
+----------------------------------------
+Evaluating: Word2Vec
+----------------------------------------
+ClusteringEvaluator not available, computing sampled silhouette...
+Computing sampled silhouette (sample_size=3000)...
+Sampled Silhouette Score: 0.1091 (computed on 2000 points)
+WCSS (computeCost): 4877.5619
+Non-empty clusters: 50 / 50
+Max cluster size: 791
+Min cluster size: 51
+Avg cluster size: 306.9
+Std of cluster sizes: 151.4
+
+Cluster size distribution (top 10):
++-------+-----+
+|cluster|count|
++-------+-----+
+|0      |272  |
+|1      |445  |
+|2      |791  |
+|3      |384  |
+|4      |285  |
+|5      |289  |
+|6      |198  |
+|7      |394  |
+|8      |160  |
+|9      |390  |
++-------+-----+
+only showing top 10 rows
+
+Cluster size histogram:
+  0-499: 46 clusters
+  500-999: 4 clusters
+
+============================================================
+[Semantic Analysis] Word2Vec
+============================================================
+
+--- Cluster Keywords ---
+26/06/07 20:33:07 WARN TaskSetManager: Stage 186 contains a task of very large size (3475 KB). The maximum recommended task size is 100 KB.
+
+Cluster 2 (size=791):
+  Keywords: want, without, need, example, take, instead, also, whole, basically, another
+
+Cluster 21 (size=607):
+  Keywords: without, also, thing, actually, possible, way, however, since, whole, needs
+
+Cluster 42 (size=564):
+  Keywords: 05, 06, 22, 08, 02, 23, 03, 07, 17, 04
+
+Cluster 45 (size=555):
+  Keywords: without, also, working, using, able, directly, via, problems, issues, currently
+
+Cluster 30 (size=486):
+  Keywords: installing, oracle, via, installation, working, gui, built, database, locally, problems
+
+--- Representative Questions ---
+  [C2] How do I find duplicate values in a table in Oracle? (score=323)
+  [C2] Search All Fields In All Tables For A Specific Value (Oracle) (score=146)
+  [C2] How to get records randomly from the Oracle database? (score=109)
+  [C2] The order of a SQL Select statement without Order By clause (score=76)
+  [C2] Proper way of checking if row exists in table in PL/SQL block (score=58)
+  [C21] Cleanest way to build an SQL string in Java (score=123)
+  [C21] Oracle: SQL query to find all the triggers belonging to the tables? (score=73)
+  [C21] How to find out when an Oracle table was updated the last time (score=43)
+  [C21] Setting Oracle size of row fetches higher makes my app slower? (score=30)
+  [C21] How to display Oracle schema size with SQL query? (score=30)
+  [C30] Find the server name for an Oracle database (score=60)
+  [C30] ORA-12154 could not resolve the connect identifier specified (score=55)
+  [C30] Does ODP.NET require Oracle Client installation (score=38)
+  [C30] Develop on local Oracle instance (score=27)
+  [C30] How to reconfigure Oracle 10g xe on Linux (score=24)
+  [C42] Best way to do multi-row insert in Oracle? (score=396)
+  [C42] Need to count records and group count by date on oracle db using sql developer (score=20)
+  [C42] ORACLE: Updating multiple columns at once (score=19)
+  [C42] Oracle order by descending with NULL last (score=14)
+  [C42] How to write Oracle query to find a total length of possible overlapping from-to dates (score=10)
+  [C45] How to display databases in Oracle 11g using SQL*Plus (score=98)
+  [C45] OVER clause in Oracle (score=84)
+  [C45] MySQL vs. SQL Server vs. Oracle (score=79)
+  [C45] Online databases for trying out Oracle SQL queries? (score=55)
+  [C45] How to Query Database Name in Oracle SQL Developer? (score=43)
+
+--- Semantic Coherence Analysis ---
+Average within-cluster cosine similarity: 0.8082
+
+============================================================
+[Experiment 3] TF-IDF Weighted Word2Vec + K-Means
+============================================================
+[3a] Training Word2Vec model...
+Word2Vec vocabulary size: 20224
+[3b] Collecting word vectors for broadcast...
+26/06/07 20:39:21 WARN TaskSetManager: Stage 231 contains a task of very large size (3475 KB). The maximum recommended task size is 100 KB.
+Collected 20224 word vectors
+[3c] Training TF-IDF model...
+IDF mapping size: 5000
+[3d] Computing TF-IDF weighted Word2Vec features...
+[3e] Training K-Means (K=50)...
+26/06/07 20:39:35 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/07 20:47:29 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+TF-IDF+Word2Vec experiment complete, time: 853.78s
+
+----------------------------------------
+Evaluating: TF-IDF+Word2Vec
+----------------------------------------
+ClusteringEvaluator not available, computing sampled silhouette...
+Computing sampled silhouette (sample_size=3000)...
+Sampled Silhouette Score: 0.1376 (computed on 2000 points)
+WCSS (computeCost): 6470.5222
+Non-empty clusters: 50 / 50
+Max cluster size: 754
+Min cluster size: 123
+Avg cluster size: 306.9
+Std of cluster sizes: 130.4
+
+Cluster size distribution (top 10):
++-------+-----+
+|cluster|count|
++-------+-----+
+|0      |160  |
+|1      |235  |
+|2      |334  |
+|3      |295  |
+|4      |460  |
+|5      |313  |
+|6      |247  |
+|7      |399  |
+|8      |289  |
+|9      |202  |
++-------+-----+
+only showing top 10 rows
+
+Cluster size histogram:
+  0-499: 45 clusters
+  500-999: 5 clusters
+
+============================================================
+[Semantic Analysis] TF-IDF+Word2Vec
+============================================================
+
+--- Cluster Keywords ---
+26/06/07 20:48:50 WARN TaskSetManager: Stage 306 contains a task of very large size (3475 KB). The maximum recommended task size is 100 KB.
+
+Cluster 42 (size=754):
+  Keywords: 05, 06, 22, 02, 08, 23, 03, 07, 17, 21
+
+Cluster 33 (size=624):
+  Keywords: without, also, thing, possible, way, wanted, actually, looking, however, whole
+
+Cluster 37 (size=620):
+  Keywords: via, working, able, issues, databases, problems, without, directly, gui, built
+
+Cluster 31 (size=586):
+  Keywords: want, example, basically, need, another, specific, take, one, certain, instead
+
+Cluster 34 (size=553):
+  Keywords: day, date, dates, current, week, months, month, days, hour, sysdate
+
+--- Representative Questions ---
+  [C31] How do I find duplicate values in a table in Oracle? (score=323)
+  [C31] Search All Fields In All Tables For A Specific Value (Oracle) (score=146)
+  [C31] How to get records randomly from the Oracle database? (score=109)
+  [C31] Efficient way to update all rows in a table (score=50)
+  [C31] oracle diff: how to compare two tables? (score=42)
+  [C33] Cleanest way to build an SQL string in Java (score=123)
+  [C33] OVER clause in Oracle (score=84)
+  [C33] Oracle: SQL query to find all the triggers belonging to the tables? (score=73)
+  [C33] Proper way of checking if row exists in table in PL/SQL block (score=58)
+  [C33] Online databases for trying out Oracle SQL queries? (score=55)
+  [C34] How do I use Group By based on a Case statement in Oracle? (score=25)
+  [C34] Date type without time in Oracle (score=24)
+  [C34] Is there an automatic modification time stamp type for Oracle columns? (score=23)
+  [C34] Is there any way to use a strftime-like function for dates before 1900 in Python? (score=20)
+  [C34] Extract time part from TimeStamp column in ORACLE (score=15)
+  [C37] How to display databases in Oracle 11g using SQL*Plus (score=98)
+  [C37] MySQL vs. SQL Server vs. Oracle (score=79)
+  [C37] Find the server name for an Oracle database (score=60)
+  [C37] How to Query Database Name in Oracle SQL Developer? (score=43)
+  [C37] How to execute an Oracle stored procedure via a database link (score=35)
+  [C42] Best way to do multi-row insert in Oracle? (score=396)
+  [C42] JDBC ResultSet: I need a getDateTime, but there is only getDate and getTimeStamp (score=55)
+  [C42] How to extract week number in sql (score=29)
+  [C42] LEFT function in Oracle (score=20)
+  [C42] Need to count records and group count by date on oracle db using sql developer (score=20)
+
+--- Semantic Coherence Analysis ---
+Average within-cluster cosine similarity: 0.7461
+
+============================================================
+[Cross-Method Comparison]
+============================================================
+
+--- Performance Comparison Table ---
+Method             Silhouette   WCSS         Clusters   MaxSize    MinSize    AvgSize    Time(s)   
+---------------------------------------------------------------------------------------------------
+TF-IDF             0.0189       13976.82     50         5042       2          306.9      56.87     
+Word2Vec           0.1091       4877.56      50         791        51         306.9      378.41    
+TF-IDF+Word2Vec    0.1376       6470.52      50         754        123        306.9      853.78    
+
+--- Semantic Coherence Comparison ---
+  TF-IDF: 0.4063
+  Word2Vec: 0.8082
+  TF-IDF+Word2Vec: 0.7461
+
+--- Cluster Keyword Comparison (Top 3 Largest Clusters) ---
+
+  [TF-IDF]
+    Cluster 42 (size=5042): id, table, 1, query, column, name, 2, select
+    Cluster 49 (size=1324): database, server, db, application, data, oracle, sql, apex
+    Cluster 46 (size=901): procedure, end, stored, dbms, loop, function, line, cursor
+
+  [Word2Vec]
+    Cluster 2 (size=791): want, without, need, example, take, instead, also, whole
+    Cluster 21 (size=607): without, also, thing, actually, possible, way, however, since
+    Cluster 42 (size=564): 05, 06, 22, 08, 02, 23, 03, 07
+
+  [TF-IDF+Word2Vec]
+    Cluster 42 (size=754): 05, 06, 22, 02, 08, 23, 03, 07
+    Cluster 33 (size=624): without, also, thing, possible, way, wanted, actually, looking
+    Cluster 37 (size=620): via, working, able, issues, databases, problems, without, directly
+
+--- Sample Questions: Cross-Method Cluster Assignment ---
+  [121387] Fetch the rows which have the Max value for a column for eac
+    TF-IDF->C3 | Word2V->C9 | TF-IDF->C12
+  [39576] Best way to do multi-row insert in Oracle?
+    TF-IDF->C16 | Word2V->C42 | TF-IDF->C42
+  [880230] Difference between a user and a schema in Oracle?
+    TF-IDF->C4 | Word2V->C10 | TF-IDF->C12
+  [3726758] Is there any boolean type in Oracle databases?
+    TF-IDF->C49 | Word2V->C38 | TF-IDF->C2
+  [7030699] Update a table with data from another table
+    TF-IDF->C42 | Word2V->C19 | TF-IDF->C30
+  [59232] How do I find duplicate values in a table in Oracle?
+    TF-IDF->C10 | Word2V->C2 | TF-IDF->C31
+  [8134493] How can I set a custom date time format in Oracle SQL Develo
+    TF-IDF->C3 | Word2V->C43 | TF-IDF->C43
+  [8919481] How to select only 1 row from oracle sql?
+    TF-IDF->C42 | Word2V->C1 | TF-IDF->C44
+  [208493] Search All Fields In All Tables For A Specific Value (Oracle
+    TF-IDF->C42 | Word2V->C2 | TF-IDF->C31
+  [370818] Cleanest way to build an SQL string in Java
+    TF-IDF->C49 | Word2V->C21 | TF-IDF->C33
+
+============================================================
+[Saving Results]
+============================================================
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/tf_idf/cluster_assignments
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/tf_idf/cluster_summary
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/tf_idf/top_questions_per_cluster
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/word2vec/cluster_assignments
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/word2vec/cluster_summary
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/word2vec/top_questions_per_cluster
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/tf_idf_word2vec/cluster_assignments
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/tf_idf_word2vec/cluster_summary
+Saved: hdfs://node5:9000/user/root/output/word2vec_experiment/tf_idf_word2vec/top_questions_per_cluster
+All results saved to: hdfs://node5:9000/user/root/output/word2vec_experiment
+
+============================================================
+EXPERIMENT COMPLETE!
+============================================================
+Total time: 1713.01s
+
+Summary:
+  TF-IDF            : Silhouette=0.0189, WCSS=13976.82, Coherence=0.4063, Time=56.87s
+  Word2Vec          : Silhouette=0.1091, WCSS=4877.56, Coherence=0.8082, Time=378.41s
+  TF-IDF+Word2Vec   : Silhouette=0.1376, WCSS=6470.52, Coherence=0.7461, Time=853.78s
+
+Results saved to: hdfs://node5:9000/user/root/output/word2vec_experiment
+============================================================
