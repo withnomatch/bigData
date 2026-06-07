@@ -1,0 +1,3 @@
+{"cluster":13,"rank":4,"question_id":"32425976","title":"How is in Java the idempotence of the close() method of the Closeable interface ensured?","score":25}
+{"cluster":13,"rank":5,"question_id":"14302577","title":"java.sql.SQLException: ORA-03115: unsupported network datatype or representation","score":25}
+{"cluster":13,"rank":6,"question_id":"9007051","title":"rs.last() gives Invalid operation for forward only resultset : last","score":24}

@@ -1,0 +1,4 @@
+{"cluster":9,"rank":3,"question_id":"42306865","title":"Sqoop job get Stuck when import data from Oracle to Hive","score":0}
+{"cluster":9,"rank":4,"question_id":"63147563","title":"Restrict inserting data in master table if child table has one record for the sysdate in Oracle","score":-1}
+{"cluster":10,"rank":1,"question_id":"49557033","title":"ORA-01704: How to insert into a XMLType Column a XML document that is bigger than 4000 characters","score":1}
+{"cluster":11,"rank":1,"question_id":"31833666","title":"Error while loading shared libraries: libsqlplus.so: cannot open shared object file: No such file or directory","score":3}

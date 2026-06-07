@@ -1,0 +1,33 @@
+{"question_id":"59583553","title":"Generating a model from an Oracle 18c database in EntityFramework","cluster":1,"question_score":0}
+{"question_id":"59930042","title":"Oracle modify column not allowed because of the length of value","cluster":3,"question_score":0}
+{"question_id":"60042945","title":"Procedure to Insert into table and its columns by given parameters?","cluster":0,"question_score":1}
+{"question_id":"60907336","title":"SQL concatenate - INSERT MANY VALUES TO ONE ROW","cluster":0,"question_score":1}
+{"question_id":"61208402","title":"record for last two month and their difference in oracle","cluster":3,"question_score":-2}
+{"question_id":"62059130","title":"Query from SQL Server tables in Oracle using ODI","cluster":1,"question_score":0}
+{"question_id":"62516758","title":"SQL not correct end failure","cluster":4,"question_score":-1}
+{"question_id":"62580782","title":"Create a select query where if the id is not present then for that id it should return null in SQL","cluster":0,"question_score":0}
+{"question_id":"62749009","title":"How to add indexes to the following examples？","cluster":0,"question_score":1}
+{"question_id":"63812025","title":"How to count each item in Oracle?","cluster":3,"question_score":0}
+{"question_id":"63940140","title":"Spark execution using jdbc","cluster":4,"question_score":0}
+{"question_id":"64639947","title":"How to select unique records from a result in oracle SQL?","cluster":4,"question_score":0}
+{"question_id":"66095151","title":"ORA-01652: unable to extend temp segment by 128 in tablespace TEMP when retrieve data from procedure in webform (ASP.NET)","cluster":3,"question_score":0}
+{"question_id":"66129049","title":"How to find the right size box?","cluster":0,"question_score":0}
+{"question_id":"66356837","title":"Oracle SQL consuming entire 200G of temp space","cluster":3,"question_score":0}
+{"question_id":"67499263","title":"Obiee agents sending delivery content in different formats for different uses","cluster":1,"question_score":0}
+{"question_id":"67951243","title":"How can i change \"Curso\" class to print in other class?","cluster":4,"question_score":-1}
+{"question_id":"69150079","title":"Oracle GRANT: prevent SQL injection","cluster":0,"question_score":0}
+{"question_id":"69613090","title":"Table Column value in where clause","cluster":3,"question_score":1}
+{"question_id":"70524219","title":"How to capture logout details when user close browser window in oracle Apex User","cluster":0,"question_score":0}
+{"question_id":"71351519","title":"ORA-01406 when copying data from one Oracle database to another with different Unicode","cluster":0,"question_score":0}
+{"question_id":"71576542","title":"Trying to create tables with Oracle for an assignment but I can't see the issues with the syntax. Any help is much appreciated","cluster":4,"question_score":0}
+{"question_id":"73178663","title":"Oracle Error: SELECT list inconsistent with GROUP BY","cluster":3,"question_score":-1}
+{"question_id":"73701417","title":"Making data available in a table all the time","cluster":1,"question_score":0}
+{"question_id":"73882698","title":"ORA-01858 error by using DatePicker in Classic Report","cluster":3,"question_score":0}
+{"question_id":"74514602","title":"how to make a connection to a SOAP web service from a PL/SQL procedure","cluster":1,"question_score":0}
+{"question_id":"74868619","title":"how can i correct line errors in views?","cluster":3,"question_score":0}
+{"question_id":"75161371","title":"SpringBoot oracle Stored procedure call raise \"exception [null]: java.lang.NullPointerException\" where I did attach parameter values to the call","cluster":0,"question_score":0}
+{"question_id":"76538414","title":"Oracle function to get account balance","cluster":3,"question_score":0}
+{"question_id":"76591230","title":"UPDATE the result of derived table","cluster":3,"question_score":-1}
+{"question_id":"77772444","title":"Got in bulk collect PL/SQL: ORA-00932: inconsistent datatypes: expected UDT got NUMBER","cluster":4,"question_score":0}
+{"question_id":"77838867","title":"How to get duplicate records after merging results of union all in oracle?","cluster":2,"question_score":-2}
+{"question_id":"77901079","title":"FIndout the column name and the column value who is having different value","cluster":0,"question_score":0}

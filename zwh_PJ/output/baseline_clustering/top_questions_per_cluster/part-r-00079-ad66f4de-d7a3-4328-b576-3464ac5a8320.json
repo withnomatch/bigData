@@ -1,0 +1,3 @@
+{"cluster":20,"rank":1,"question_id":"6027961","title":"ORA-00904: invalid identifier","score":121}
+{"cluster":20,"rank":2,"question_id":"9133120","title":"Can you SELECT everything, but 1 or 2 fields, without writer's cramp?","score":57}
+{"cluster":20,"rank":3,"question_id":"19779483","title":"PL/SQL ORA-01422: exact fetch returns more than requested number of rows","score":36}

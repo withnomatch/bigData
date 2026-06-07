@@ -1,0 +1,5 @@
+{"cluster":45,"rank":2,"question_id":"2852727","title":"java.sql.SQLException: Unsupported feature","score":3}
+{"cluster":45,"rank":3,"question_id":"63969702","title":"Hibernate does not return first record from database","score":2}
+{"cluster":45,"rank":4,"question_id":"35609007","title":"Hibernate map Entity to function result","score":1}
+{"cluster":45,"rank":5,"question_id":"56984459","title":"java.sql.SQLException: Invalid column name , on Oracle everything works fine","score":1}
+{"cluster":45,"rank":6,"question_id":"59792499","title":"Avoid SqlRecoverableException: Statement closed","score":1}

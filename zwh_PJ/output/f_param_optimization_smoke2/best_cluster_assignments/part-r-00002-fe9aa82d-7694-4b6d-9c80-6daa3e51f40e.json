@@ -1,0 +1,37 @@
+{"question_id":"41939063","title":"Sort / Order by multiple column values in oracle, in a case specific way","cluster":2,"question_score":-1}
+{"question_id":"42029196","title":"Can Oracle SQL Developer be made to reconnect as needed?","cluster":3,"question_score":6}
+{"question_id":"42584355","title":"Oracle report about executed queries for a specific user before TDE activation","cluster":1,"question_score":0}
+{"question_id":"43434941","title":"JMX role-based access control with custom authorization","cluster":1,"question_score":1}
+{"question_id":"44647695","title":"Mapping a nested Oracle CURSOR (ResultSet) with myBatis 3?","cluster":4,"question_score":0}
+{"question_id":"45282914","title":"|WLST| Is it possible to undo changes from activated session?","cluster":1,"question_score":2}
+{"question_id":"45328973","title":"how can i substr in oracle procedure","cluster":0,"question_score":-1}
+{"question_id":"45683485","title":"Disable compression on partitioned index?","cluster":3,"question_score":1}
+{"question_id":"46242381","title":"Oracle IMPDP fail - unable to create INITIAL extent for segment in tablespace","cluster":3,"question_score":0}
+{"question_id":"46760415","title":"Inner join + where ORACLE","cluster":1,"question_score":0}
+{"question_id":"46836407","title":"Installing Oracle in RHEL7 (IBM linuxone Community cloud)","cluster":1,"question_score":-1}
+{"question_id":"48241286","title":"Oracle Database 12c tnsnames.ora file","cluster":1,"question_score":0}
+{"question_id":"48537086","title":"FORECAST() Oracle BI (OBIEE)","cluster":3,"question_score":0}
+{"question_id":"49617886","title":"SQL command line error while defining foreign key in a create table command","cluster":4,"question_score":0}
+{"question_id":"50031501","title":"How to insert the data from the same table which is in another instance using ORACLE SQL","cluster":2,"question_score":0}
+{"question_id":"50391663","title":"Transform Oracle sql syntax","cluster":4,"question_score":0}
+{"question_id":"50491900","title":"Oracle 9i: ORA-01017: invalid username/password; logon denied","cluster":1,"question_score":0}
+{"question_id":"50521327","title":"TypeORM Oracle Driver, works with query.raw but not with entity","cluster":0,"question_score":0}
+{"question_id":"50675094","title":"Oracle Database Query in C#","cluster":4,"question_score":0}
+{"question_id":"50829598","title":"Bulk Collect with Sum function","cluster":2,"question_score":0}
+{"question_id":"51087758","title":"Procedure to remove duplicates in a table","cluster":4,"question_score":2}
+{"question_id":"51823092","title":"How to use cursor with set_block_property in oracle forms?","cluster":1,"question_score":0}
+{"question_id":"52080578","title":"Oracle Developer Tools for Visual Studio 2017 (ODT)","cluster":3,"question_score":0}
+{"question_id":"52104813","title":"How to join three tables using Spring JPA","cluster":0,"question_score":0}
+{"question_id":"52340411","title":"Golang SQL query variable substituion","cluster":1,"question_score":12}
+{"question_id":"53683985","title":"How to get count for similar identifier in a single column using PL/SQL","cluster":3,"question_score":1}
+{"question_id":"53769087","title":"Turn CLOB data column into string","cluster":0,"question_score":0}
+{"question_id":"54093753","title":"Trying to run a simple dynamic scaffolding Grails app results in an ORA-00904 error","cluster":3,"question_score":1}
+{"question_id":"54145827","title":"Trigger that delete a value before or after inserting a matching statement","cluster":3,"question_score":0}
+{"question_id":"54326990","title":"Oracle 11gR2 installation in Windows 8","cluster":1,"question_score":-1}
+{"question_id":"54925955","title":"SQL sorting issue","cluster":3,"question_score":0}
+{"question_id":"56386532","title":"Oracle How to Map Data Types to CODE/IDs - Dump and dbms_sql.define_column produce data type codes","cluster":0,"question_score":1}
+{"question_id":"57267800","title":"Trying to bind multiple value coming from oracle in dotnet side","cluster":2,"question_score":0}
+{"question_id":"57344935","title":"In oracle plsql procedure can we use out parameter if our procedure has 'Pragma autonomous transaction'?","cluster":3,"question_score":0}
+{"question_id":"57556691","title":"Handling data in global temporary tables in case of transaction rollback","cluster":1,"question_score":0}
+{"question_id":"57831527","title":"Do not include in the LoV the car numbers already used in the second table","cluster":4,"question_score":0}
+{"question_id":"58957422","title":"Oracle SQL - JOIN table on itself, ON (column * -1)","cluster":0,"question_score":0}

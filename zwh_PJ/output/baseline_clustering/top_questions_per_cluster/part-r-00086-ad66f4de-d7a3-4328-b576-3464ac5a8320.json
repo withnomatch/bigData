@@ -1,0 +1,3 @@
+{"cluster":21,"rank":8,"question_id":"30598697","title":"TABLE/CAST/MULTISET vs subquery in FROM clause","score":3}
+{"cluster":21,"rank":9,"question_id":"33180774","title":"Different result for to_number in Order By clause in Oracle","score":3}
+{"cluster":21,"rank":10,"question_id":"66178220","title":"Why does Oracle implicitly add SYS_EXTRACT_UTC to index?","score":3}

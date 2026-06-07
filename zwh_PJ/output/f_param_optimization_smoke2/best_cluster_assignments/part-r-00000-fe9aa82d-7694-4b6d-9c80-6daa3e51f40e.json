@@ -1,0 +1,36 @@
+{"question_id":"706503","title":"Why does Oracle think I'm missing a right parenthesis?","cluster":3,"question_score":11}
+{"question_id":"1348804","title":"Regular Expressions _# at end of string","cluster":3,"question_score":3}
+{"question_id":"1824572","title":"How to shrink temp tablespace in oracle?","cluster":3,"question_score":42}
+{"question_id":"2794996","title":"Oracle Schema Name","cluster":1,"question_score":3}
+{"question_id":"3477445","title":"Oracle (0x80004005)ORA-12154: TNS:could not resolve the connect identifier","cluster":1,"question_score":8}
+{"question_id":"4348982","title":"how to set Oracle connection pool size?","cluster":3,"question_score":2}
+{"question_id":"4740376","title":"Calling a function/procedure present inside an Oracle package from PHP","cluster":3,"question_score":4}
+{"question_id":"5302946","title":"Oracle text index (Context) keep growing","cluster":2,"question_score":2}
+{"question_id":"5801370","title":"Can we use user-defined (non-scalar) SQL-types for ORM?","cluster":3,"question_score":2}
+{"question_id":"6027961","title":"ORA-00904: invalid identifier","cluster":0,"question_score":121}
+{"question_id":"6960717","title":"How do I compare Record Sets or Record Groups in Oracle?","cluster":0,"question_score":1}
+{"question_id":"7364122","title":"Place to store PL/SQL block","cluster":0,"question_score":-6}
+{"question_id":"7405911","title":"Oracle NVL problem","cluster":2,"question_score":2}
+{"question_id":"7791165","title":"ORACLE PL/SQL missing keyword error","cluster":3,"question_score":1}
+{"question_id":"8875355","title":"How does EXISTS work in Oracle, and how does it differ from IN?","cluster":2,"question_score":8}
+{"question_id":"9647693","title":"How to calculate average of a column and then include it in a select query in oracle?","cluster":0,"question_score":6}
+{"question_id":"10557030","title":"Changing the column precision while creating a view in Oracle","cluster":4,"question_score":3}
+{"question_id":"10603940","title":"choose what column to include in select based on a second select statment","cluster":0,"question_score":0}
+{"question_id":"10869821","title":"How to create/call procedure in oracle 10g?","cluster":0,"question_score":1}
+{"question_id":"11136555","title":"sdo_geom.relate determines DISJOINT where CONTAINS expected","cluster":2,"question_score":0}
+{"question_id":"11386664","title":"T4 to make Oracle's STUFF_LIKE_THIS into StuffLikeThis","cluster":1,"question_score":1}
+{"question_id":"11822599","title":"How to compare oracle date and lotusscript date?","cluster":3,"question_score":0}
+{"question_id":"12166032","title":"How to enable or disable the Debug Toolbar on Oracle WebCenter Content Server","cluster":1,"question_score":2}
+{"question_id":"13486560","title":"ORACLE: CHECK TIME CONSTRAINT","cluster":0,"question_score":0}
+{"question_id":"13761256","title":"What does the Fuzzy operator do?","cluster":3,"question_score":2}
+{"question_id":"13979187","title":"Is there a method to check the number of objects in an Oracle AQ queue?","cluster":0,"question_score":0}
+{"question_id":"15324380","title":"oracle sql count (or other sufficient aggregate) return zero when row not present","cluster":2,"question_score":0}
+{"question_id":"15365422","title":"Can I repeat a Union Join in Oracle SQL for different values defined by another query?","cluster":3,"question_score":0}
+{"question_id":"16041372","title":"Function/Package issue PL/SQL","cluster":0,"question_score":4}
+{"question_id":"16812625","title":"How to fetch the multiple match string using a regular expression","cluster":2,"question_score":0}
+{"question_id":"18075220","title":"Oracle 11g - most efficient way of inserting multiple rows","cluster":0,"question_score":4}
+{"question_id":"18296076","title":"How to limit this query to only those books that have more than one author?","cluster":3,"question_score":1}
+{"question_id":"18921452","title":"DB job to generate/email Oracle report output","cluster":1,"question_score":0}
+{"question_id":"18976417","title":"Group by : To get the column value","cluster":3,"question_score":0}
+{"question_id":"19425827","title":"How to retrieve image from oracle database?","cluster":0,"question_score":1}
+{"question_id":"20063960","title":"Oracle 11g - Update bulk with index vs without","cluster":0,"question_score":1}

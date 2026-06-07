@@ -1,0 +1,3 @@
+{"cluster":25,"rank":4,"question_id":"8635881","title":"Fatal error: Call to undefined function oci_connect()","score":7}
+{"cluster":25,"rank":5,"question_id":"30568594","title":"Why does Oracle not find oci.dll?","score":6}
+{"cluster":25,"rank":6,"question_id":"31153130","title":"Executing stored procedure in PHP : ORA-01460: unimplemented or unreasonable conversion requested","score":6}

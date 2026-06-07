@@ -1,0 +1,32 @@
+{"question_id":"23066108","title":"how to pass array object to a cursor in Oracle?","cluster":3,"question_score":2}
+{"question_id":"24108545","title":"how to perform same DML statements on two different server ( Oracle and SQL )","cluster":1,"question_score":0}
+{"question_id":"25431229","title":".Net calling Oracle Array bound stored procedure output VarChar2","cluster":0,"question_score":0}
+{"question_id":"25564759","title":"SQL Oracle Query: Can this query be optimized?","cluster":3,"question_score":3}
+{"question_id":"26106070","title":"\"group by day\" in Oracle doesn't appear to group by date","cluster":3,"question_score":4}
+{"question_id":"26494428","title":"Using function based index (oracle) to speed up count(X)","cluster":3,"question_score":1}
+{"question_id":"27067908","title":"Exception raised executing Oracle SP with Table and Record Types","cluster":0,"question_score":2}
+{"question_id":"27751617","title":"joining three tables together using Inner Joins","cluster":4,"question_score":0}
+{"question_id":"27872353","title":"How to select alphanumeric characters using regex","cluster":4,"question_score":3}
+{"question_id":"27912972","title":"tricky select query, need assistance","cluster":0,"question_score":1}
+{"question_id":"28135906","title":"PL/SQL duplicate","cluster":0,"question_score":0}
+{"question_id":"28563445","title":"oracle partition by group_id and subpartition monthly","cluster":4,"question_score":2}
+{"question_id":"28653042","title":"Oracle SQL Between Dates Query","cluster":4,"question_score":5}
+{"question_id":"29473367","title":"Oracle SQL: If a condition isn't met create a record in the returned results","cluster":3,"question_score":0}
+{"question_id":"31181196","title":"What is the better approach for solving Restrictions.in with large lists?","cluster":1,"question_score":3}
+{"question_id":"33154159","title":"Oracle database reverting database to a previous state","cluster":1,"question_score":0}
+{"question_id":"34080298","title":"Import Oracle to HDFS by Sqoop with 3 records is OK. Failed for full table","cluster":4,"question_score":0}
+{"question_id":"34396459","title":"Oracle Merge based on Target and source","cluster":4,"question_score":0}
+{"question_id":"34762829","title":"Whether performance will impact when database procedure is called from application many times?","cluster":0,"question_score":1}
+{"question_id":"34800102","title":"My DBMS_SCHEDULER.CREATE_JOB not running?","cluster":0,"question_score":0}
+{"question_id":"35355390","title":"What happens to not commited transaction in oracle RMAN backup","cluster":1,"question_score":1}
+{"question_id":"36746239","title":"Found an Unknown Relational Diagram Symbol in Oracle SQL Developer","cluster":0,"question_score":2}
+{"question_id":"37660856","title":"Error while executing the Proc PLS-00103 Encountered the symbol \"=\" when expecting one of the following","cluster":4,"question_score":-2}
+{"question_id":"37733397","title":"Oracle SQL: issue with age calculation","cluster":3,"question_score":0}
+{"question_id":"37818842","title":"How to delete from table with number stored as varchar2","cluster":3,"question_score":1}
+{"question_id":"37865069","title":"Query that multiplies row by a number in a row from table in Oracle Database","cluster":3,"question_score":0}
+{"question_id":"38527099","title":"Error Installing yajra/laravel-datatables-oracle:~6.0 with Laravel 5.2","cluster":2,"question_score":0}
+{"question_id":"39304840","title":"Select just fill columns in oracle","cluster":0,"question_score":0}
+{"question_id":"39308516","title":"Is it a bad practice to create a large number of users in an Oracle database?","cluster":4,"question_score":0}
+{"question_id":"39823352","title":"Concatenate rows, based on common column Oracle","cluster":0,"question_score":0}
+{"question_id":"40395034","title":"Oracle inner join two select queries with columns first in second","cluster":0,"question_score":1}
+{"question_id":"41402110","title":"Execute SQL command with parameter using Devart EF Drivers for Oracle","cluster":4,"question_score":1}

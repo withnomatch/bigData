@@ -1,0 +1,2 @@
+{"cluster":14,"rank":2,"question_id":"6073983","title":"Oracle: SELECT * FROM tablea a, tableb b WHERE a.fielda(+)=b.fieldb -- what is (+)?","score":10}
+{"cluster":14,"rank":3,"question_id":"2138363","title":"Oracle triggers - problem with mutating tables","score":6}

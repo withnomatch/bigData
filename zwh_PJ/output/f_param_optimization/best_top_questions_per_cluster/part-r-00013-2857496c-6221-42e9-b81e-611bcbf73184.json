@@ -1,0 +1,5 @@
+{"cluster":23,"rank":1,"question_id":"32595949","title":"PLSQL SOAP WebService","score":0}
+{"cluster":24,"rank":1,"question_id":"34639275","title":"Connections could not be acquired from the underlying database! Using Hibernate + c3p0 + Oracle 11g","score":4}
+{"cluster":24,"rank":2,"question_id":"73672194","title":"org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL \"create table workers","score":2}
+{"cluster":24,"rank":3,"question_id":"29747856","title":"Can't store BLOB using Oracle + Spring + Liberty profile","score":1}
+{"cluster":24,"rank":4,"question_id":"36675117","title":"java.sql.SQLException: ORA-01017: invalid username/password; logon denied","score":1}

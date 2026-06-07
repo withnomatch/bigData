@@ -1,0 +1,5 @@
+{"cluster":7,"rank":10,"question_id":"29167698","title":"performance query issue - Oracle","score":2}
+{"cluster":8,"rank":1,"question_id":"29800923","title":"Weblogic with Hibernate getting javax.persistence.PersistenceException: org.hibernate.exception.GenericJDBCException: Could not open connection","score":0}
+{"cluster":8,"rank":2,"question_id":"52135281","title":"Error creating bean with name 'entityManagerFactory' defined in class path resource using spring boot jpa","score":0}
+{"cluster":9,"rank":1,"question_id":"28224352","title":"Quartz Job executed multiple times simultaneously by each cluster machine, rather than one time by one machine for the entire cluster","score":2}
+{"cluster":9,"rank":2,"question_id":"38375017","title":"Pentaho Initialization Exception Error _0014 on starting Pentaho 6.1","score":1}

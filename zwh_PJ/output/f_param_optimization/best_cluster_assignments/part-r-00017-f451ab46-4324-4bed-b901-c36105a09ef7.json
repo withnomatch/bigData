@@ -1,0 +1,643 @@
+{"question_id":"57719737","title":"Oracle: wrong number or types of arguments in call","cluster":0,"question_score":1}
+{"question_id":"57720751","title":"how to migrate data from blob datatype from oracle to SQL using java where in file stream I am sending only table dynamically","cluster":0,"question_score":0}
+{"question_id":"57730279","title":"what is the SYS_AUDIT in the filter predicate in oracle execution","cluster":0,"question_score":1}
+{"question_id":"57730613","title":"Server- Side condition not working for Interactive Grids in Oracle APEX?","cluster":0,"question_score":1}
+{"question_id":"57730860","title":"Is it possible to have a table function return null rows?","cluster":0,"question_score":1}
+{"question_id":"57731422","title":"\"ORA-00933: SQL command not properly ended\"","cluster":0,"question_score":0}
+{"question_id":"57734378","title":"How to set same sequence number on two columns","cluster":0,"question_score":2}
+{"question_id":"57737617","title":"ORA-6550 Wrong number of Arguments in a Call","cluster":0,"question_score":1}
+{"question_id":"57752630","title":"Getting error \"Error parsing insert statement for table ROOT.LOAD_SQL\" while using ltrim in sql loader","cluster":0,"question_score":1}
+{"question_id":"57757919","title":"How to set parallel trace files available to public on Linux?","cluster":0,"question_score":0}
+{"question_id":"57766587","title":"Excel file generation using SQL query, SPOOL command in Shell script","cluster":0,"question_score":0}
+{"question_id":"57767621","title":"Oracle SQL Function Implementation","cluster":0,"question_score":0}
+{"question_id":"57769429","title":"How to pull data from an external source (REST API) with Oracle SQL?","cluster":0,"question_score":0}
+{"question_id":"57769648","title":"Hibernate Generation Type for SQL Server and Others","cluster":0,"question_score":0}
+{"question_id":"57769835","title":"Concurrent get timestamp plus sequence from Oracle","cluster":0,"question_score":0}
+{"question_id":"57780448","title":"Explain parameters in Oracle actual execution plan","cluster":0,"question_score":1}
+{"question_id":"57783199","title":"How to send column Items in apex.server.process pageItems parameter?","cluster":0,"question_score":0}
+{"question_id":"57783817","title":"Unable to connect web browser after installation apex 5.1","cluster":0,"question_score":0}
+{"question_id":"57788668","title":"How to use multiple select queries inside c# by oracle","cluster":0,"question_score":1}
+{"question_id":"57798368","title":"How to split record in multiple records from start/end date record","cluster":0,"question_score":1}
+{"question_id":"57798600","title":"Combine Multiple Rows in one in Oracle","cluster":0,"question_score":0}
+{"question_id":"57799492","title":"Calculate rolling 180 days average","cluster":0,"question_score":0}
+{"question_id":"57803133","title":"Reuse function call inside select statement","cluster":0,"question_score":1}
+{"question_id":"57805475","title":"Is there a SUBSTR alternative in Oracle SQL","cluster":0,"question_score":0}
+{"question_id":"57819170","title":"How to Shorted Regular Expression","cluster":0,"question_score":0}
+{"question_id":"57822118","title":"Split CLOB datatype without conversion to varchar2","cluster":0,"question_score":0}
+{"question_id":"57830323","title":"SQL Server Migration Assisstant (SSMA) doesn't see my schema in Oracle","cluster":0,"question_score":0}
+{"question_id":"57836081","title":"sql group by monthly sum and sum year by month","cluster":0,"question_score":0}
+{"question_id":"57838172","title":"I try to insert query alphanumeric sequence in table but it is not working","cluster":0,"question_score":0}
+{"question_id":"57851152","title":"execute SQL query stored in a table","cluster":0,"question_score":1}
+{"question_id":"57852511","title":"oracle.sql.CLOB vs java.sql.Clob","cluster":0,"question_score":0}
+{"question_id":"57852545","title":"How can I create dynamic action creation in tabular form","cluster":0,"question_score":0}
+{"question_id":"57855697","title":"ora-06575 package or function is in an invalid state pl sql","cluster":0,"question_score":0}
+{"question_id":"57869249","title":"Why explain plan uses INDEX UNIQUE SCAN and TABLE ACCESS FULL?","cluster":0,"question_score":0}
+{"question_id":"57872869","title":"Formula picking up almost all values","cluster":0,"question_score":0}
+{"question_id":"57874824","title":"Textbox Value does not fall within the expected range","cluster":0,"question_score":1}
+{"question_id":"57876914","title":"Transpose Oracle table/data set","cluster":0,"question_score":0}
+{"question_id":"57878002","title":"How to do SQL queries (ORACLE) using Laravel?","cluster":0,"question_score":0}
+{"question_id":"57884392","title":"how to update or add values during runtime in PL/SQL?","cluster":0,"question_score":0}
+{"question_id":"57883537","title":"Refactor Oracle SQL query","cluster":0,"question_score":1}
+{"question_id":"57885651","title":"value does not fall within the expected range exception for Oracle","cluster":0,"question_score":0}
+{"question_id":"57885670","title":"Output parameter as Integer using spring StoredProcedure","cluster":0,"question_score":1}
+{"question_id":"57889078","title":"Avoid duplicate in query and make all the duplicated row blank","cluster":0,"question_score":0}
+{"question_id":"57889519","title":"How to add few rows of a specific table in outlook (Either as attachment or in body of the email)","cluster":0,"question_score":0}
+{"question_id":"57900251","title":"Oracle Apex: load an application variable each time the application is loaded","cluster":0,"question_score":2}
+{"question_id":"57904489","title":"Oracle - extract images from BLOB","cluster":0,"question_score":-1}
+{"question_id":"57907711","title":"Oracle SQL - REGEXP_LIKE contains characters other than string 'NA'","cluster":0,"question_score":1}
+{"question_id":"57913177","title":"Can the installation of Oracle APEX on LINUX be accomplished if Oracle DB resides on separate system?","cluster":0,"question_score":1}
+{"question_id":"57917892","title":"Passing 900 parameters in SQL IN Clause multiple times and export to xlsx file using Java","cluster":0,"question_score":0}
+{"question_id":"57919334","title":"Hierarchy data from Oracle from Multiple Tables","cluster":0,"question_score":1}
+{"question_id":"57923077","title":"how to split a string with both space and special characters in oracle?","cluster":0,"question_score":2}
+{"question_id":"57924380","title":"Unable to Join table to other tables inside a stored procedure","cluster":0,"question_score":0}
+{"question_id":"57924446","title":"best way to convert column to json array (Oracle)","cluster":0,"question_score":2}
+{"question_id":"57934045","title":"How to avoid implicit type conversion from VARCHAR to VARCHAR2 using Hibernate?","cluster":0,"question_score":6}
+{"question_id":"57941155","title":"Group By With Special Condition To Select Row","cluster":0,"question_score":0}
+{"question_id":"57953526","title":"No results on view after granting select for that specific user - Default User sees results","cluster":0,"question_score":0}
+{"question_id":"57957059","title":"How to replace a constraint in sql?","cluster":0,"question_score":-1}
+{"question_id":"57960059","title":"oracle regular expression or internal function usage","cluster":0,"question_score":0}
+{"question_id":"57964651","title":"How do you export a complete data-model from Oracle APEX/SQL Workshop?","cluster":0,"question_score":3}
+{"question_id":"57967105","title":"Tableau - How do I create multiple custom SQL from the same data source WITHOUT join?","cluster":0,"question_score":0}
+{"question_id":"57971043","title":"How to performs multiple query on the database Oracle using PHP Language","cluster":0,"question_score":0}
+{"question_id":"57971417","title":"How to add a string to regular expressions in SQL and then convert it to a date?","cluster":0,"question_score":2}
+{"question_id":"57973576","title":"TO_DATE in Oracle JDBC PreparedStatement giving invalid identifier","cluster":0,"question_score":0}
+{"question_id":"57976757","title":"To get the code view in Java with ResultSet.getNString or getString. Does not return the complete string from DBA_VIEWS.text","cluster":0,"question_score":1}
+{"question_id":"57983326","title":"'not like' in Oracle","cluster":0,"question_score":0}
+{"question_id":"57988295","title":"ORACLE APEX 5.1 Error after process runs a long time","cluster":0,"question_score":1}
+{"question_id":"57993928","title":"Does spring.jpa.hibernate.ddl-auto = validate property validates the columns with table?","cluster":0,"question_score":2}
+{"question_id":"58002451","title":"How to get a particular pattern from a Column","cluster":0,"question_score":0}
+{"question_id":"58012891","title":"How to validate or get the value from the Input parameter of (Type Table) in Stored procedure in Oracle PL SQL?","cluster":0,"question_score":0}
+{"question_id":"58015030","title":"Replace character with multiple characters","cluster":0,"question_score":0}
+{"question_id":"58019105","title":"opensource tool for Oracle Change data capture - Alternative to GoldenGate","cluster":0,"question_score":4}
+{"question_id":"58026111","title":"Passing an array of Object from Java to PL/SQL function","cluster":0,"question_score":2}
+{"question_id":"58028349","title":"Oracle Open Cursor For doesnt do %rowcount","cluster":0,"question_score":0}
+{"question_id":"58028639","title":"I want to concatenate these case statements","cluster":0,"question_score":0}
+{"question_id":"58031821","title":"how to migrate this function/trigger from postgres to oracle?","cluster":0,"question_score":0}
+{"question_id":"58035264","title":"case statement in select when creating a subquery","cluster":0,"question_score":-1}
+{"question_id":"58042413","title":"Select all columns with time formatting","cluster":0,"question_score":3}
+{"question_id":"58045540","title":"Error occurred while trying to connect to db in aws","cluster":0,"question_score":0}
+{"question_id":"58067802","title":"Matching demographics from two tables with no unique identifiers","cluster":0,"question_score":1}
+{"question_id":"58067624","title":"Using Spring CrudRepository to Insert a Record Into a One-To-One Join Table With Hibernate","cluster":0,"question_score":1}
+{"question_id":"58068171","title":"How to perform Like in SQL on a column with '%' in the data?","cluster":0,"question_score":1}
+{"question_id":"58074704","title":"PLS-00103: Encountered the symbol \"EXECUTE\" when expecting one of the following:","cluster":0,"question_score":-2}
+{"question_id":"58081192","title":"Which are all implicit and explicit cursor here?","cluster":0,"question_score":0}
+{"question_id":"58082868","title":"Oracle XE dg4odbc: connecting to SQL Server doesn't work","cluster":0,"question_score":0}
+{"question_id":"58083762","title":"List of tables along with key information - Oracle","cluster":0,"question_score":0}
+{"question_id":"58084424","title":"how to call an oracle procedure and a function inside another procedure","cluster":0,"question_score":0}
+{"question_id":"58085996","title":"SQL to find Consecutive Halves","cluster":0,"question_score":1}
+{"question_id":"58088422","title":"PERL using WITH clause in Database prepare","cluster":0,"question_score":0}
+{"question_id":"58109497","title":"What's the cause for an ORA-00979 on oracle 11g","cluster":0,"question_score":1}
+{"question_id":"58111961","title":"How to report a label with 0(zero) when not found in the result in a complex CASE statement","cluster":0,"question_score":0}
+{"question_id":"58115800","title":"How to rollback automatically if script having error in Oracle sql plus","cluster":0,"question_score":0}
+{"question_id":"58118403","title":"Order by Date not functioning as expected","cluster":0,"question_score":0}
+{"question_id":"58120892","title":"Optimizing OLE DB Destination for Fast load from Oracle to SQL Server for SSIS","cluster":0,"question_score":2}
+{"question_id":"58129234","title":"Does my Query allows me to extend SELECT statment","cluster":0,"question_score":0}
+{"question_id":"58129910","title":"How to make :NEW dynamic PL/SQL","cluster":0,"question_score":0}
+{"question_id":"58131116","title":"How can I get data in the required field?","cluster":0,"question_score":1}
+{"question_id":"58136263","title":"How to Declare, Populate and Use a Variable using Oracle PL/SQL","cluster":0,"question_score":1}
+{"question_id":"58137609","title":"SQL/ORACLE- FOREIGN KEY using two columns from other tables","cluster":0,"question_score":1}
+{"question_id":"58140215","title":"How to identify the words in between a particular pattern using regexp: Oracle?","cluster":0,"question_score":3}
+{"question_id":"58141585","title":"Oracle SQL script giving error. I try to create table","cluster":0,"question_score":1}
+{"question_id":"58140573","title":"Host key verification failed. Oracle 11g","cluster":0,"question_score":-2}
+{"question_id":"58145697","title":"Select table in cursor after creating the table","cluster":0,"question_score":1}
+{"question_id":"58152173","title":"cannot change NEW values for this trigger type","cluster":0,"question_score":1}
+{"question_id":"58154811","title":"Update only mapped fields or Ignore the unmapped fields - Automapper?","cluster":0,"question_score":0}
+{"question_id":"58162195","title":"I want to update a column using PL/SQL","cluster":0,"question_score":-2}
+{"question_id":"58162392","title":"ORA-00928: Getting multiple errors while passing XML in stored procedure","cluster":0,"question_score":0}
+{"question_id":"58168795","title":"Data grouping for 10 seconds. PLSQL","cluster":0,"question_score":1}
+{"question_id":"58169458","title":"Oracle SQL adding additional foreign keys","cluster":0,"question_score":1}
+{"question_id":"58180687","title":"How to create oracle sequence with param \"cache\" sets to \"No cache\" using sqlalchemy orm","cluster":0,"question_score":1}
+{"question_id":"58195060","title":"Query failing on Oracle 12c and 18c when changing NLS_SORT to BINARY_CI","cluster":0,"question_score":0}
+{"question_id":"58206908","title":"Move rows to column and columns to row in oralce SQL","cluster":0,"question_score":0}
+{"question_id":"58213516","title":"find gaps in sequence by group","cluster":0,"question_score":1}
+{"question_id":"58218288","title":"How to hide page when no records found oracle report","cluster":0,"question_score":0}
+{"question_id":"58220769","title":"Creating SQL view with XML data in Oracle","cluster":0,"question_score":0}
+{"question_id":"58222518","title":"SQL - How to join tables but keep all values for a particular attribute","cluster":0,"question_score":1}
+{"question_id":"58225872","title":"How to return distinct rows meeting condition","cluster":0,"question_score":0}
+{"question_id":"58231466","title":"How to pass a TABLE OBJECT out parameter from C# ASP.NET Core to Oracle Stored Procedure","cluster":0,"question_score":0}
+{"question_id":"58235470","title":"With cluse in insert","cluster":0,"question_score":0}
+{"question_id":"58245798","title":"How to update rows with the same foreign key without updating them all","cluster":0,"question_score":0}
+{"question_id":"58247772","title":"How to migrate selective data from one database to another in oracle SQL Developer?","cluster":0,"question_score":-1}
+{"question_id":"58263147","title":"First effective date from a table sql","cluster":0,"question_score":0}
+{"question_id":"58263233","title":"How to convert column with Rank Value into rows in oracle","cluster":0,"question_score":1}
+{"question_id":"58266289","title":"How to return result from JSON_OBJECT with lowecase column names in Oracle 19C","cluster":0,"question_score":1}
+{"question_id":"58269078","title":"connection to oracle db gives System.TypeInitializationException' in Oracle.DataAccess.dll?","cluster":0,"question_score":1}
+{"question_id":"58270163","title":"Conditional Procedure oracle Pl/sql","cluster":0,"question_score":0}
+{"question_id":"58270955","title":"Query table for null columns when column name like","cluster":0,"question_score":0}
+{"question_id":"58280888","title":"AWS lambda - how to connect Internal oracle instance (say VPN / inside office network) from lambda","cluster":0,"question_score":0}
+{"question_id":"58281086","title":"Oracle: Ensure each value that used by the IN operator to always return one row even there is no match data","cluster":0,"question_score":2}
+{"question_id":"58282690","title":"Entity Framework - Simple query takes 3 minutes to complete","cluster":0,"question_score":0}
+{"question_id":"58292293","title":"Dynamic Column Name for a Derived Column - ORACLE SQL","cluster":0,"question_score":3}
+{"question_id":"58295436","title":"Lower function being ignored when used in a function in SQL Oracle","cluster":0,"question_score":0}
+{"question_id":"58296462","title":"Oracle SQL Where clause","cluster":0,"question_score":0}
+{"question_id":"58300646","title":"Display query-set results on a Django template without using a django model","cluster":0,"question_score":0}
+{"question_id":"58304692","title":"Oracle server timezone using SQL query","cluster":0,"question_score":4}
+{"question_id":"58309558","title":"my reports (pdf and excel) sometimes are empty","cluster":0,"question_score":0}
+{"question_id":"58311652","title":"Import hour, minute, second from csv to timestamp column in external table","cluster":0,"question_score":0}
+{"question_id":"58324006","title":"XML Table- Parametrized Path","cluster":0,"question_score":0}
+{"question_id":"58329735","title":"Create table from table of column names and data types","cluster":0,"question_score":1}
+{"question_id":"58331702","title":"SQL - joining 3 tables and choosing newest logged entry per id","cluster":0,"question_score":2}
+{"question_id":"58333077","title":"SQL - ORA-00911 Invalid character on my insertions","cluster":0,"question_score":1}
+{"question_id":"58334174","title":"How to convert time into hours( in decimal)?","cluster":0,"question_score":0}
+{"question_id":"58334367","title":"How to convert a single column containing multiple rows into rows","cluster":0,"question_score":1}
+{"question_id":"58334766","title":"Error while executing insert triggers in PL/SQL","cluster":0,"question_score":1}
+{"question_id":"58340300","title":"MSAccess - Oracle: Cant add record to form recordset","cluster":0,"question_score":0}
+{"question_id":"58339942","title":"How to use a group by but still access every number values cleverly","cluster":0,"question_score":0}
+{"question_id":"58342509","title":"Missing Expression for insert statement in PL/SQL ODBM?","cluster":0,"question_score":0}
+{"question_id":"58343277","title":"Activiti createTaskQuery().processInstanceId returns empty","cluster":0,"question_score":1}
+{"question_id":"58345389","title":"Counts return by sql query on sql developer is different then returned in the application","cluster":0,"question_score":1}
+{"question_id":"58348316","title":"Bind variable error in triggers Oracle PL/SQL","cluster":0,"question_score":0}
+{"question_id":"58355232","title":"PL/SQL: While Loop not waiting for inner procedures to complete","cluster":0,"question_score":1}
+{"question_id":"58364763","title":"How to hide a Submit button on Oracle Workflow Notification after clicking it?","cluster":0,"question_score":1}
+{"question_id":"58372512","title":"ORA-01873: the leading precision of the interval is too small with EXTRACT function","cluster":0,"question_score":1}
+{"question_id":"58376013","title":"Import data command missing tables in oracle","cluster":0,"question_score":0}
+{"question_id":"58381311","title":"Oracle: How can you clean up every grant a user has?","cluster":0,"question_score":1}
+{"question_id":"58401100","title":"What is wrong with my procedure, data from my procedure is wrong","cluster":0,"question_score":0}
+{"question_id":"58400797","title":"Unable to connect to Oracle database from SSIS","cluster":0,"question_score":1}
+{"question_id":"58404679","title":"Why am i getting error with this JSON_OBJECT usage","cluster":0,"question_score":1}
+{"question_id":"58410598","title":"Replacing everything but a specific pattern in a string (Oracle)","cluster":0,"question_score":0}
+{"question_id":"58411008","title":"Is it possible get apex collection from another application in apex","cluster":0,"question_score":1}
+{"question_id":"58413960","title":"How to fix bug that null value row not return in oracle 11.2.0.1","cluster":0,"question_score":-1}
+{"question_id":"58414024","title":"pyspark 2.3.3 connectivity issue with oracle database via jupyter notebook","cluster":0,"question_score":0}
+{"question_id":"58418447","title":"what is the criteria that oracle follows to auto collect stats on user schema tables in 12c","cluster":0,"question_score":1}
+{"question_id":"58418489","title":"Row lumping, cycle dates","cluster":0,"question_score":2}
+{"question_id":"58417851","title":"Oracle Database Connection issue with SSH Tunnel - Logon denied","cluster":0,"question_score":0}
+{"question_id":"58423732","title":"While loops with Strings not Integers","cluster":0,"question_score":0}
+{"question_id":"58428865","title":"SQL group two value in a same row","cluster":0,"question_score":2}
+{"question_id":"58430624","title":"how to select a bunch of objects automatically in ssma(SQL Server Migration Assistant)","cluster":0,"question_score":0}
+{"question_id":"58433508","title":"Moving Oracle SQL CLOB values(>4000 chars) to SQL Server without trimming","cluster":0,"question_score":0}
+{"question_id":"58433502","title":"Symfony 3.4 Command vs oracle wallet ORA-12154: TNS:could not resolve the connect identifier specified","cluster":0,"question_score":0}
+{"question_id":"58435530","title":"insert into not working on oracle in date field","cluster":0,"question_score":0}
+{"question_id":"58439412","title":"Check if any element in list A exists in list B","cluster":0,"question_score":0}
+{"question_id":"58444001","title":"Select query payment schedule","cluster":0,"question_score":0}
+{"question_id":"58449310","title":"Shapiro-Wilk test","cluster":0,"question_score":1}
+{"question_id":"58460399","title":"SQL: calculating distances between a town and multiple other locations","cluster":0,"question_score":0}
+{"question_id":"58462921","title":"XMLQuery in Oracle to query a XML","cluster":0,"question_score":0}
+{"question_id":"58468821","title":"Delete records with correlation query in Oracle","cluster":0,"question_score":0}
+{"question_id":"58484091","title":"Ways of Combining the data from Two tables in Oracle","cluster":0,"question_score":0}
+{"question_id":"58485689","title":"Oracle deleting duplicates based on a condition","cluster":0,"question_score":0}
+{"question_id":"58485979","title":"How to select from another table during SQLLDR importing file","cluster":0,"question_score":0}
+{"question_id":"58491959","title":"how do I use if condition in cursor because our professor don't allow us use where clause in the select statement","cluster":0,"question_score":1}
+{"question_id":"58496023","title":"Truncate table privilege without stored procedures","cluster":0,"question_score":1}
+{"question_id":"58497919","title":"how can we group 5 pm yesterday to 5 pm today records to todays date","cluster":0,"question_score":1}
+{"question_id":"58499274","title":"Oracle not reuse deleted blocks","cluster":0,"question_score":0}
+{"question_id":"58500707","title":"How attach the SQL script by SQLPlus to the bash loop?","cluster":0,"question_score":2}
+{"question_id":"58500251","title":"Oracle database - delete records from a fixed length file","cluster":0,"question_score":0}
+{"question_id":"58511819","title":"Query for fuel usage with a subquery","cluster":0,"question_score":0}
+{"question_id":"58512183","title":"How to know the statistics are up to date in Oracle Database?","cluster":0,"question_score":1}
+{"question_id":"58525964","title":"Union table from several schemas with variable","cluster":0,"question_score":0}
+{"question_id":"58527713","title":"Looping in Oracle","cluster":0,"question_score":-1}
+{"question_id":"58534324","title":"Should Rollback be issued before raise application error?","cluster":0,"question_score":0}
+{"question_id":"58536843","title":"Coldfusion insert record into Oracle DB","cluster":0,"question_score":-1}
+{"question_id":"58538214","title":"SQL: modifying query output subject to a condition","cluster":0,"question_score":0}
+{"question_id":"58541233","title":"Oracle to SQL Server query migration results into: The ORDER BY clause is invalid in views, inline functions, derived tables","cluster":0,"question_score":0}
+{"question_id":"58542322","title":"How to export R table to Oracle database","cluster":0,"question_score":1}
+{"question_id":"58543487","title":"Using max-function in subquery relating to main query","cluster":0,"question_score":1}
+{"question_id":"58546671","title":"rank a column with out ordering in oracle","cluster":0,"question_score":4}
+{"question_id":"58546934","title":"Issue using SQLLDR unable to pass in date 'YYYYMMDD' from CVS to oracle DB","cluster":0,"question_score":1}
+{"question_id":"58547042","title":"how to join two select queries of different databases?","cluster":0,"question_score":0}
+{"question_id":"58548004","title":"Add Action to Custom Transaction Form in NetSuite","cluster":0,"question_score":0}
+{"question_id":"58549389","title":"Re-duplicate a broken physical standby database?","cluster":0,"question_score":1}
+{"question_id":"58549041","title":"Query the exact partition when table is hash-partitioned","cluster":0,"question_score":1}
+{"question_id":"58557097","title":"Deadlock like behavior in Oracle 12c on select statements","cluster":0,"question_score":1}
+{"question_id":"58560479","title":"Retrieve distinct values with LISTAGG in Oracle 12C","cluster":0,"question_score":2}
+{"question_id":"58560776","title":"Filter on numerical values in Oracle SQL","cluster":0,"question_score":0}
+{"question_id":"58565216","title":"Have view object number in oracle?","cluster":0,"question_score":0}
+{"question_id":"58570159","title":"SQL Developer tool doesn't have \"Application Express\" node in the file hiearchy in the Connections Tab","cluster":0,"question_score":0}
+{"question_id":"58570964","title":"Issues with Oracle SQL syntax error for DATE_SUB","cluster":0,"question_score":1}
+{"question_id":"58589447","title":"Create a default column filter at schema/database level in Oracle and SQL Server?","cluster":0,"question_score":1}
+{"question_id":"58594521","title":"Return all Users, even those who don't fit my criteria","cluster":0,"question_score":0}
+{"question_id":"58602676","title":"Commit and Rollback a DML statement in Oracle","cluster":0,"question_score":0}
+{"question_id":"58603079","title":"select only required text in oracle without hardcoding the character position","cluster":0,"question_score":0}
+{"question_id":"58603684","title":"How can I merge two oracle database with same application running in two instances","cluster":0,"question_score":0}
+{"question_id":"58604113","title":"Oracle Default null on converion error - timestamp","cluster":0,"question_score":2}
+{"question_id":"58614148","title":"Finding max value of a field available in all tables","cluster":0,"question_score":0}
+{"question_id":"58621889","title":"Nesting a WITH statement into an existing select and passing dates into it","cluster":0,"question_score":-1}
+{"question_id":"58621858","title":"How to remove all hyphens and spaces from a string?","cluster":0,"question_score":0}
+{"question_id":"58625790","title":"ORA-01802: Julian date is out of range although select statement does not include date manipulation","cluster":0,"question_score":2}
+{"question_id":"58631107","title":"How to Duplicate a column or record when combining multiple table","cluster":0,"question_score":0}
+{"question_id":"58631918","title":"Looking for a tool(GUI or Form) that serves as front-end to Oracle SQL database","cluster":0,"question_score":-2}
+{"question_id":"58640215","title":"How to remove/Delete the effect of UNIQUE KEY from TABLE","cluster":0,"question_score":0}
+{"question_id":"58641074","title":"Function & Cursor HELP ORACLE PL/SQL","cluster":0,"question_score":0}
+{"question_id":"58641080","title":"Oracle active and innactive sessions are there even after system down","cluster":0,"question_score":0}
+{"question_id":"58651213","title":"Find unique row when two rows when two row have the column id as the same, but have other column a date which I want the newset one","cluster":0,"question_score":1}
+{"question_id":"58660850","title":"Convert rank() partition by oracle query to pyspark sql","cluster":0,"question_score":0}
+{"question_id":"58662889","title":"missing right parenthesis in case statement","cluster":0,"question_score":0}
+{"question_id":"58664679","title":"Oracle - LISTAGG and ordering fields separated by pipe; order messed up","cluster":0,"question_score":0}
+{"question_id":"58674163","title":"How to format output so that it output in sentence?","cluster":0,"question_score":2}
+{"question_id":"58675751","title":"oracle join string to number not working by adding regexp_like","cluster":0,"question_score":2}
+{"question_id":"58676390","title":"Reading A Massive CSV file into an Oracle table","cluster":0,"question_score":0}
+{"question_id":"58681105","title":"Access to Oracle DB 9.2 without Oracle Client using C #","cluster":0,"question_score":0}
+{"question_id":"58689966","title":"ExecuteMany inserts wrong value","cluster":0,"question_score":1}
+{"question_id":"58688842","title":"Simpler regular expression for oracle regexp_replace","cluster":0,"question_score":1}
+{"question_id":"58691623","title":"Tomcat Cors + Oracle ORDS is blocking my angular request","cluster":0,"question_score":0}
+{"question_id":"58694885","title":"Missing / Wrong characters returnd via CPAN Perl DBI:Oracle ( missing umlauts)","cluster":0,"question_score":2}
+{"question_id":"58695636","title":"Listing a person and their nth phone number","cluster":0,"question_score":1}
+{"question_id":"58697768","title":"RETURN REF CURSOR FROM PROCEDURE BY SELECT","cluster":0,"question_score":1}
+{"question_id":"58706518","title":"Oracle Query based on data to horizontal","cluster":0,"question_score":1}
+{"question_id":"58710435","title":"Commons DBUtils Oracle 11.2.0.4 with Java 1.7 Binding parameters SQLException ORA-00942","cluster":0,"question_score":0}
+{"question_id":"58719729","title":"SQL Developer doesn't recognize right outer join ORA-00905: missing keyword","cluster":0,"question_score":1}
+{"question_id":"58724019","title":"Test data management solution for Oracle, DB2 and HANA","cluster":0,"question_score":0}
+{"question_id":"58724305","title":"How to List aggregate values using Group By in oracle","cluster":0,"question_score":1}
+{"question_id":"58726710","title":"I want to replace the Year to all 2000, but failing to replace the year","cluster":0,"question_score":-1}
+{"question_id":"58729493","title":"Oracle simple update script causes \"ORA-00600: internal error code, arguments: [15851], [6], [6], [1], [2], [], [], []\"","cluster":0,"question_score":0}
+{"question_id":"58733976","title":"Get Month by a Intenger","cluster":0,"question_score":0}
+{"question_id":"58740636","title":"Oracle SQL - select last 3 rows after a specific row","cluster":0,"question_score":0}
+{"question_id":"58743467","title":"Getting specific value from checkbox global array variable in oracle apex","cluster":0,"question_score":-1}
+{"question_id":"58746729","title":"Count Jobs Submitted After Every Hour","cluster":7,"question_score":1}
+{"question_id":"58749315","title":"(Oracle)How to select a data in a Table with horizontal and vertical coordinates?","cluster":0,"question_score":0}
+{"question_id":"58750976","title":"How to get an the id inserted using Oracle and Zend","cluster":0,"question_score":0}
+{"question_id":"58751048","title":"Migrate auto generated IDs from Oracle to SQL Server","cluster":0,"question_score":1}
+{"question_id":"58751369","title":"Sql Server to Oracle - Change procedures and view syntax","cluster":0,"question_score":0}
+{"question_id":"58768338","title":"How to use table input parameter for MERGE command in Oracle Stored Procedure","cluster":0,"question_score":0}
+{"question_id":"58780905","title":"Oracle SQL: INSERT with SELECT","cluster":0,"question_score":0}
+{"question_id":"58785416","title":"Debugging PL/SQL Procedure for reservation service report","cluster":0,"question_score":-3}
+{"question_id":"58792320","title":"ORA-00933: SQL command not properly ended 00933. 00000 - \"SQL command not properly ended","cluster":0,"question_score":0}
+{"question_id":"58795133","title":"How do I join my result to retrieve another table's corresponding records?","cluster":0,"question_score":0}
+{"question_id":"58795208","title":"Superset of column value in table SQL","cluster":0,"question_score":2}
+{"question_id":"58801024","title":"Why no results when executing PLSQL procedure?","cluster":0,"question_score":0}
+{"question_id":"58803319","title":"Liquibase Oracle OS Authentication","cluster":0,"question_score":0}
+{"question_id":"58804784","title":"oracle regexp_substring return only part of pattern","cluster":0,"question_score":1}
+{"question_id":"58813874","title":"Full Outer Join Subqueries works until last part then ORA-013113","cluster":0,"question_score":0}
+{"question_id":"58814687","title":"Oracle skip the index when using PARALLEL hint","cluster":0,"question_score":1}
+{"question_id":"58816793","title":"oracle : Writing an Oracle FileSize function","cluster":0,"question_score":0}
+{"question_id":"58817704","title":"Delete certain values inside a column","cluster":0,"question_score":1}
+{"question_id":"58821137","title":"How to get the week before the current week?","cluster":0,"question_score":0}
+{"question_id":"58821760","title":"Using HTP.P in ATP oracle database","cluster":0,"question_score":0}
+{"question_id":"58822520","title":"Entering a sequence into a SQL Table, Error - ORA-01858: a non-numeric character was found where a numeric was expected","cluster":0,"question_score":1}
+{"question_id":"58824633","title":"PL/SQL : how to display / export hierarchical tree with lines from table","cluster":0,"question_score":-1}
+{"question_id":"58829195","title":"Is it possible to hide the user password in Oracle JDBC diagnostic trace?","cluster":0,"question_score":2}
+{"question_id":"58831040","title":"How to store many to many relationship with extra column data","cluster":0,"question_score":1}
+{"question_id":"58831226","title":"Why truncate table does not change the Last DDL Date?","cluster":0,"question_score":2}
+{"question_id":"58836773","title":"ExecuteReader return null value for one of the column but data exist in the database","cluster":0,"question_score":0}
+{"question_id":"58838568","title":"Split two columns in one row","cluster":0,"question_score":0}
+{"question_id":"58839016","title":"Cannot load Oracle.DataAccess dll on NUnit Test project (System.BadImageFormatException : Could not load file or assembly) but app runs fine","cluster":0,"question_score":0}
+{"question_id":"58846687","title":"Working with 'HUGEBLOB' datatype in python","cluster":0,"question_score":1}
+{"question_id":"58853951","title":"Oracle select specific rows","cluster":0,"question_score":0}
+{"question_id":"58855423","title":"Oracle JDBC Optimization : Enable PreparedStatement caching in a Spring boot Application","cluster":0,"question_score":10}
+{"question_id":"58859952","title":"Python SQL insert not inserting in the correct order?","cluster":0,"question_score":-2}
+{"question_id":"58871283","title":"Why I am getting huge amount of duplicate records?","cluster":0,"question_score":0}
+{"question_id":"58872689","title":"Transform table to smoothen records in one column","cluster":0,"question_score":0}
+{"question_id":"58873738","title":"how to set values in sql when values of one column have to be assigned to individual column based on their id","cluster":0,"question_score":-2}
+{"question_id":"58874923","title":"Oracle user cannot see any content in ALL_MVIEW_COMMENTS","cluster":0,"question_score":1}
+{"question_id":"58896962","title":"How to return a ROWTYPE in PL/SQL and retrieve it in Java?","cluster":0,"question_score":1}
+{"question_id":"58903600","title":"part 2 of limiting regexp_substr expressions","cluster":0,"question_score":0}
+{"question_id":"58909622","title":"Links to Download older versions of Oracle Weblogic / OBI","cluster":0,"question_score":1}
+{"question_id":"58909841","title":"cx_Oracle.NotSupportedError: Python value of type tuple not supported","cluster":0,"question_score":3}
+{"question_id":"58910019","title":"coin change problem in pl sql. Convert c++ logic in plsql","cluster":0,"question_score":-1}
+{"question_id":"58911128","title":"How to ADD specific values in a oracle database column?","cluster":0,"question_score":0}
+{"question_id":"58923246","title":"UTL_SMTP insufficient privilege","cluster":0,"question_score":0}
+{"question_id":"58925348","title":"How to delete datetime value using update?","cluster":0,"question_score":0}
+{"question_id":"58930075","title":"Error ORA-01722: Invalid number when creating materialized view (Oracle SDE problem?)","cluster":0,"question_score":0}
+{"question_id":"58934538","title":"PL/SQL Unable to get return value of a function when called through trigger - Oracle","cluster":0,"question_score":0}
+{"question_id":"58938664","title":"How to order a VARCHAR2 column representing date and time with AM and PM Oracle SQL?","cluster":0,"question_score":0}
+{"question_id":"58940811","title":"Oracle display all sql query run against DB by application","cluster":0,"question_score":0}
+{"question_id":"58942654","title":"Reducing the size of oracle database docker image","cluster":0,"question_score":5}
+{"question_id":"58945788","title":"SQL Create view or procedure in a SUM query without adding new column?","cluster":0,"question_score":0}
+{"question_id":"58948731","title":"Trying to call a Function inside a stored procedure in oracle","cluster":0,"question_score":0}
+{"question_id":"58950651","title":"Date Column showing Duplicate Records even after using to_date(to_char(JOB_CLOSED_DATE,'dd-mon-yy')),","cluster":0,"question_score":0}
+{"question_id":"58953780","title":"how to load file contain Polish character","cluster":0,"question_score":0}
+{"question_id":"58965292","title":"ORA-40474: invalid UTF-8 byte sequence in JSON data","cluster":0,"question_score":3}
+{"question_id":"58967629","title":"How to show all departments where in March 2014 there were sales of goods with a price of less than 400","cluster":0,"question_score":-3}
+{"question_id":"58968969","title":"Replace Characters from result Oracle SQL developer","cluster":0,"question_score":0}
+{"question_id":"58972278","title":"How do I get all the column data in a table","cluster":0,"question_score":0}
+{"question_id":"58975547","title":"Is there way to get table name reference before column names in Oracle?","cluster":0,"question_score":0}
+{"question_id":"58976142","title":"Oracle Query to return a single row","cluster":0,"question_score":-1}
+{"question_id":"58985807","title":"remove the last two spaces from a string","cluster":0,"question_score":1}
+{"question_id":"58992133","title":"Oracle Reports (6i): Get difference of two items from two different queries (Multi Query Report)","cluster":0,"question_score":0}
+{"question_id":"58994041","title":"Replacing numeric values in a cloumn by their ranking respective the other values in the column","cluster":0,"question_score":2}
+{"question_id":"59002280","title":"Oracle Peoplesoft Case Expression error with date format","cluster":0,"question_score":1}
+{"question_id":"59016002","title":"Do I need explicit locking when using atomic update","cluster":0,"question_score":1}
+{"question_id":"59016459","title":"WAP in pl/sql to create package name calculator that contains functions for basic mathematical operations","cluster":0,"question_score":1}
+{"question_id":"59028805","title":"Correct way to handle exception handshake between python and oracle","cluster":0,"question_score":1}
+{"question_id":"59029861","title":"Multi-byte Character store (In BLOB) and search(using JSON functions) in single byte Oracle Environment","cluster":0,"question_score":1}
+{"question_id":"59030677","title":"SQL/PLSQL query to get sum of difference between Start date and End date","cluster":0,"question_score":2}
+{"question_id":"59041810","title":"Arrays in PL/SQL function as return type returning ORA-06502: PL/SQL: numeric or value error: character to number conversion error","cluster":0,"question_score":0}
+{"question_id":"59043280","title":"Not a GROUP BY expression - what should I be aware?","cluster":0,"question_score":0}
+{"question_id":"59051310","title":"ASH: IN_PARSE and IN_SQL_EXECUTION simultaneously?","cluster":0,"question_score":0}
+{"question_id":"59061291","title":"Passing arguments inside procedure (message) not working - oracle","cluster":0,"question_score":2}
+{"question_id":"59061553","title":"oracle proc to update one table using another via dblink","cluster":0,"question_score":1}
+{"question_id":"59063591","title":"how can I open Notepad editor by Oracle procedure and show output?","cluster":0,"question_score":1}
+{"question_id":"59065281","title":"What is the difference between these 2 sql queries?","cluster":0,"question_score":-3}
+{"question_id":"59067553","title":"Monitor a folder and ETL xml data to oracle","cluster":0,"question_score":0}
+{"question_id":"59068921","title":"insert value in table with column name should be incremented while inserting","cluster":0,"question_score":0}
+{"question_id":"59069970","title":"Getting error on server side while executing query","cluster":0,"question_score":-1}
+{"question_id":"59076905","title":"oracle subquery insert gives ora937 and ora 979","cluster":0,"question_score":1}
+{"question_id":"59079188","title":"Password with 3 different characters from the previous password - PL/SQL","cluster":0,"question_score":0}
+{"question_id":"59082028","title":"Using Oracle DB exporter with Prometheus","cluster":0,"question_score":2}
+{"question_id":"59084643","title":"How to get last lines from table, but need all information of line?","cluster":0,"question_score":0}
+{"question_id":"59085965","title":"Substring a SQL QUERY","cluster":0,"question_score":0}
+{"question_id":"59088415","title":"count (*) with descending and random order","cluster":0,"question_score":0}
+{"question_id":"59088131","title":"Oracle primary key generator in Java","cluster":0,"question_score":0}
+{"question_id":"59093282","title":"Why is Oracle Pivot producing non-existent results?","cluster":0,"question_score":1}
+{"question_id":"59103414","title":"Local index in Range interval partitioned table is not being used","cluster":0,"question_score":0}
+{"question_id":"59108948","title":"Reconstruct historical table rows, based only on change-log data","cluster":0,"question_score":3}
+{"question_id":"59123619","title":"Sql Query / Calculate rank for values based on date and id","cluster":0,"question_score":0}
+{"question_id":"59127925","title":"How to get different value of particular id into single row in oracle?","cluster":0,"question_score":0}
+{"question_id":"59132762","title":"How to delete element from varray in oracle?","cluster":0,"question_score":1}
+{"question_id":"59138466","title":"ORA-01461-can bind a LONG value only for insert into a LONG column","cluster":0,"question_score":1}
+{"question_id":"59138816","title":"How to compare rows in a table and keep the highest values in the row in Oracle","cluster":0,"question_score":2}
+{"question_id":"59141816","title":"i have 2 tables owner(Name,ID int) Property(PID int,Name(fk) references Owner). List Owners who have one property","cluster":0,"question_score":0}
+{"question_id":"59143639","title":"Oracle - Stored Procedure with same name across multiple schema - Which would be called by default","cluster":0,"question_score":0}
+{"question_id":"59145541","title":"How to convert Date November 8 2019 to 11/08/19","cluster":0,"question_score":0}
+{"question_id":"59149412","title":"How to count the number of entries between a time period","cluster":7,"question_score":0}
+{"question_id":"59149431","title":"Point local TNS listener to remote database","cluster":0,"question_score":0}
+{"question_id":"59151232","title":"How to select a string between the characters","cluster":0,"question_score":-1}
+{"question_id":"59151348","title":"Insert Data to Oracle DB table from SQL Server Table with dblink with using SQL Server","cluster":0,"question_score":0}
+{"question_id":"59165675","title":"output with different rows from different columns from the same SQL table","cluster":0,"question_score":0}
+{"question_id":"59167252","title":"Finding least and highest month revenue","cluster":0,"question_score":1}
+{"question_id":"59171391","title":"Date columns from a table","cluster":0,"question_score":0}
+{"question_id":"59172490","title":"Reactive jdbc driver support for Oracle database","cluster":0,"question_score":2}
+{"question_id":"59175394","title":"Add dates of the same value to display as a single date PL/SQL","cluster":0,"question_score":1}
+{"question_id":"59178287","title":"Query Running Slow Post Upgrade to 18c","cluster":0,"question_score":2}
+{"question_id":"59178106","title":"Oracle SQL SAVEPOINT problems","cluster":0,"question_score":1}
+{"question_id":"59179588","title":"ASP.NET MVC -Working with Oracle and Dapper, using pagination","cluster":0,"question_score":-1}
+{"question_id":"59180115","title":"T-SQL script to get UDT data from Oracle to SQL Server","cluster":0,"question_score":0}
+{"question_id":"59183416","title":"PL/SQL trouble at create trigger","cluster":0,"question_score":0}
+{"question_id":"59185279","title":"Re-partition table from scratch, in Oracle","cluster":0,"question_score":0}
+{"question_id":"59195908","title":"Low reading speed with ODBC Excel","cluster":0,"question_score":0}
+{"question_id":"59196605","title":"How to select next value","cluster":0,"question_score":0}
+{"question_id":"59201422","title":"Getting For item in ( Error report - unknown command","cluster":0,"question_score":0}
+{"question_id":"59201112","title":"Why am I getting error code 135 when applying patch through opatch?","cluster":0,"question_score":2}
+{"question_id":"59203513","title":"\"missing the right parenthesis\" in Oracle SQL","cluster":40,"question_score":-3}
+{"question_id":"59209366","title":"How to set large string as param without getting ORA-01460: unimplemented or unreasonable conversion error?","cluster":0,"question_score":2}
+{"question_id":"59215760","title":"Can you call an Oracle Apex application process from another website?","cluster":0,"question_score":1}
+{"question_id":"59215828","title":"Add new type of item in Oracle APEX","cluster":0,"question_score":1}
+{"question_id":"59222159","title":"Grab the Last Date when a value changes","cluster":0,"question_score":0}
+{"question_id":"59227199","title":"How to show the worked years in SQL with select?","cluster":0,"question_score":-3}
+{"question_id":"59229416","title":"Autonumber rows in select SQL based on column changes","cluster":0,"question_score":1}
+{"question_id":"59230826","title":"problem when creating a new connection in SQL developer","cluster":0,"question_score":0}
+{"question_id":"59237656","title":"Is the OWNER in ALL_CONSTRAINTS and ALL_CONS_COLUMNS the same as the table owner?","cluster":0,"question_score":2}
+{"question_id":"59239892","title":"i am using oracle apex shuttle control. Here is, time list i want some kind of data from given shuttle image i am sharing","cluster":0,"question_score":0}
+{"question_id":"59243319","title":"/opt/apache-tomcat-9.0.29/bin/catalina.sh: line 467: /opt/jdk-13.0.1/bin/java: No such file or directory on dockers, OS centos 8 minimal","cluster":0,"question_score":-1}
+{"question_id":"59247810","title":"Filter rows within an analytical function - Oracle","cluster":0,"question_score":-2}
+{"question_id":"59255379","title":"Oracle Query that needs optimization due to date filter making it run slow","cluster":0,"question_score":2}
+{"question_id":"59261286","title":"Inserting data from jsp to oracle doesn't work","cluster":0,"question_score":1}
+{"question_id":"59266624","title":"How to resolve missing SELECT keyword error when trying to insert select","cluster":0,"question_score":2}
+{"question_id":"59270138","title":"High IO% with optimal Execution Plan","cluster":20,"question_score":2}
+{"question_id":"59275606","title":"Trying to delete rows from a table based on the max value determined by a join with 2 other tables","cluster":0,"question_score":1}
+{"question_id":"59285542","title":"Adding currency in a SQL query","cluster":0,"question_score":1}
+{"question_id":"59290999","title":"Oracle - How to change field value based on certain value","cluster":0,"question_score":1}
+{"question_id":"59295310","title":"Creat Table as Select is changing some data types","cluster":0,"question_score":1}
+{"question_id":"59295707","title":"Oracle: show min and max consecutive code but adding check digit","cluster":0,"question_score":2}
+{"question_id":"59297902","title":"How to combine common dates into 1 row in Oracle SQL","cluster":0,"question_score":0}
+{"question_id":"59301187","title":"Using DBMS_RANDOM.Value function in SQL query for equality comparison - returning multiple records","cluster":0,"question_score":0}
+{"question_id":"59318870","title":"Connection is not defined in oracledb","cluster":0,"question_score":0}
+{"question_id":"59323239","title":"getting output of union all without using union all","cluster":0,"question_score":0}
+{"question_id":"59325888","title":"When to use OCI_B_INT in PHP?","cluster":0,"question_score":0}
+{"question_id":"59326863","title":"how to display display data from database into scrolledText widget of tkinter in python?","cluster":0,"question_score":1}
+{"question_id":"59333794","title":"Title: How to use a function that take a record in a select statement","cluster":0,"question_score":0}
+{"question_id":"59335524","title":"PL/SQL can you INSERT INTO (SELECT GROUP BY)?","cluster":0,"question_score":1}
+{"question_id":"59343630","title":"Improve distinct query performance","cluster":0,"question_score":-1}
+{"question_id":"59345204","title":"How can increase the performance of the query below without using distinct keyword","cluster":0,"question_score":0}
+{"question_id":"59351174","title":"How to convert oracle stored procedure to simple inserts using sed","cluster":0,"question_score":0}
+{"question_id":"59352721","title":"PL SQL to read blob field","cluster":0,"question_score":0}
+{"question_id":"59353325","title":"Insert multiple rows of data from C# List of objects into a table in Oracle 12 database","cluster":0,"question_score":0}
+{"question_id":"59365694","title":"Select EVERY department and number of employees with salary higher than 10000","cluster":0,"question_score":-1}
+{"question_id":"59365708","title":"Cannot to create trigger properly","cluster":0,"question_score":0}
+{"question_id":"59377970","title":"How to replace characters at specific position in several words using REGEX_REPLACE","cluster":0,"question_score":0}
+{"question_id":"59380580","title":"Oracle: Selecting Duplicates with where clause?","cluster":0,"question_score":0}
+{"question_id":"59382622","title":"translate from oracle to db2","cluster":0,"question_score":0}
+{"question_id":"59387049","title":"ANYONE CAN TELL ME THAT WHY THIS CODE IS GIVING ME AN ERROR OF TABLE OT CLUSTER KEY WORD IS MISSING?","cluster":0,"question_score":-6}
+{"question_id":"59392305","title":"Oracle - Concatenate calculated number field with string field","cluster":0,"question_score":0}
+{"question_id":"59412252","title":"How to Implement Oracle Transaction for two different Method in C#","cluster":0,"question_score":0}
+{"question_id":"59413742","title":"2 columns one below another in sql","cluster":0,"question_score":-2}
+{"question_id":"59419610","title":"How to retrieve actual blob data rather than \"oracle.sql.blob@\" from an Oracle database over JDBC?","cluster":0,"question_score":1}
+{"question_id":"59421864","title":"How to use case statement in where condition in oracle sql?","cluster":0,"question_score":0}
+{"question_id":"59427230","title":"Flask sqlalchemy model shared across multiple Oracle schemas","cluster":0,"question_score":0}
+{"question_id":"59438526","title":"Execute and test stored procedure in sql developer","cluster":0,"question_score":0}
+{"question_id":"59440049","title":"Tables Won't Join Properly","cluster":0,"question_score":0}
+{"question_id":"59445421","title":"I want to add a constraint to my table but an error keeps on showing","cluster":0,"question_score":0}
+{"question_id":"59447607","title":"Oracle - How can i insert timestamp from Java Project as String without formatting","cluster":0,"question_score":0}
+{"question_id":"59453808","title":"System design : how to make sure two DB receive the same data (synchronous)?","cluster":0,"question_score":0}
+{"question_id":"59468915","title":"inserting records in Oracle SQL","cluster":0,"question_score":-1}
+{"question_id":"59470303","title":"If conditional in BI Publisher Excel template","cluster":0,"question_score":2}
+{"question_id":"59471091","title":"ORA-00936: missing expression using SELECT INTO local_variable","cluster":0,"question_score":1}
+{"question_id":"59487962","title":"How to implement @SqlCall to call the stored procedure","cluster":0,"question_score":1}
+{"question_id":"59492289","title":"How to Resolve ORA-28040: No matching authentication protocol with Docker","cluster":0,"question_score":2}
+{"question_id":"59501313","title":"Masking of Certain user specific data in Hybris","cluster":0,"question_score":0}
+{"question_id":"59506344","title":"apex_web_service.make_rest_request POST has bad json or returns ORA-06502 numeric or value error","cluster":0,"question_score":2}
+{"question_id":"59524662","title":"Why am I getting Error at line 3: ORA-00907: missing right parenthesis in my SQL when using IDENTITY","cluster":0,"question_score":0}
+{"question_id":"59532994","title":"Calculating and adding the totals row in Oracle for multiple columns","cluster":0,"question_score":1}
+{"question_id":"59555297","title":"Unpivot (or alternative) all columns into rows","cluster":0,"question_score":1}
+{"question_id":"59558355","title":"Query correction needed","cluster":0,"question_score":-4}
+{"question_id":"59567177","title":"Schema not found using Hibernate and Oracle","cluster":0,"question_score":2}
+{"question_id":"59591274","title":"Validate data inserted based on other data in the same table (Oracle)","cluster":0,"question_score":4}
+{"question_id":"59591930","title":"How to use subqueries in insert into?","cluster":0,"question_score":-1}
+{"question_id":"59600152","title":"Oracle Apex Date Picker behaving strangely","cluster":0,"question_score":0}
+{"question_id":"59602624","title":"How to read image stored in an oracle SQL BLOB?","cluster":0,"question_score":0}
+{"question_id":"59606986","title":"How to Compare Selected Query Result in Oracle?","cluster":0,"question_score":1}
+{"question_id":"59614873","title":"Trying to access a oracle db but a trigger preventing me to connect","cluster":0,"question_score":0}
+{"question_id":"59618174","title":"How to use nested SELECT statements with IN operator in SQL (JPA)?","cluster":0,"question_score":0}
+{"question_id":"59618488","title":"Export Multiple Tables Data With Toad Oracle","cluster":0,"question_score":0}
+{"question_id":"59624176","title":"Getting text from multiple brackets","cluster":0,"question_score":0}
+{"question_id":"59627904","title":"How to use INSTR in HIVE?","cluster":0,"question_score":0}
+{"question_id":"59628757","title":"How to: inster into select in c# oracle","cluster":0,"question_score":1}
+{"question_id":"59632046","title":"Deducting values from 2 case statements from one another","cluster":0,"question_score":-1}
+{"question_id":"59639508","title":"Nested case statement in Oracle","cluster":0,"question_score":-2}
+{"question_id":"59642780","title":"Link GROUPED BY SUM query with other query (with either JOIN or subquery)","cluster":0,"question_score":0}
+{"question_id":"59653473","title":"Performance issue on two different instances within the same database","cluster":0,"question_score":0}
+{"question_id":"59654689","title":"Call Oracle procedure from C# when procedure is in different schema","cluster":0,"question_score":0}
+{"question_id":"59658411","title":"Getting \"BCFKS KeyStore corrupted: MAC calculation failed.\" error","cluster":0,"question_score":0}
+{"question_id":"59660251","title":"Oracle remove Name/Surname/Telephone and Address","cluster":0,"question_score":0}
+{"question_id":"59664663","title":"Oracle: keep a table up to date to another","cluster":0,"question_score":0}
+{"question_id":"59684204","title":"Add constraint PK using index tablespace","cluster":0,"question_score":2}
+{"question_id":"59685699","title":"'DatabaseError: DPI-1050: Oracle Client library is at version 0.0 but version 11.2 or higher is needed' error is displayed in remote machine","cluster":0,"question_score":0}
+{"question_id":"59685863","title":"Timeout on long running query","cluster":26,"question_score":0}
+{"question_id":"59686698","title":"ORACLE - NLS_LANG, CHARSET, SPECIAL CHARS","cluster":0,"question_score":1}
+{"question_id":"59693112","title":"Spring transaction not getting rolled back","cluster":0,"question_score":0}
+{"question_id":"59700280","title":"Adding Data in 1 tables through trigger on multiple tables","cluster":0,"question_score":-1}
+{"question_id":"59711424","title":"why dbreport response 202 accepted,I need 200","cluster":0,"question_score":0}
+{"question_id":"59718506","title":"How to select rows that have numbers as a value?","cluster":0,"question_score":0}
+{"question_id":"59724384","title":"How can I display some records with twho conditions from different columns","cluster":0,"question_score":0}
+{"question_id":"59731567","title":"How to \"Add-Member\" in Function \"Format-Table\" to get new \"MemberType\" in Powershell?","cluster":0,"question_score":0}
+{"question_id":"59733917","title":"How to export/import full OracleDB data dump?","cluster":0,"question_score":3}
+{"question_id":"59736482","title":"Dynamically create a table and then insert the data dynamically","cluster":0,"question_score":1}
+{"question_id":"59750458","title":"Join 2 tables with different row and column","cluster":0,"question_score":1}
+{"question_id":"59753757","title":"Issue with Devart that connects oracle where max pool size is 300","cluster":0,"question_score":2}
+{"question_id":"59762964","title":"Error ORA-00936 in Laravel Eloquent relationship","cluster":0,"question_score":0}
+{"question_id":"59765900","title":"Error in application: ORA-19202: Error occurred in XML processing ORA-01843: not a valid month - Oracle Apex","cluster":0,"question_score":0}
+{"question_id":"59767190","title":"ORA-06502/ORA-06512 errors using remote clob and dual","cluster":0,"question_score":0}
+{"question_id":"59768820","title":"Java: Problem with Code for Database Connection","cluster":0,"question_score":0}
+{"question_id":"59776566","title":"In SQL Server how to have a paymentdate greater than the month and year ignoring the day part?","cluster":0,"question_score":0}
+{"question_id":"59779034","title":"Evaluate user-defined variables in FROM and WHERE clauses (Oracle DEFINE command)","cluster":0,"question_score":0}
+{"question_id":"59787688","title":"API stateless database access perfomance","cluster":0,"question_score":0}
+{"question_id":"59788968","title":"If Else Formula for Date field in Crysal Reports that keeps Date format - not string","cluster":0,"question_score":0}
+{"question_id":"59789490","title":"Can there be a 1 to 1 relationship for keys with multiple fields?","cluster":0,"question_score":1}
+{"question_id":"59789784","title":"How to Delete Rows After Grouping With Maximum Performance","cluster":0,"question_score":0}
+{"question_id":"59792499","title":"Avoid SqlRecoverableException: Statement closed","cluster":45,"question_score":1}
+{"question_id":"59812128","title":"Logstash in Docker not responsive","cluster":0,"question_score":1}
+{"question_id":"59818487","title":"Oracle Database Object SQL query","cluster":0,"question_score":0}
+{"question_id":"59820253","title":"Oracle SQL - join two tables with columns in different order","cluster":0,"question_score":0}
+{"question_id":"59823322","title":"Could anyone help me to resolve below mentioned error?","cluster":0,"question_score":0}
+{"question_id":"59832304","title":"PL-SQL: why does a dynamic statement using bind-variable input not work?","cluster":0,"question_score":1}
+{"question_id":"59834814","title":"Laravel query builder bypasses database view clauses","cluster":0,"question_score":0}
+{"question_id":"59848296","title":"How to order field names by their \"natural\" order?","cluster":0,"question_score":0}
+{"question_id":"59849736","title":"extract items from json array by condition in oracle","cluster":0,"question_score":0}
+{"question_id":"59854425","title":"How to select every Friday for the last six months?","cluster":0,"question_score":0}
+{"question_id":"59871487","title":"oracle sql check constraint for number to_char","cluster":0,"question_score":0}
+{"question_id":"59876191","title":"Java code for an oracle access failed,during execution. How do i fix my code?","cluster":0,"question_score":0}
+{"question_id":"59888107","title":"Cannot Set ON COMMIT refresh attribute for Materialized View with PIVOT clause","cluster":0,"question_score":5}
+{"question_id":"59891055","title":"Converting rows into more columns","cluster":0,"question_score":0}
+{"question_id":"59901208","title":"Liquibase rollback altered column size to older version","cluster":0,"question_score":0}
+{"question_id":"59900757","title":"Continuously replicate data from Oracle to ElasticSearch","cluster":0,"question_score":1}
+{"question_id":"59901871","title":"How to get the values for the next and next next date in a table","cluster":0,"question_score":0}
+{"question_id":"59905354","title":"ORA-01400: cannot insert NULL into (\"EnvironmentName\".\"Project name\".\"ID\") in ORACLE APEX","cluster":0,"question_score":1}
+{"question_id":"59908832","title":"How to pass table as a parameter and populate that table using plsql procedure","cluster":0,"question_score":1}
+{"question_id":"59930293","title":"Oracle Date comparison","cluster":0,"question_score":0}
+{"question_id":"59943355","title":"ORA-01435: user does not exist when accessing V$Locked_Object in Oracle","cluster":0,"question_score":0}
+{"question_id":"59944174","title":"OTL problem with oracle with clause and function in it in C++","cluster":0,"question_score":0}
+{"question_id":"59945096","title":"How to speed up query execution in oracle when the tables are joined","cluster":0,"question_score":1}
+{"question_id":"59952473","title":"Oracle Advance Queue Dequeue callback not working","cluster":0,"question_score":2}
+{"question_id":"59954946","title":"How to determine QString reserve size for a PL/SQL bind value","cluster":0,"question_score":0}
+{"question_id":"59965471","title":"Siebel crm , how to open url on another machine?","cluster":0,"question_score":0}
+{"question_id":"59966084","title":"How to edit XML column in SQL Developer?","cluster":0,"question_score":0}
+{"question_id":"59966882","title":"A simple Oracle UPDATE query in SQL developer is taking too much of time, why?","cluster":0,"question_score":0}
+{"question_id":"59968242","title":"Pivoting Oracle query","cluster":0,"question_score":1}
+{"question_id":"59970101","title":"Trigger after insert and joining tables to update","cluster":0,"question_score":1}
+{"question_id":"59970978","title":"Alphabetical comparing two string in WHERE","cluster":0,"question_score":0}
+{"question_id":"59972237","title":"How to use part of foreign key which is composite primary key of another table as a primary key in hibernate?","cluster":0,"question_score":0}
+{"question_id":"59979914","title":"How to query a name in a column which has exactly 2 'a' in any position","cluster":0,"question_score":0}
+{"question_id":"59981905","title":"how to use full outer join writing query on multiple tables?","cluster":0,"question_score":0}
+{"question_id":"59985221","title":"Binding a variable to a input parameter in procedure","cluster":0,"question_score":0}
+{"question_id":"59986355","title":"Invalid Identifier when using LIKE query in Java","cluster":0,"question_score":0}
+{"question_id":"59989129","title":"NOT IN Clause : how to get all the users that doesnt have ALL the elements inside NOT IN parentheses","cluster":0,"question_score":0}
+{"question_id":"59993887","title":"SQL Server and Oracle compatible multi-row insert?","cluster":0,"question_score":0}
+{"question_id":"59993915","title":"How to import sample schemas to oracle database in docker container through SQL Developer?","cluster":0,"question_score":3}
+{"question_id":"59997704","title":"Oracle - I want to find out delta changes in a database table","cluster":0,"question_score":0}
+{"question_id":"59999107","title":"Retrieve Child Object records from other tables values in SQL query","cluster":0,"question_score":-3}
+{"question_id":"59999139","title":"How to replace NULL in the last row with the same column's value on which Lead() function is applied in Oracle?","cluster":0,"question_score":1}
+{"question_id":"60008365","title":"Oracle: When are constraints checked?","cluster":0,"question_score":2}
+{"question_id":"60034985","title":"Row_Number() alternative in Couchbase 6.0","cluster":0,"question_score":1}
+{"question_id":"60045515","title":"Performance Issue in Oracle (Difference between common table expressions and global temp table)","cluster":0,"question_score":0}
+{"question_id":"60058019","title":"Make a selection based on difference in dates","cluster":0,"question_score":0}
+{"question_id":"60062241","title":"Show only the First Row of a Query in Oracle","cluster":0,"question_score":0}
+{"question_id":"60064918","title":"In Oracle, how to extract values from XML/CLOB field that has multiple values?","cluster":0,"question_score":1}
+{"question_id":"60070952","title":"PL/SQL regex match commas not inside quotes","cluster":0,"question_score":2}
+{"question_id":"60073571","title":"Is the insert into ... where not exists costlier in performance?","cluster":0,"question_score":0}
+{"question_id":"60080597","title":"Oracle.DataAccess.Client.OracleException: Data provider internal error(-3000) [System.String]","cluster":0,"question_score":0}
+{"question_id":"60084618","title":"Oracle SQL get the most recent line per each id","cluster":0,"question_score":0}
+{"question_id":"60089529","title":"PL/SQL function returns minimal number","cluster":0,"question_score":0}
+{"question_id":"60091645","title":"Oracle view or With Clause","cluster":0,"question_score":0}
+{"question_id":"60091971","title":"Pl/SQL function returns string with changed characters","cluster":0,"question_score":0}
+{"question_id":"60094108","title":"SQL query to update 1000 records","cluster":0,"question_score":0}
+{"question_id":"60098326","title":"Stored procedure doesn't have the same result when calling from PL/SQL developer and SQL*plus","cluster":0,"question_score":2}
+{"question_id":"60110798","title":"How to select dates from dual, but with joined data?","cluster":0,"question_score":7}
+{"question_id":"60113474","title":"In oracle how to know which data is deleted through application and which is deleted through query","cluster":0,"question_score":0}
+{"question_id":"60118353","title":"Find data from different year for missing sections","cluster":0,"question_score":2}
+{"question_id":"60146235","title":"Substring in Calc script Essbase","cluster":0,"question_score":-1}
+{"question_id":"60148928","title":"convert raw text to_char in oracle dbeaver","cluster":0,"question_score":0}
+{"question_id":"60152103","title":"sqlplus in linux not returning result","cluster":0,"question_score":0}
+{"question_id":"60155658","title":"CONNECT BY PRIOR and concatenation of parent - child hierarchy","cluster":0,"question_score":0}
+{"question_id":"60165214","title":"How to truncate tables during export/import in Oracle?","cluster":0,"question_score":0}
+{"question_id":"60171993","title":"Oracle Database - With Statement vs With Statement and Create Table in Script","cluster":0,"question_score":1}
+{"question_id":"60184053","title":"find out the loading mechanism for an oracle table","cluster":0,"question_score":1}
+{"question_id":"60185765","title":"SQL INSERT and SELECT into Oracle using a single command with .NET","cluster":0,"question_score":2}
+{"question_id":"60187200","title":"Is there any possible way to do UpperCase only \"Vowel\" form Column name = \"last_name\"?","cluster":0,"question_score":0}
+{"question_id":"60188064","title":"Spring JDBC cannot handle DECLARE statement when running SQL Script","cluster":0,"question_score":1}
+{"question_id":"60191974","title":"How to retrieve an zip file from oracle blob using java?","cluster":0,"question_score":0}
+{"question_id":"60191368","title":"Does Oracle LISTAGG work with GROUP BY and PIVOT?","cluster":0,"question_score":1}
+{"question_id":"60197941","title":"coverting TSQL to Oracle setting parameters","cluster":0,"question_score":1}
+{"question_id":"60200542","title":"Alter session is not altering the session properly","cluster":0,"question_score":1}
+{"question_id":"60201446","title":"How to display Area wise Data for the following Problem statement?","cluster":0,"question_score":1}
+{"question_id":"60201919","title":"How to calculate years of experience from date_of_hiring to till date in months of an employee using sql query","cluster":0,"question_score":-2}
+{"question_id":"60204418","title":"DBMS_SCHEDULER in apex oracle","cluster":0,"question_score":3}
+{"question_id":"60211441","title":"How do I check the current size of the undo tablespace?","cluster":0,"question_score":0}
+{"question_id":"60217579","title":"Select the latest record for an Id per day - Oracle pl sql","cluster":0,"question_score":0}
+{"question_id":"60218603","title":"Count data per day between two dates","cluster":0,"question_score":0}
+{"question_id":"60221212","title":"Variable1 value exists in variable2 script","cluster":0,"question_score":0}
+{"question_id":"60221972","title":"How to lock Oracle table using select statement in C# ? I tried using NOLOCK but still cannot lock.I'm getting conflicts while using tasks","cluster":0,"question_score":0}
+{"question_id":"60225306","title":"Turn row with 2 different value into 2 column oracle","cluster":0,"question_score":0}
+{"question_id":"60228702","title":"error PLSQL creating procedure with exception","cluster":0,"question_score":0}
+{"question_id":"60228833","title":"Oracle (XE) & SQL-Developer: how to find out the time/date/timestamp format being used?","cluster":0,"question_score":0}
+{"question_id":"60229315","title":"Need to group records based on matching reversal in sql","cluster":0,"question_score":-1}
+{"question_id":"60230875","title":"Dynamic minDate for datepicker","cluster":0,"question_score":1}
+{"question_id":"60235270","title":"How to use JSON_VALUE with a variable","cluster":0,"question_score":0}
+{"question_id":"60238241","title":"Quickly insert 24 million rows into Oracle","cluster":0,"question_score":0}
+{"question_id":"60244299","title":"How can I get a React application to send SQL queries to an Oracle database and retrieve results?","cluster":0,"question_score":0}
+{"question_id":"60245974","title":"To fetch parent and its children connected thru one attribute","cluster":0,"question_score":0}
+{"question_id":"60248648","title":"Sending Email in PLSQL using UTL_MAIL throwing SMTP Parmanent Error : 550 RBL - Oracle 11g","cluster":0,"question_score":0}
+{"question_id":"60252753","title":"oracle update with correlated query","cluster":0,"question_score":3}
+{"question_id":"60258194","title":"How to delete reversed value on Oracle Database by using Query?","cluster":0,"question_score":1}
+{"question_id":"60267139","title":"load when (1:5) in select with external inline view asks for bind variables","cluster":0,"question_score":0}
+{"question_id":"60270440","title":"Unable to connect SQL Server with ODBC drivers on linux","cluster":0,"question_score":-1}
+{"question_id":"60273373","title":"How to pass parameter of oracle sql script file to sqlplus from shell prompt?","cluster":0,"question_score":2}
+{"question_id":"60280984","title":"create index on creation of table in Oracle","cluster":0,"question_score":1}
+{"question_id":"60285712","title":"How can I display my primary key as a column when using inner join?","cluster":0,"question_score":-1}
+{"question_id":"60285290","title":"How to find mismatch between two tables with respect to each table in SQL?","cluster":0,"question_score":1}
+{"question_id":"60285545","title":"How do you reference APEX Application Items in Trigger","cluster":0,"question_score":0}
+{"question_id":"60287110","title":"Regular expression","cluster":0,"question_score":-1}
+{"question_id":"60287727","title":"Regular expression for SQL query to extract date range which is in String format","cluster":0,"question_score":0}
+{"question_id":"60296903","title":"LiquibasePro don't generate package, packagebody and other things in the changeLog file","cluster":0,"question_score":0}
+{"question_id":"60297156","title":"ORACLE BIPUBLISHER SQL Query taking too long to execute","cluster":0,"question_score":0}
+{"question_id":"60296517","title":"Distributing a given amount over a list of negative values from bottom to top in SQL","cluster":0,"question_score":2}
+{"question_id":"60297065","title":"SQL Validation Check","cluster":0,"question_score":0}
+{"question_id":"60303121","title":"Scheduler job on Oracle does not run every second","cluster":0,"question_score":2}
+{"question_id":"60304904","title":"PL SQL identifier must be declared","cluster":0,"question_score":0}
+{"question_id":"60304589","title":"oracle: get a specific date with a condition","cluster":0,"question_score":0}
+{"question_id":"60310822","title":"Datetime format in xml from Oracle","cluster":0,"question_score":0}
+{"question_id":"60317278","title":"SQL query to get output on the basis of 3 columns in Oracle SQL","cluster":0,"question_score":0}
+{"question_id":"60318086","title":"Function and Triggers in Oracle","cluster":0,"question_score":-1}
+{"question_id":"60327433","title":"Oracle SQL check if two values exists across a partition","cluster":0,"question_score":0}
+{"question_id":"60331013","title":"how to create a function or a procedure in tableplus","cluster":0,"question_score":0}
+{"question_id":"60337852","title":"How to insert multiple cursor result set into one table","cluster":0,"question_score":0}
+{"question_id":"60345172","title":"PL/SQL Compare XMLTypes","cluster":0,"question_score":1}
+{"question_id":"60350007","title":"ORA-06502 when connecting to Oracle 12c using new SQL credentials","cluster":0,"question_score":0}
+{"question_id":"60349281","title":"Pl sql Proc or update statement for address correction from abbreviation to fullform","cluster":0,"question_score":0}
+{"question_id":"60357218","title":"Show the names of customers that have accounts SQL Query Oracle 10G","cluster":0,"question_score":-1}
+{"question_id":"60360364","title":"Oracle Installation for client server connection in lab","cluster":0,"question_score":0}
+{"question_id":"60360309","title":"SQL select two same column on same table but with different ORDER","cluster":0,"question_score":-1}
+{"question_id":"60362026","title":"How to do multiple queries from a single table at once and do math calculations?","cluster":0,"question_score":0}
+{"question_id":"60371705","title":"I have to get month and year from due_dt column and pass that as input in sql","cluster":0,"question_score":0}
+{"question_id":"60377867","title":"Add attribute called VenueName in LECTURE table for 3 possible venues","cluster":0,"question_score":0}
+{"question_id":"60388152","title":"Database connection in spring batch","cluster":0,"question_score":1}
+{"question_id":"60391748","title":"transform pair of key value tags to <key>value</key> in Oracle integration Cloud","cluster":0,"question_score":0}
+{"question_id":"60392560","title":"How to use tables from database in apex 19.2","cluster":0,"question_score":0}
+{"question_id":"60393073","title":"Need correction","cluster":0,"question_score":0}
+{"question_id":"60399666","title":"Adding rows with missing entries","cluster":0,"question_score":0}
+{"question_id":"60404224","title":"PL/SQL Switch from case statements to calculate a date based on a custom calendar by joining two tables","cluster":0,"question_score":0}
+{"question_id":"60409394","title":"Connect to External Oracle database using ksqlDB running in Docker container","cluster":0,"question_score":0}
+{"question_id":"60410116","title":"OracleDB: How to know a table row transaction CSN?","cluster":0,"question_score":0}
+{"question_id":"60413988","title":"Oracle Sql query for ordered output of hierarchical data","cluster":0,"question_score":0}
+{"question_id":"60427777","title":"Local Instance and K8s Instance resolve different checksums for same flyway schema","cluster":0,"question_score":0}
+{"question_id":"60431619","title":"How to make pivot query that returns no rows return null instead. (Oracle SQL)","cluster":0,"question_score":0}
+{"question_id":"60435293","title":"How to find the imporper data that cause ORA-01436","cluster":0,"question_score":3}
+{"question_id":"60442458","title":"How to merge two result columns into column with alternating results in oracle?","cluster":0,"question_score":1}
+{"question_id":"60443887","title":"Why adding \"AS\" in SQL statement \"FROM\" cause error?","cluster":0,"question_score":3}
+{"question_id":"60453437","title":"Java function to convert CIDR to regex","cluster":0,"question_score":1}
+{"question_id":"60458594","title":"How can I determine the most efficient query execution plan from the following choices","cluster":0,"question_score":1}
+{"question_id":"60459135","title":"oracle regexp_like: using Perl regexp for AND operator equivalent","cluster":0,"question_score":0}
+{"question_id":"60459433","title":"I am looking to find customers repurchase frequency in SQL from their first purchase date","cluster":0,"question_score":0}
+{"question_id":"60462435","title":"Oracle database rollback","cluster":0,"question_score":1}
+{"question_id":"60463284","title":"How can I write a plsql code for creating a new split partition in a table?","cluster":0,"question_score":1}
+{"question_id":"60466012","title":"How to use one sql parameter to represent input array","cluster":0,"question_score":3}
+{"question_id":"60477957","title":"How to update multiple columns in one table in Oracle","cluster":0,"question_score":0}
+{"question_id":"60482208","title":"How to install Oracle Apex Listener?","cluster":0,"question_score":1}
+{"question_id":"60484267","title":"Oracle Reports REP-0820: Cannot import specified image","cluster":0,"question_score":0}
+{"question_id":"60487746","title":"Will Oracle9iDialect used for oracle 12C?","cluster":0,"question_score":0}
+{"question_id":"60500002","title":"Alias For partition table SQL","cluster":0,"question_score":1}
+{"question_id":"60514909","title":"My solution to LeetCode SQL question No.1174. Immediate Food Delivery II with CTE and Window function always shows syntax error","cluster":0,"question_score":0}
+{"question_id":"60523349","title":"Error during insert BLOB data in oracle database","cluster":0,"question_score":0}
+{"question_id":"60524205","title":"Changing the query in oracle apps for quotation","cluster":0,"question_score":0}
+{"question_id":"60533552","title":"Is there a way to use OracleDB with Node 10.15?","cluster":0,"question_score":0}
+{"question_id":"60539883","title":"Hơw to resolve error when query CLOB json in ORACLE 19c","cluster":0,"question_score":0}
+{"question_id":"60543284","title":"Selecting new distinct values over time (ORACLE SQL)","cluster":0,"question_score":1}
+{"question_id":"60545100","title":"Apex Oracle : How to open a public page using a different session?","cluster":0,"question_score":2}
+{"question_id":"60556300","title":"Weblogic - Oracle DB - SQLException - Interrupt task is already scheduled for the thread - and the type SO_TIMEOUT","cluster":0,"question_score":1}
+{"question_id":"60558799","title":"SQL interview questions","cluster":0,"question_score":-3}
+{"question_id":"60562516","title":"Oracle Sql select all values in a row without using aggregate functions and procedures","cluster":0,"question_score":-1}
+{"question_id":"60564091","title":"Can multiple tables have same composite keys? Spring boot + Spring Data JPA + Oracle","cluster":0,"question_score":0}
+{"question_id":"60564020","title":"sql oracle sum valaues in multiple columns","cluster":0,"question_score":1}
+{"question_id":"60568292","title":"Oracle update with a left join","cluster":0,"question_score":3}
+{"question_id":"60569362","title":"Update Statements with multiple tables","cluster":0,"question_score":1}
+{"question_id":"60577756","title":"Convert ROW into column with their respective records","cluster":0,"question_score":0}
+{"question_id":"60598982","title":"Oracle How to Dynamicaly change argument/parameter in function with loop","cluster":0,"question_score":0}
+{"question_id":"60600545","title":"Rule to validate a comma-separated field PLSQL","cluster":0,"question_score":0}
+{"question_id":"60601108","title":"How to get latest date of specific record without specifying record?","cluster":0,"question_score":1}
+{"question_id":"60604480","title":"Can't disable Oracle foreign key over JDBC","cluster":0,"question_score":0}
+{"question_id":"60608748","title":"Oracle still showing spool statement despite \"set serveroutput off\"?","cluster":0,"question_score":0}
+{"question_id":"60613417","title":"Increase column's size in Oracle DB tables with Knex.js","cluster":0,"question_score":2}
+{"question_id":"60616804","title":"How to Pivot row (Dates of the month ) into columns in sql ? ( without giving the date of the month \"for in\" )","cluster":0,"question_score":0}
+{"question_id":"60619939","title":"Oracle SQL Return First & Last Value From Different Columns By Partition","cluster":0,"question_score":0}
+{"question_id":"60623768","title":"Oracle Text optimize query for a Google like search bar","cluster":0,"question_score":1}
+{"question_id":"60626599","title":"Is this SQL (oracle) query correct?","cluster":0,"question_score":-1}

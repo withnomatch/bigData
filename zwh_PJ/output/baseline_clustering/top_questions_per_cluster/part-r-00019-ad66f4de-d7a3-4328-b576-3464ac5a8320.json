@@ -1,0 +1,3 @@
+{"cluster":4,"rank":7,"question_id":"21846648","title":"Accessing a table without specifying the schema name","score":13}
+{"cluster":4,"rank":8,"question_id":"37728528","title":"How to get the schema name when I have table name?","score":10}
+{"cluster":4,"rank":9,"question_id":"6782278","title":"Generating DDL script for object without schema name baked in using DBMS_METADATA.GET_DDL?","score":10}
