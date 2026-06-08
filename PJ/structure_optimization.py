@@ -45,6 +45,11 @@ from pyspark.ml.feature import (
     Normalizer,
 )
 from pyspark.ml.clustering import KMeans, BisectingKMeans
+try:
+    from pyspark.ml.evaluation import ClusteringEvaluator
+    HAS_EVALUATOR = True
+except ImportError:
+    HAS_EVALUATOR = False
 
 
 # =====================================================================
@@ -168,8 +173,8 @@ def run_kmeans(processed_df, k=50, max_iter=30):
     print("[Experiment 1] Standard K-Means Clustering")
     print("=" * 60)
     print("K=%d, max_iter=%d" % (k, max_iter))
-    print("Note: distanceMeasure not supported in Spark 2.0, using euclidean")
 
+    # 使用与基准方案相同的欧氏距离，保证对照组条件一致
     kmeans = KMeans(
         featuresCol="features",
         predictionCol="cluster",
@@ -184,9 +189,18 @@ def run_kmeans(processed_df, k=50, max_iter=30):
     elapsed = time.time() - t0
 
     wssse = model.computeCost(processed_df)
+    sil = 0.0
+    if HAS_EVALUATOR:
+        evaluator = ClusteringEvaluator(
+            featuresCol="features", predictionCol="cluster",
+            metricName="silhouette", distanceMeasure="squaredEuclidean"
+        )
+        sil = evaluator.evaluate(predictions)
+
     print("K-Means training time: %.2fs" % elapsed)
     print("K-Means WSSSE: %.6f" % wssse)
-    return model, predictions, elapsed, wssse
+    print("K-Means Silhouette: %.4f" % sil)
+    return model, predictions, elapsed, wssse, sil
 
 
 # =====================================================================
@@ -197,8 +211,9 @@ def run_bisecting_kmeans(processed_df, k=50, max_iter=20, min_divisible=1.0):
     print("\n" + "=" * 60)
     print("[Experiment 2] BisectingKMeans (Hierarchical) Clustering")
     print("=" * 60)
-    print("K=%d, max_iter=%d, minDivisibleClusterSize=%.1f" % (k, max_iter, min_divisible))
+    print("K=%d, max_iter=%d" % (k, max_iter))
 
+    # 使用与基准方案相同的欧氏距离，保证对照组条件一致
     bkm = BisectingKMeans(
         featuresCol="features",
         predictionCol="cluster",
@@ -214,9 +229,18 @@ def run_bisecting_kmeans(processed_df, k=50, max_iter=20, min_divisible=1.0):
     elapsed = time.time() - t0
 
     wssse = model.computeCost(processed_df)
+    sil = 0.0
+    if HAS_EVALUATOR:
+        evaluator = ClusteringEvaluator(
+            featuresCol="features", predictionCol="cluster",
+            metricName="silhouette", distanceMeasure="squaredEuclidean"
+        )
+        sil = evaluator.evaluate(predictions)
+
     print("BisectingKMeans training time: %.2fs" % elapsed)
     print("BisectingKMeans WSSSE: %.6f" % wssse)
-    return model, predictions, elapsed, wssse
+    print("BisectingKMeans Silhouette: %.4f" % sil)
+    return model, predictions, elapsed, wssse, sil
 
 
 # =====================================================================
@@ -279,7 +303,8 @@ def analyze_distribution(predictions, algo_name, show_detail=True):
 # Step 5: 对比结果汇总打印
 # =====================================================================
 
-def print_comparison(km_stat, bkm_stat, km_wssse, bkm_wssse, km_time, bkm_time):
+def print_comparison(km_stat, bkm_stat, km_wssse, bkm_wssse, km_time, bkm_time,
+                     km_sil=0.0, bkm_sil=0.0):
     print("\n" + "=" * 70)
     print("COMPARISON RESULTS: K-Means  vs  BisectingKMeans")
     print("=" * 70)
@@ -294,6 +319,9 @@ def print_comparison(km_stat, bkm_stat, km_wssse, bkm_wssse, km_time, bkm_time):
                  "-", "%.2fx faster" % speedup if bkm_time < km_time else "%.2fx slower" % (bkm_time / km_time)))
     print(fmt % ("WSSSE",
                  "%.4f" % km_wssse, "%.4f" % bkm_wssse))
+    if HAS_EVALUATOR:
+        print(fmt % ("Silhouette Score (cosine)",
+                     "%.4f" % km_sil, "%.4f" % bkm_sil))
     print(fmt % ("Actual Clusters",
                  str(km_stat["cluster_count"]), str(bkm_stat["cluster_count"])))
     print(fmt % ("Max Cluster Size",
@@ -473,6 +501,140 @@ def show_sample_clusters(predictions, cluster_labels, n_clusters=5, n_questions=
 
 
 # =====================================================================
+# 实验报告打印（所有行以 [REPORT] 开头，便于从日志中提取）
+# =====================================================================
+
+def print_experiment_report(args, km_stat, bkm_stat,
+                            km_wssse, bkm_wssse, km_time, bkm_time,
+                            km_final_k, bkm_final_k, total_elapsed,
+                            km_preds, bkm_preds, km_labels, bkm_labels):
+    R = "[REPORT]"
+    sep = R + " " + "=" * 62
+
+    print("\n" + sep)
+    print(R + " EXPERIMENT REPORT - Clustering Structure Optimization")
+    print(R + " BisectingKMeans vs K-Means")
+    print(sep)
+    print(R + " Dataset    : StackOverflow Oracle Database Questions")
+    print(R + " Sample     : %.0f%%" % (args.sample_ratio * 100))
+    print(R + " K          : %d" % args.k)
+    print(R + " Vocab size : %d" % args.max_features)
+    print(sep)
+
+    print(R + "")
+    print(R + " [1] COMPARISON TABLE")
+    fmt = R + "  %-32s %14s %14s"
+    print(fmt % ("Metric", "K-Means", "BisectingKMeans"))
+    print(R + "  " + "-" * 60)
+    print(fmt % ("Training Time (s)",
+                 "%.2f" % km_time, "%.2f" % bkm_time))
+    print(fmt % ("WSSSE (lower=more compact)",
+                 "%.2f" % km_wssse, "%.2f" % bkm_wssse))
+    print(fmt % ("Cluster Count",
+                 str(km_stat["cluster_count"]), str(bkm_stat["cluster_count"])))
+    print(fmt % ("Max Cluster Size",
+                 str(km_stat["max_size"]), str(bkm_stat["max_size"])))
+    print(fmt % ("Min Cluster Size",
+                 str(km_stat["min_size"]), str(bkm_stat["min_size"])))
+    print(fmt % ("Avg Cluster Size",
+                 "%.1f" % km_stat["avg_size"], "%.1f" % bkm_stat["avg_size"])),
+    print(fmt % ("Std Deviation",
+                 "%.1f" % km_stat["std_dev"], "%.1f" % bkm_stat["std_dev"]))
+    print(fmt % ("CV (lower=more uniform)",
+                 "%.4f" % km_stat["cv"], "%.4f" % bkm_stat["cv"]))
+    print(fmt % ("Small Clusters (< avg*10%)",
+                 "%d (%.0f%%)" % (km_stat["small_cluster_count"],
+                                  km_stat["small_cluster_ratio"] * 100),
+                 "%d (%.0f%%)" % (bkm_stat["small_cluster_count"],
+                                  bkm_stat["small_cluster_ratio"] * 100)))
+    print(fmt % ("Effective Clusters (after merge)",
+                 str(km_final_k), str(bkm_final_k)))
+
+    print(R + "")
+    print(R + " [2] ANALYSIS")
+    if bkm_time > km_time:
+        print(R + "  - K-Means is %.1fx faster (%.2fs vs %.2fs)"
+              % (bkm_time / km_time, km_time, bkm_time))
+    else:
+        print(R + "  - BisectingKMeans is %.1fx faster (%.2fs vs %.2fs)"
+              % (km_time / bkm_time, bkm_time, km_time))
+    if km_wssse <= bkm_wssse:
+        print(R + "  - K-Means has better compactness (WSSSE %.2f vs %.2f, diff %.2f%%)"
+              % (km_wssse, bkm_wssse, (bkm_wssse - km_wssse) / km_wssse * 100))
+    else:
+        print(R + "  - BisectingKMeans has better compactness (WSSSE %.2f vs %.2f)"
+              % (bkm_wssse, km_wssse))
+    cv_improve = (km_stat["cv"] - bkm_stat["cv"]) / km_stat["cv"] * 100
+    print(R + "  - BisectingKMeans CV is %.1f%% lower (%.4f vs %.4f), more uniform"
+          % (cv_improve, bkm_stat["cv"], km_stat["cv"]))
+    print(R + "  - BisectingKMeans small clusters: %d vs K-Means: %d"
+          % (bkm_stat["small_cluster_count"], km_stat["small_cluster_count"]))
+    print(R + "  - Max cluster reduced by %.0f%% (%d -> %d)"
+          % ((km_stat["max_size"] - bkm_stat["max_size"]) / float(km_stat["max_size"]) * 100,
+             km_stat["max_size"], bkm_stat["max_size"]))
+
+    print(R + "")
+    print(R + " [3] TOP-5 CLUSTER LABELS")
+    print(R + "  K-Means top clusters:")
+    km_top = km_preds.groupBy("cluster").agg(count("*").alias("sz")) \
+                     .orderBy(desc("sz")).limit(5).collect()
+    for row in km_top:
+        cid = row["cluster"]
+        print(R + "    Cluster %3d (size=%4d): [%s]"
+              % (cid, row["sz"], km_labels.get(cid, "")))
+
+    print(R + "  BisectingKMeans top clusters:")
+    bkm_top = bkm_preds.groupBy("cluster").agg(count("*").alias("sz")) \
+                       .orderBy(desc("sz")).limit(5).collect()
+    for row in bkm_top:
+        cid = row["cluster"]
+        print(R + "    Cluster %3d (size=%4d): [%s]"
+              % (cid, row["sz"], bkm_labels.get(cid, "")))
+
+    print(R + "")
+    print(R + " [4] CONCLUSION")
+    # 综合评分：WSSSE、CV、小聚类数量决定胜者
+    km_score  = (1 if km_wssse  <= bkm_wssse  else 0) + \
+                (1 if km_stat["cv"] <= bkm_stat["cv"] else 0) + \
+                (1 if km_stat["small_cluster_count"] <= bkm_stat["small_cluster_count"] else 0)
+    bkm_score = 3 - km_score
+    winner    = "K-Means" if km_score >= 2 else "BisectingKMeans"
+    loser     = "BisectingKMeans" if winner == "K-Means" else "K-Means"
+    print(R + "  Overall winner: %s (%d/3 metrics better)" % (winner, km_score if winner == "K-Means" else bkm_score))
+    print(R + "")
+    if winner == "K-Means":
+        print(R + "  K-Means advantages:")
+        if km_wssse < bkm_wssse:
+            print(R + "  + Lower WSSSE (better compactness): %.2f vs %.2f (%.1f%% better)"
+                  % (km_wssse, bkm_wssse, (bkm_wssse - km_wssse) / bkm_wssse * 100))
+        if km_stat["cv"] < bkm_stat["cv"]:
+            print(R + "  + More uniform distribution (CV): %.4f vs %.4f"
+                  % (km_stat["cv"], bkm_stat["cv"]))
+        if km_stat["small_cluster_count"] <= bkm_stat["small_cluster_count"]:
+            print(R + "  + Fewer small clusters: %d vs %d"
+                  % (km_stat["small_cluster_count"], bkm_stat["small_cluster_count"]))
+        print(R + "  + %.1fx faster training time" % (bkm_time / km_time))
+        print(R + "")
+        print(R + "  Note: Both algorithms use the same distance metric and parameters.")
+        print(R + "  The difference is purely due to algorithm structure (flat vs hierarchical).")
+    else:
+        print(R + "  BisectingKMeans advantages:")
+        if bkm_wssse < km_wssse:
+            print(R + "  + Lower WSSSE: %.2f vs %.2f" % (bkm_wssse, km_wssse))
+        if bkm_stat["cv"] < km_stat["cv"]:
+            print(R + "  + More uniform distribution (CV): %.4f vs %.4f"
+                  % (bkm_stat["cv"], km_stat["cv"]))
+        if bkm_stat["small_cluster_count"] < km_stat["small_cluster_count"]:
+            print(R + "  + Fewer small clusters: %d vs %d"
+                  % (bkm_stat["small_cluster_count"], km_stat["small_cluster_count"]))
+        print(R + "  - Trade-off: %.1fx slower training time" % (bkm_time / km_time))
+    print(R + "")
+    print(R + " Total experiment time: %.1fs (%.1f min)"
+          % (total_elapsed, total_elapsed / 60))
+    print(sep)
+
+
+# =====================================================================
 # Step 9: 保存结果
 # =====================================================================
 
@@ -544,7 +706,7 @@ def main():
     total_start = time.time()
 
     print("\n" + "=" * 70)
-    print("StackOverflow Clustering - Structure Optimization (Member E)")
+    print("StackOverflow Clustering - Structure Optimization")
     print("=" * 70)
     print("Input        : %s" % args.input)
     print("Output       : %s" % args.output)
@@ -570,13 +732,13 @@ def main():
         processed_df.count()
         print("Cache ready.")
 
-        # ---- Step 3a: K-Means ----
-        km_model, km_preds, km_time, km_wssse = run_kmeans(
+        # ---- Step 3a: K-Means (欧氏距离，与基准方案相同) ----
+        km_model, km_preds, km_time, km_wssse, km_sil = run_kmeans(
             processed_df, args.k, args.km_max_iter
         )
 
-        # ---- Step 3b: BisectingKMeans ----
-        bkm_model, bkm_preds, bkm_time, bkm_wssse = run_bisecting_kmeans(
+        # ---- Step 3b: BisectingKMeans (欧氏距离，仅改变算法结构) ----
+        bkm_model, bkm_preds, bkm_time, bkm_wssse, bkm_sil = run_bisecting_kmeans(
             processed_df, args.k, args.bkm_max_iter
         )
 
@@ -588,7 +750,8 @@ def main():
         bkm_stat = analyze_distribution(bkm_preds, "BisectingKMeans")
 
         # ---- Step 5: 对比汇总 ----
-        print_comparison(km_stat, bkm_stat, km_wssse, bkm_wssse, km_time, bkm_time)
+        print_comparison(km_stat, bkm_stat, km_wssse, bkm_wssse,
+                         km_time, bkm_time, km_sil, bkm_sil)
 
         # ---- Step 6: 生成聚类标签 ----
         km_labels  = generate_cluster_labels(km_model,  vocabulary, args.label_top_k)
@@ -596,11 +759,9 @@ def main():
 
         # ---- Step 7: 合并小聚类 ----
         km_merged,  km_final_k  = merge_small_clusters(
-            spark, km_preds,  km_model,  "KMeans",          args.merge_threshold
-        )
+            spark, km_preds,  km_model,  "KMeans",          args.merge_threshold)
         bkm_merged, bkm_final_k = merge_small_clusters(
-            spark, bkm_preds, bkm_model, "BisectingKMeans", args.merge_threshold
-        )
+            spark, bkm_preds, bkm_model, "BisectingKMeans", args.merge_threshold)
 
         # ---- Step 8: 展示样例 ----
         show_sample_clusters(km_preds,  km_labels,  algo_name="KMeans")
@@ -623,13 +784,21 @@ def main():
         print("\n" + "=" * 70)
         print("Structure Optimization Complete!")
         print("=" * 70)
-        print("K-Means        : WSSSE=%.4f, time=%.2fs, final_k=%d"
-              % (km_wssse,  km_time,  km_final_k))
-        print("BisectingKMeans: WSSSE=%.4f, time=%.2fs, final_k=%d"
-              % (bkm_wssse, bkm_time, bkm_final_k))
+        print("K-Means        : WSSSE=%.4f, Sil=%.4f, time=%.2fs, final_k=%d"
+              % (km_wssse,  km_sil,  km_time,  km_final_k))
+        print("BisectingKMeans: WSSSE=%.4f, Sil=%.4f, time=%.2fs, final_k=%d"
+              % (bkm_wssse, bkm_sil, bkm_time, bkm_final_k))
         print("Total time: %.2fs" % total_elapsed)
         print("Results saved to: %s" % args.output)
         print("=" * 70)
+
+        # ---- 实验报告（纯文本，便于提取）----
+        print_experiment_report(
+            args, km_stat, bkm_stat,
+            km_wssse, bkm_wssse, km_time, bkm_time,
+            km_final_k, bkm_final_k, total_elapsed,
+            km_preds, bkm_preds, km_labels, bkm_labels
+        )
 
     finally:
         spark.stop()

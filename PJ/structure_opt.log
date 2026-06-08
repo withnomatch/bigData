@@ -1,0 +1,502 @@
+nohup: ignoring input
+============================================================
+聚类结构优化 - BisectingKMeans vs KMeans
+聚类结构优化 + 后处理
+============================================================
+集群Master  : spark://10.176.62.230:7077
+输入路径    : hdfs://10.176.62.230:9000/user/root/data/oracle_database_questions_jsonlines.json
+输出路径    : hdfs://10.176.62.230:9000/user/root/output/structure_optimization
+聚类数 K    : 50
+采样比例    : 0.1
+最大词汇表  : 5000
+合并阈值    : 0.1 (avg_size 的 0.1 倍)
+============================================================
+
+[检查] 验证输入数据...
+输入数据大小: 522.9
+
+[清理] 删除旧的输出目录...
+26/06/08 09:47:50 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /user/root/output/structure_optimization
+已删除旧输出目录
+
+[提交] 提交 Spark 任务...
+============================================================
+26/06/08 09:47:52 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+======================================================================
+StackOverflow Clustering - Structure Optimization (Member E)
+======================================================================
+Input        : hdfs://10.176.62.230:9000/user/root/data/oracle_database_questions_jsonlines.json
+Output       : hdfs://10.176.62.230:9000/user/root/output/structure_optimization
+K            : 50
+Max features : 5000
+Sample ratio : 0.10
+======================================================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+26/06/08 09:47:53 INFO SparkContext: Running Spark version 2.4.8
+26/06/08 09:47:53 INFO SparkContext: Submitted application: StackOverflow_Structure_Optimization
+26/06/08 09:47:53 INFO SecurityManager: Changing view acls to: root
+26/06/08 09:47:53 INFO SecurityManager: Changing modify acls to: root
+26/06/08 09:47:53 INFO SecurityManager: Changing view acls groups to: 
+26/06/08 09:47:53 INFO SecurityManager: Changing modify acls groups to: 
+26/06/08 09:47:53 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+26/06/08 09:47:53 INFO Utils: Successfully started service 'sparkDriver' on port 51933.
+26/06/08 09:47:53 INFO SparkEnv: Registering MapOutputTracker
+26/06/08 09:47:53 INFO SparkEnv: Registering BlockManagerMaster
+26/06/08 09:47:53 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/06/08 09:47:53 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/06/08 09:47:53 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-035de0e6-8b08-4573-8733-0c58555b41f7
+26/06/08 09:47:53 INFO MemoryStore: MemoryStore started with capacity 2004.6 MB
+26/06/08 09:47:53 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/08 09:47:53 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/08 09:47:53 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://node5:4040
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://10.176.62.230:7077...
+26/06/08 09:47:54 INFO TransportClientFactory: Successfully created connection to /10.176.62.230:7077 after 42 ms (0 ms spent in bootstraps)
+26/06/08 09:47:54 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20260608094754-0003
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260608094754-0003/0 on worker-20260608084831-10.176.62.231-55399 (10.176.62.231:55399) with 2 core(s)
+26/06/08 09:47:54 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 41769.
+26/06/08 09:47:54 INFO NettyBlockTransferService: Server created on node5:41769
+26/06/08 09:47:54 INFO StandaloneSchedulerBackend: Granted executor ID app-20260608094754-0003/0 on hostPort 10.176.62.231:55399 with 2 core(s), 4.0 GB RAM
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260608094754-0003/1 on worker-20260608001424-10.176.62.232-42166 (10.176.62.232:42166) with 2 core(s)
+26/06/08 09:47:54 INFO StandaloneSchedulerBackend: Granted executor ID app-20260608094754-0003/1 on hostPort 10.176.62.232:42166 with 2 core(s), 4.0 GB RAM
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260608094754-0003/2 on worker-20260608083837-10.176.62.231-56017 (10.176.62.231:56017) with 2 core(s)
+26/06/08 09:47:54 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/06/08 09:47:54 INFO StandaloneSchedulerBackend: Granted executor ID app-20260608094754-0003/2 on hostPort 10.176.62.231:56017 with 2 core(s), 4.0 GB RAM
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260608094754-0003/3 on worker-20260608002414-10.176.62.232-44745 (10.176.62.232:44745) with 2 core(s)
+26/06/08 09:47:54 INFO StandaloneSchedulerBackend: Granted executor ID app-20260608094754-0003/3 on hostPort 10.176.62.232:44745 with 2 core(s), 4.0 GB RAM
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260608094754-0003/1 is now RUNNING
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260608094754-0003/0 is now RUNNING
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260608094754-0003/2 is now RUNNING
+26/06/08 09:47:54 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260608094754-0003/3 is now RUNNING
+26/06/08 09:47:54 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, node5, 41769, None)
+26/06/08 09:47:54 INFO BlockManagerMasterEndpoint: Registering block manager node5:41769 with 2004.6 MB RAM, BlockManagerId(driver, node5, 41769, None)
+26/06/08 09:47:54 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, node5, 41769, None)
+26/06/08 09:47:54 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, node5, 41769, None)
+26/06/08 09:47:54 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+26/06/08 09:47:54 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/root/spark-warehouse/').
+26/06/08 09:47:54 INFO SharedState: Warehouse path is 'file:/root/spark-warehouse/'.
+26/06/08 09:47:55 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+
+============================================================
+[Step 1] Loading and Preprocessing Data
+============================================================
+Total records: 152758
+Sampled records: 15441 (ratio: 0.10)
+Valid records after filtering: 15441
+
+============================================================
+[Step 2] Feature Extraction (TF-IDF)
+============================================================
+Params: max_features=5000, min_df=5
+Fitting TF-IDF pipeline...
+Vocabulary size: 5000, Pipeline time: 22.78s
+
+Caching feature data...
+Cache ready.
+
+============================================================
+[Experiment 1] Standard K-Means Clustering
+============================================================
+K=50, max_iter=30
+26/06/08 09:49:02 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/08 09:49:04 ERROR Utils: Uncaught exception in thread heartbeat-receiver-event-loop-thread
+java.lang.NullPointerException
+	at org.apache.spark.util.CollectionAccumulator.value(AccumulatorV2.scala:479)
+	at org.apache.spark.util.CollectionAccumulator.value(AccumulatorV2.scala:451)
+	at org.apache.spark.scheduler.TaskSchedulerImpl$$anonfun$11$$anonfun$12.apply(TaskSchedulerImpl.scala:610)
+	at org.apache.spark.scheduler.TaskSchedulerImpl$$anonfun$11$$anonfun$12.apply(TaskSchedulerImpl.scala:610)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:234)
+	at scala.collection.Iterator$class.foreach(Iterator.scala:891)
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1334)
+	at scala.collection.IterableLike$class.foreach(IterableLike.scala:72)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:54)
+	at scala.collection.TraversableLike$class.map(TraversableLike.scala:234)
+	at scala.collection.AbstractTraversable.map(Traversable.scala:104)
+	at org.apache.spark.scheduler.TaskSchedulerImpl$$anonfun$11.apply(TaskSchedulerImpl.scala:610)
+	at org.apache.spark.scheduler.TaskSchedulerImpl$$anonfun$11.apply(TaskSchedulerImpl.scala:609)
+	at scala.collection.TraversableLike$$anonfun$flatMap$1.apply(TraversableLike.scala:241)
+	at scala.collection.TraversableLike$$anonfun$flatMap$1.apply(TraversableLike.scala:241)
+	at scala.collection.IndexedSeqOptimized$class.foreach(IndexedSeqOptimized.scala:33)
+	at scala.collection.mutable.ArrayOps$ofRef.foreach(ArrayOps.scala:186)
+	at scala.collection.TraversableLike$class.flatMap(TraversableLike.scala:241)
+	at scala.collection.mutable.ArrayOps$ofRef.flatMap(ArrayOps.scala:186)
+	at org.apache.spark.scheduler.TaskSchedulerImpl.executorHeartbeatReceived(TaskSchedulerImpl.scala:609)
+	at org.apache.spark.HeartbeatReceiver$$anonfun$receiveAndReply$1$$anon$2$$anonfun$run$2.apply$mcV$sp(HeartbeatReceiver.scala:129)
+	at org.apache.spark.util.Utils$.tryLogNonFatalError(Utils.scala:1340)
+	at org.apache.spark.HeartbeatReceiver$$anonfun$receiveAndReply$1$$anon$2.run(HeartbeatReceiver.scala:128)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+26/06/08 09:49:05 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeSystemBLAS
+26/06/08 09:49:05 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeRefBLAS
+26/06/08 09:49:16 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+K-Means training time: 15.97s
+K-Means WSSSE: 14180.970264
+K-Means Silhouette: 0.0000
+
+============================================================
+[Experiment 2] BisectingKMeans (Hierarchical) Clustering
+============================================================
+K=50, max_iter=20
+26/06/08 09:49:20 WARN BisectingKMeans: The input RDD 209 is not directly cached, which may hurt performance if its parent RDDs are also not cached.
+BisectingKMeans training time: 39.09s
+BisectingKMeans WSSSE: 14201.624329
+BisectingKMeans Silhouette: 0.0014
+
+============================================================
+[Step 4] Cluster Distribution Analysis
+============================================================
+
+--- KMeans Distribution ---
+  Clusters     : 50
+  Total points : 15441
+  Max size     : 5129
+  Min size     : 1
+  Avg size     : 308.8
+  Std dev      : 745.0
+  CV (lower=more uniform): 2.4124
+  Small clusters (<31): 14 (28.0%)
+
+--- BisectingKMeans Distribution ---
+  Clusters     : 50
+  Total points : 15441
+  Max size     : 2236
+  Min size     : 43
+  Avg size     : 308.8
+  Std dev      : 411.0
+  CV (lower=more uniform): 1.3310
+  Small clusters (<31): 0 (0.0%)
+
+======================================================================
+COMPARISON RESULTS: K-Means  vs  BisectingKMeans
+======================================================================
+Metric                                      K-Means BisectingKMeans
+----------------------------------------------------------------------
+Training Time (s)                             15.97           39.09
+  Speedup (BKM vs KM)                             -    2.45x slower
+WSSSE                                    14180.9703      14201.6243
+Silhouette Score (cosine)                    0.0000          0.0014
+Actual Clusters                                  50              50
+Max Cluster Size                               5129            2236
+Min Cluster Size                                  1              43
+Avg Cluster Size                              308.8           308.8
+Std Deviation                                 745.0           411.0
+CV (uniformity, lower=better)                2.4124          1.3310
+Small Clusters Count                             14               0
+Small Cluster Ratio (%)                       28.0%            0.0%
+======================================================================
+
+[Analysis]
+  - K-Means is 2.4x faster than BisectingKMeans
+  - K-Means achieves lower WSSSE (better intra-cluster compactness)
+  - BisectingKMeans produces more uniform cluster size distribution (CV: 1.3310 vs 2.4124)
+  - BisectingKMeans generates fewer small clusters (0 vs 14)
+
+============================================================
+[Post-Processing] Generate Cluster Labels (top-5 keywords)
+============================================================
+Sample labels (first 10 clusters):
+  Cluster   0: [product | products | id | quantity | price]
+  Cluster   1: [department | employees | salary | id | employee]
+  Cluster   2: [procedure | stored | package | call | parameter]
+  Cluster   3: [role | user | roles | grant | id]
+  Cluster   4: [scan | full | index | indexed | table]
+  Cluster   5: [2016 | 01 | date | 12 | 05]
+  Cluster   6: [connect | server | database | client | connection]
+  Cluster   7: [refused | connection | network | proxy | connect]
+  Cluster   8: [sqlplus | script | spool | echo | set]
+  Cluster   9: [v | loop | varchar2 | end | dbms]
+
+============================================================
+[Post-Processing] Generate Cluster Labels (top-5 keywords)
+============================================================
+Sample labels (first 10 clusters):
+  Cluster   0: [query | select | count | table | 1]
+  Cluster   1: [column | 1 | value | 2 | table]
+  Cluster   2: [item | customer | id | orders | order]
+  Cluster   3: [id | p | join | name | 1]
+  Cluster   4: [t1 | t2 | t3 | id | join]
+  Cluster   5: [b | c | id | d | join]
+  Cluster   6: [b | c | 1 | id | d]
+  Cluster   7: [salary | department | employees | employee | id]
+  Cluster   8: [employee | employees | id | emp | name]
+  Cluster   9: [emp | dept | deptno | employee | empno]
+
+============================================================
+[Post-Processing] Merge Small Clusters (KMeans)
+============================================================
+Avg cluster size: 308.8, threshold: 30.9 (ratio=0.10)
+Small clusters to merge: 14 / 50
+Large clusters to keep : 36
+
+Small -> Large mapping (first 10):
+  Cluster  43 (size=   2) -> Cluster  36 (size=5129)
+  Cluster   4 (size=  16) -> Cluster  36 (size=5129)
+  Cluster   7 (size=   2) -> Cluster   6 (size=1015)
+  Cluster  40 (size=   2) -> Cluster  36 (size=5129)
+  Cluster  11 (size=   2) -> Cluster  36 (size=5129)
+  Cluster  46 (size=   5) -> Cluster  36 (size=5129)
+  Cluster  15 (size=  17) -> Cluster  36 (size=5129)
+  Cluster  16 (size=   1) -> Cluster  44 (size=1494)
+  Cluster  18 (size=  26) -> Cluster  36 (size=5129)
+  Cluster  20 (size=  17) -> Cluster  36 (size=5129)
+
+After merging: 36 effective clusters (was 50)
+
+============================================================
+[Post-Processing] Merge Small Clusters (BisectingKMeans)
+============================================================
+Avg cluster size: 308.8, threshold: 30.9 (ratio=0.10)
+Small clusters to merge: 0 / 50
+Large clusters to keep : 50
+No small clusters found, skipping merge.
+
+============================================================
+[Sample Clusters] KMeans (top 5 clusters)
+============================================================
+
+Cluster 36 [id | query | table | data | sql] (total 5129 questions):
+  1. How to get the correct result in the sql query?
+  2. How to get all cachegroup names in TimesTen IMDB?
+  3. Get multiple columns from a large subquery
+  4. How to improve the performance of my query? / My query is running slow.
+  5. How synchronize multiple machines to insert one single row?
+
+Cluster 44 [column | name | table | value | insert] (total 1494 questions):
+  1. ORA-06502: PL/SQL: numeric or value error ~ for all STRING values
+  2. Move record from Oracle array to Cobol occurs
+  3. How to update multiple rows of a table based on one value?
+  4. append string to varchar2 field based on the value of another field
+  5. Insert big XSLT into Clob column
+
+Cluster 6 [connect | server | database | client | connection] (total 1015 questions):
+  1. Migrated from Oracle XE to Oracle 11g (using Hiberate 3.6, Spring 3 and JPA 2)
+  2. multiport Weblogic
+  3. Cannot connect Oracle 32bit on X64 machine
+  4. How to use OracleMembershipProvider in ASP.NET MVC Application
+  5. Getting User attributes from MembershipProvider
+
+Cluster 28 [1 | 2 | 01 | 3 | 0] (total 907 questions):
+  1. PHP format of date from Oracle database
+  2. How to compare OracleTimeStamps
+  3. how does below query work
+  4. Oracle SQL - I want to combine multiple queries and group by the date, but the dates are pulling from different sources.
+  5. Oracle SQL: Show n rows for each id
+
+Cluster 10 [connection | string | cmd | jdbc | new] (total 594 questions):
+  1. How can I call an oracle function as part of a parameterized query?
+  2. Delay / Lag between Commit and select with Distributed Transactions when two connections are enlisted to the transaction in Oracle with ODAC
+  3. Java: Oracle XMLType + JDBC
+  4. how to set Oracle connection pool size?
+  5. JDBC Oracle - Fetch explain plan for query
+
+============================================================
+[Sample Clusters] BisectingKMeans (top 5 clusters)
+============================================================
+
+Cluster 0 [query | select | count | table | 1] (total 2236 questions):
+  1. Best way to do multi-row insert in Oracle?
+  2. Unique vs Distinct keyword in Oracle
+  3. Determine Oracle null == null
+  4. Running total by grouped records in table
+  5. Oracle correlated subquery in FROM list
+
+Cluster 26 [database | data | db | oracle | sql] (total 1338 questions):
+  1. Sql modifying relationships
+  2. What's a good way to format and lay items out in Application Express?
+  3. Oracle Triggers not showing in DBA_SOURCE
+  4. Is it possible to perform parallel nested transactions?
+  5. Why does this CREATE TABLE statement cause "ORA-00922 missing or invalid option"?
+
+Cluster 27 [sql | error | data | oracle | query] (total 1301 questions):
+  1. Read all parameters from SYS_CONTEXT/USERENV
+  2. Migrated from Oracle XE to Oracle 11g (using Hiberate 3.6, Spring 3 and JPA 2)
+  3. How to find the query sent through ODAC to Oracle Database when using Entity Framework (EF)
+  4. How to configure UTF8 character set in Oracle?
+  5. Hibernate - Orderding criteria by formula property
+
+Cluster 1 [column | 1 | value | 2 | table] (total 1269 questions):
+  1. SQL : How to select a column based on partial string of the column
+  2. Possible recursive or analytical query. Can this be done via SQL or is a Script Required?
+  3. How to get the last row of an Oracle table
+  4. How to retrieve the last inserted record in Oracle
+  5. Portable way to add dates between Oracle and MySQL?
+
+Cluster 3 [id | p | join | name | 1] (total 1032 questions):
+  1. Insert many rows to Oracle Database very fast
+  2. Oracle + SQL Server tree query issue
+  3. Oracle SQL Query (LEFT OUTER JOIN)
+  4. Fetching a single column into array
+  5. For an Oracle NUMBER datatype, LIKE operator vs BETWEEN..AND operator
+
+============================================================
+[Step 9] Saving Results
+============================================================
+Comparison table saved: hdfs://10.176.62.230:9000/user/root/output/structure_optimization/comparison_table
+Assignments saved: hdfs://10.176.62.230:9000/user/root/output/structure_optimization/kmeans_assignments
+Summary saved: hdfs://10.176.62.230:9000/user/root/output/structure_optimization/kmeans_summary
+Assignments saved: hdfs://10.176.62.230:9000/user/root/output/structure_optimization/bisecting_kmeans_assignments
+Summary saved: hdfs://10.176.62.230:9000/user/root/output/structure_optimization/bisecting_kmeans_summary
+
+======================================================================
+Structure Optimization Complete!
+======================================================================
+K-Means        : WSSSE=14180.9703, Sil=0.0000, time=15.97s, final_k=36
+BisectingKMeans: WSSSE=14201.6243, Sil=0.0014, time=39.09s, final_k=50
+Total time: 149.59s
+Results saved to: hdfs://10.176.62.230:9000/user/root/output/structure_optimization
+======================================================================
+
+[REPORT] ==============================================================
+[REPORT] EXPERIMENT REPORT - Clustering Structure Optimization
+[REPORT] Member E: BisectingKMeans vs K-Means
+[REPORT] ==============================================================
+[REPORT] Dataset    : StackOverflow Oracle Database Questions
+[REPORT] Sample     : 10%
+[REPORT] K          : 50
+[REPORT] Vocab size : 5000
+[REPORT] ==============================================================
+[REPORT]
+[REPORT] [1] COMPARISON TABLE
+[REPORT]  Metric                                  K-Means BisectingKMeans
+[REPORT]  ------------------------------------------------------------
+[REPORT]  Training Time (s)                         15.97          39.09
+[REPORT]  WSSSE (lower=more compact)             14180.97       14201.62
+[REPORT]  Cluster Count                                50             50
+[REPORT]  Max Cluster Size                           5129           2236
+[REPORT]  Min Cluster Size                              1             43
+[REPORT]  Avg Cluster Size                          308.8          308.8
+[REPORT]  Std Deviation                             745.0          411.0
+[REPORT]  CV (lower=more uniform)                  2.4124         1.3310
+[REPORT]  Small Clusters (< avg*10%)             14 (28%)         0 (0%)
+[REPORT]  Effective Clusters (after merge)             36             50
+[REPORT]
+[REPORT] [2] ANALYSIS
+[REPORT]  - K-Means is 2.4x faster (15.97s vs 39.09s)
+[REPORT]  - K-Means has better compactness (WSSSE 14180.97 vs 14201.62, diff 0.15%)
+[REPORT]  - BisectingKMeans CV is 44.8% lower (1.3310 vs 2.4124), more uniform
+[REPORT]  - BisectingKMeans small clusters: 0 vs K-Means: 14
+[REPORT]  - Max cluster reduced by 56% (5129 -> 2236)
+[REPORT]
+[REPORT] [3] TOP-5 CLUSTER LABELS
+[REPORT]  K-Means top clusters:
+[REPORT]    Cluster  36 (size=5129): [id | query | table | data | sql]
+[REPORT]    Cluster  44 (size=1494): [column | name | table | value | insert]
+[REPORT]    Cluster   6 (size=1015): [connect | server | database | client | connection]
+[REPORT]    Cluster  28 (size= 907): [1 | 2 | 01 | 3 | 0]
+[REPORT]    Cluster  10 (size= 594): [connection | string | cmd | jdbc | new]
+[REPORT]  BisectingKMeans top clusters:
+[REPORT]    Cluster   0 (size=2236): [query | select | count | table | 1]
+[REPORT]    Cluster  26 (size=1338): [database | data | db | oracle | sql]
+[REPORT]    Cluster  27 (size=1301): [sql | error | data | oracle | query]
+[REPORT]    Cluster   1 (size=1269): [column | 1 | value | 2 | table]
+[REPORT]    Cluster   3 (size=1032): [id | p | join | name | 1]
+[REPORT]
+[REPORT] [4] CONCLUSION
+[REPORT]  Overall winner: BisectingKMeans (2/3 metrics better)
+[REPORT]
+[REPORT]  BisectingKMeans advantages:
+[REPORT]  + More uniform distribution (CV): 1.3310 vs 2.4124
+[REPORT]  + Fewer small clusters: 0 vs 14
+[REPORT]  - Trade-off: 2.4x slower training time
+[REPORT]
+[REPORT] Total experiment time: 149.6s (2.5 min)
+[REPORT] ==============================================================
+
+============================================================
+[验证] 检查输出结果...
+============================================================
+  ✓ comparison_table
+  ✓ kmeans_assignments
+  ✓ bisecting_kmeans_assignments
+  ✓ kmeans_summary
+  ✓ bisecting_kmeans_summary
+
+对比表格预览:
+metric,kmeans,bisecting_kmeans
+training_time_s,15.97,39.09
+wssse,14180.970264,14201.624329
+cluster_count,50,50
+max_cluster_size,5129,2236
+min_cluster_size,1,43
+avg_cluster_size,308.8,308.8
+std_deviation,745.0,411.0
+cv_uniformity,2.4124,1.3310
+small_cluster_cnt,14,0
+small_cluster_pct,28.0%,0.0%
+
+============================================================
+结构优化实验执行完成!
+============================================================
+结果路径: hdfs://10.176.62.230:9000/user/root/output/structure_optimization
+
+[提取] 从日志中提取实验报告...
+✓ 实验报告已保存至: experiment_report.txt
+
+====== 实验报告预览 ======
+==============================================================
+EXPERIMENT REPORT - Clustering Structure Optimization
+Member E: BisectingKMeans vs K-Means
+==============================================================
+Dataset    : StackOverflow Oracle Database Questions
+Sample     : 10%
+K          : 50
+Vocab size : 5000
+==============================================================
+
+[1] COMPARISON TABLE
+ Metric                                  K-Means BisectingKMeans
+ ------------------------------------------------------------
+ Training Time (s)                         15.97          39.09
+ WSSSE (lower=more compact)             14180.97       14201.62
+ Cluster Count                                50             50
+ Max Cluster Size                           5129           2236
+ Min Cluster Size                              1             43
+ Avg Cluster Size                          308.8          308.8
+ Std Deviation                             745.0          411.0
+ CV (lower=more uniform)                  2.4124         1.3310
+ Small Clusters (< avg*10%)             14 (28%)         0 (0%)
+ Effective Clusters (after merge)             36             50
+
+[2] ANALYSIS
+ - K-Means is 2.4x faster (15.97s vs 39.09s)
+ - K-Means has better compactness (WSSSE 14180.97 vs 14201.62, diff 0.15%)
+ - BisectingKMeans CV is 44.8% lower (1.3310 vs 2.4124), more uniform
+ - BisectingKMeans small clusters: 0 vs K-Means: 14
+ - Max cluster reduced by 56% (5129 -> 2236)
+
+[3] TOP-5 CLUSTER LABELS
+ K-Means top clusters:
+   Cluster  36 (size=5129): [id | query | table | data | sql]
+   Cluster  44 (size=1494): [column | name | table | value | insert]
+   Cluster   6 (size=1015): [connect | server | database | client | connection]
+   Cluster  28 (size= 907): [1 | 2 | 01 | 3 | 0]
+   Cluster  10 (size= 594): [connection | string | cmd | jdbc | new]
+ BisectingKMeans top clusters:
+   Cluster   0 (size=2236): [query | select | count | table | 1]
+   Cluster  26 (size=1338): [database | data | db | oracle | sql]
+   Cluster  27 (size=1301): [sql | error | data | oracle | query]
+   Cluster   1 (size=1269): [column | 1 | value | 2 | table]
+   Cluster   3 (size=1032): [id | p | join | name | 1]
+
+[4] CONCLUSION
+ Overall winner: BisectingKMeans (2/3 metrics better)
+
+ BisectingKMeans advantages:
+ + More uniform distribution (CV): 1.3310 vs 2.4124
+ + Fewer small clusters: 0 vs 14
+ - Trade-off: 2.4x slower training time
+
+Total experiment time: 149.6s (2.5 min)
+==============================================================
+
+查看完整结果:
+  cat experiment_report.txt
+  hdfs dfs -cat /user/root/output/structure_optimization/comparison_table/*.csv
+============================================================

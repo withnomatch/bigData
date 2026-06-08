@@ -6,7 +6,7 @@
 
 # ==================== 环境变量 ====================
 export HADOOP_HOME=/opt/hadoop
-export SPARK_HOME=/opt/spark-2.0.0-bin-hadoop2.7
+export SPARK_HOME=/opt/spark          # 实际运行版本: Spark 2.4.8
 export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SPARK_HOME/bin:$PATH
 
 # ==================== 配置参数 ====================
@@ -124,9 +124,22 @@ echo "结构优化实验执行完成!"
 echo "============================================================"
 echo "结果路径: hdfs://${MASTER_NODE}:9000${HDFS_OUTPUT}"
 echo ""
-echo "查看结果:"
-echo "  hdfs dfs -ls ${HDFS_OUTPUT}"
+
+# ==================== 提取干净的实验报告 ====================
+echo "[提取] 从日志中提取实验报告..."
+grep "^\[REPORT\]" structure_opt.log | sed 's/^\[REPORT\] \?//' > experiment_report.txt
+
+if [ -s experiment_report.txt ]; then
+    echo "✓ 实验报告已保存至: experiment_report.txt"
+    echo ""
+    echo "====== 实验报告预览 ======"
+    cat experiment_report.txt
+else
+    echo "⚠ 未能提取实验报告，请手动查看 structure_opt.log"
+fi
+
+echo ""
+echo "查看完整结果:"
+echo "  cat experiment_report.txt"
 echo "  hdfs dfs -cat ${HDFS_OUTPUT}/comparison_table/*.csv"
-echo "  hdfs dfs -cat ${HDFS_OUTPUT}/kmeans_summary/*.json | head -20"
-echo "  hdfs dfs -cat ${HDFS_OUTPUT}/bisecting_kmeans_summary/*.json | head -20"
 echo "============================================================"
