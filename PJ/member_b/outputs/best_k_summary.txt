@@ -1,0 +1,2 @@
+Recommended K: 50
+K=60 has the highest silhouette score (0.0246), while baseline K=50 is within 0.0050 (0.0214) and keeps experiments comparable.
