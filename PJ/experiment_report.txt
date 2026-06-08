@@ -1,0 +1,55 @@
+==============================================================
+EXPERIMENT REPORT - Clustering Structure Optimization
+Member E: BisectingKMeans vs K-Means
+==============================================================
+Dataset    : StackOverflow Oracle Database Questions
+Sample     : 10%
+K          : 50
+Vocab size : 5000
+==============================================================
+
+[1] COMPARISON TABLE
+ Metric                                  K-Means BisectingKMeans
+ ------------------------------------------------------------
+ Training Time (s)                         15.97          39.09
+ WSSSE (lower=more compact)             14180.97       14201.62
+ Cluster Count                                50             50
+ Max Cluster Size                           5129           2236
+ Min Cluster Size                              1             43
+ Avg Cluster Size                          308.8          308.8
+ Std Deviation                             745.0          411.0
+ CV (lower=more uniform)                  2.4124         1.3310
+ Small Clusters (< avg*10%)             14 (28%)         0 (0%)
+ Effective Clusters (after merge)             36             50
+
+[2] ANALYSIS
+ - K-Means is 2.4x faster (15.97s vs 39.09s)
+ - K-Means has better compactness (WSSSE 14180.97 vs 14201.62, diff 0.15%)
+ - BisectingKMeans CV is 44.8% lower (1.3310 vs 2.4124), more uniform
+ - BisectingKMeans small clusters: 0 vs K-Means: 14
+ - Max cluster reduced by 56% (5129 -> 2236)
+
+[3] TOP-5 CLUSTER LABELS
+ K-Means top clusters:
+   Cluster  36 (size=5129): [id | query | table | data | sql]
+   Cluster  44 (size=1494): [column | name | table | value | insert]
+   Cluster   6 (size=1015): [connect | server | database | client | connection]
+   Cluster  28 (size= 907): [1 | 2 | 01 | 3 | 0]
+   Cluster  10 (size= 594): [connection | string | cmd | jdbc | new]
+ BisectingKMeans top clusters:
+   Cluster   0 (size=2236): [query | select | count | table | 1]
+   Cluster  26 (size=1338): [database | data | db | oracle | sql]
+   Cluster  27 (size=1301): [sql | error | data | oracle | query]
+   Cluster   1 (size=1269): [column | 1 | value | 2 | table]
+   Cluster   3 (size=1032): [id | p | join | name | 1]
+
+[4] CONCLUSION
+ Overall winner: BisectingKMeans (2/3 metrics better)
+
+ BisectingKMeans advantages:
+ + More uniform distribution (CV): 1.3310 vs 2.4124
+ + Fewer small clusters: 0 vs 14
+ - Trade-off: 2.4x slower training time
+
+Total experiment time: 149.6s (2.5 min)
+==============================================================
