@@ -16,7 +16,13 @@ from pyspark.ml.feature import (
     Normalizer,
 )
 from pyspark.ml.clustering import KMeans
-from pyspark.ml.evaluation import ClusteringEvaluator
+
+# ClusteringEvaluator was added in Spark 2.3; not available on Spark 2.0.
+try:
+    from pyspark.ml.evaluation import ClusteringEvaluator
+    _HAS_CLUSTERING_EVALUATOR = True
+except ImportError:
+    _HAS_CLUSTERING_EVALUATOR = False
 
 
 class HTMLTextExtractor(HTMLParser):
@@ -81,6 +87,9 @@ def main():
     print("=" * 60)
 
     # ---- Step 1: Load Data ----
+    # Input is expected to be JSON Lines (one JSON object per line).
+    # If working with the original JSON array locally, pass --multi-line or
+    # convert first with convert_json.py.
     print("\n[Step 1] Loading data...")
     df = spark.read.json(args.input)
     print(f"Total records loaded: {df.count()}")
@@ -131,30 +140,40 @@ def main():
     print(f"Pipeline fitting complete. Features dimension: {args.max_features}")
 
     # ---- Step 4: K-Means Clustering ----
+    # distanceMeasure="cosine" requires Spark 2.4+.
+    # For L2-normalised vectors the cosine and euclidean metrics yield identical
+    # cluster assignments (minimising ||a-b||² equals maximising cos(a,b) when
+    # ||a||=||b||=1), so the default "euclidean" is safe for Spark 2.0 clusters.
     print(f"\n[Step 4] Running K-Means clustering with K={args.k}...")
-    kmeans = KMeans(
+    spark_version = tuple(int(x) for x in spark.version.split(".")[:2])
+    kmeans_kwargs = dict(
         featuresCol="features",
         predictionCol="cluster",
         k=args.k,
         maxIter=30,
         seed=42,
-        distanceMeasure="cosine",
     )
+    if spark_version >= (2, 4):
+        kmeans_kwargs["distanceMeasure"] = "cosine"
 
-    kmeans_model = kmeans.fit(processed_df)
+    kmeans_model = KMeans(**kmeans_kwargs).fit(processed_df)
     predictions = kmeans_model.transform(processed_df)
 
     # ---- Step 5: Evaluate ----
     print("\n[Step 5] Evaluating clustering...")
-    evaluator = ClusteringEvaluator(
-        featuresCol="features",
-        predictionCol="cluster",
-        metricName="silhouette",
-        distanceMeasure="cosine",
-    )
-
-    silhouette = evaluator.evaluate(predictions)
-    print(f"Silhouette Score (cosine): {silhouette:.4f}")
+    if _HAS_CLUSTERING_EVALUATOR:
+        eval_kwargs = dict(
+            featuresCol="features",
+            predictionCol="cluster",
+            metricName="silhouette",
+        )
+        if spark_version >= (3, 0):
+            eval_kwargs["distanceMeasure"] = "cosine"
+        silhouette = ClusteringEvaluator(**eval_kwargs).evaluate(predictions)
+        print(f"Silhouette Score: {silhouette:.4f}")
+    else:
+        silhouette = 0.0
+        print("Silhouette Score: N/A (ClusteringEvaluator not available in Spark < 2.3)")
 
     # ---- Step 6: Analyze Clusters ----
     print("\n[Step 6] Cluster statistics:")
@@ -214,7 +233,7 @@ def main():
 
     print("\n" + "=" * 60)
     print("Clustering job completed!")
-    print(f"Silhouette Score: {silhouette:.4f}")
+    print(f"Silhouette Score: {silhouette:.4f}" if silhouette else "Silhouette Score: N/A")
     print(f"Results saved to: {args.output}")
     print("=" * 60)
 

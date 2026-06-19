@@ -1,0 +1,64 @@
+{
+  "sample_count": 71,
+  "reviewed_label_counts": {
+    "相关但不重复": 41,
+    "不相关": 30
+  },
+  "initial_label_counts": {
+    "重复": 11,
+    "相关但不重复": 30,
+    "不相关": 30
+  },
+  "three_class": {
+    "accuracy": 0.8450704225352113,
+    "macro_f1_present_classes": 0.9225352112676056,
+    "per_class": {
+      "重复": {
+        "support": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      },
+      "相关但不重复": {
+        "support": 41,
+        "precision": 1.0,
+        "recall": 0.7317073170731707,
+        "f1": 0.8450704225352113
+      },
+      "不相关": {
+        "support": 30,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "confusion_matrix_actual_by_predicted": {
+      "重复": {
+        "重复": 0,
+        "相关但不重复": 0,
+        "不相关": 0
+      },
+      "相关但不重复": {
+        "重复": 11,
+        "相关但不重复": 30,
+        "不相关": 0
+      },
+      "不相关": {
+        "重复": 0,
+        "相关但不重复": 0,
+        "不相关": 30
+      }
+    }
+  },
+  "binary_dedup": {
+    "tp": 0,
+    "fp": 11,
+    "fn": 0,
+    "tn": 60,
+    "precision": 0.0,
+    "recall": null,
+    "f1": null,
+    "candidate_recall": null,
+    "note": "复核集中没有可靠的重复正例，因此 Recall、F1 和 Candidate Recall 不能用于评价系统的真实去重能力。"
+  }
+}

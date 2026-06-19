@@ -74,8 +74,11 @@ def main():
     print("=" * 60)
 
     # Step 1: Load
+    # The original data file is a JSON array ([{...},{...}]).
+    # multiLine=True is required so Spark reads the whole file as one JSON document
+    # rather than treating each line as a separate record (JSONLines mode).
     print("\n[Step 1] Loading data...")
-    df = spark.read.json(DATA_PATH)
+    df = spark.read.option("multiLine", "true").json(DATA_PATH)
     total = df.count()
     print(f"Total records: {total}")
 
@@ -146,14 +149,24 @@ def main():
 
     top_per_cluster.show(50, truncate=80)
 
-    # Save local results
+    # Save local results using Python's built-in csv module to avoid the
+    # winutils.exe requirement on Windows for Spark's Hadoop-backed file writer.
     print("\n[Step 8] Saving local results...")
+    import csv, os
     output_path = "./local_test_output"
-    predictions.select(
-        col("question_id"), col("title"), col("cluster"), col("score"),
-    ).coalesce(1).write.mode("overwrite").csv(output_path + "/assignments", header=True)
+    os.makedirs(output_path, exist_ok=True)
 
-    print(f"\nResults saved to: {output_path}")
+    rows = predictions.select(
+        col("question_id"), col("title"), col("cluster"), col("score"),
+    ).collect()
+    out_file = os.path.join(output_path, "assignments.csv")
+    with open(out_file, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["question_id", "title", "cluster", "score"])
+        for r in rows:
+            writer.writerow([r["question_id"], r["title"], r["cluster"], r["score"]])
+
+    print(f"\nResults saved to: {out_file} ({len(rows)} rows)")
     print("=" * 60)
     print("LOCAL TEST COMPLETE!")
     print("=" * 60)

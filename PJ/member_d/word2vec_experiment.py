@@ -13,6 +13,7 @@ Word2Vec特征提取对比实验
 from __future__ import print_function
 import re
 import argparse
+import json
 import time
 import sys
 import numpy as np
@@ -822,6 +823,15 @@ def save_results(results, output_path):
         top_per_cluster.write.mode("overwrite").json(path)
         print("Saved: %s" % path)
 
+        metrics = dict(r["metrics"])
+        metrics["semantic_coherence"] = float(r.get("semantic_coherence", 0.0))
+        metrics["k"] = int(metrics["total_clusters"])
+        metrics_path = "%s/%s/metrics" % (output_path, method)
+        predictions.rdd.context.parallelize(
+            [json.dumps(metrics, sort_keys=True)], 1
+        ).saveAsTextFile(metrics_path)
+        print("Saved: %s" % metrics_path)
+
     print("All results saved to: %s" % output_path)
 
 
@@ -850,6 +860,12 @@ def main():
                         help="Sampling ratio (default: 1.0)")
     parser.add_argument("--max-iter", type=int, default=30,
                         help="K-Means max iterations (default: 30)")
+    parser.add_argument(
+        "--methods",
+        type=str,
+        default="tfidf,word2vec,tfidf_word2vec",
+        help="Comma-separated methods: tfidf,word2vec,tfidf_word2vec",
+    )
 
     args = parser.parse_args()
 
@@ -864,6 +880,7 @@ def main():
     print("Max features: %d" % args.max_features)
     print("Vector size: %d" % args.vector_size)
     print("Sample ratio: %f" % args.sample_ratio)
+    print("Methods: %s" % args.methods)
     print("=" * 60)
 
     spark = create_spark_session()
@@ -874,29 +891,44 @@ def main():
         df.cache()
 
         results = []
+        methods = set(
+            item.strip().lower() for item in args.methods.split(",") if item.strip()
+        )
+        valid_methods = {"tfidf", "word2vec", "tfidf_word2vec"}
+        unknown_methods = methods - valid_methods
+        if unknown_methods:
+            raise ValueError("Unknown methods: %s" % sorted(unknown_methods))
 
         # ---- 实验1: 纯TF-IDF ----
-        r1 = run_tfidf_experiment(df, args.k, args.max_features, args.min_df, args.max_iter)
-        evaluate_clustering(r1, args.k)
-        semantic_analysis(r1)
-        results.append(r1)
+        if "tfidf" in methods:
+            r1 = run_tfidf_experiment(
+                df, args.k, args.max_features, args.min_df, args.max_iter
+            )
+            evaluate_clustering(r1, args.k)
+            semantic_analysis(r1)
+            results.append(r1)
 
         # ---- 实验2: 纯Word2Vec ----
-        r2 = run_w2v_experiment(df, args.k, args.vector_size, args.min_count, args.max_iter)
-        evaluate_clustering(r2, args.k)
-        semantic_analysis(r2)
-        results.append(r2)
+        if "word2vec" in methods:
+            r2 = run_w2v_experiment(
+                df, args.k, args.vector_size, args.min_count, args.max_iter
+            )
+            evaluate_clustering(r2, args.k)
+            semantic_analysis(r2)
+            results.append(r2)
 
         # ---- 实验3: TF-IDF加权Word2Vec ----
-        r3 = run_tfidf_w2v_experiment(
-            df, spark, args.k, args.max_features, args.min_df,
-            args.vector_size, args.min_count, args.max_iter)
-        evaluate_clustering(r3, args.k)
-        semantic_analysis(r3)
-        results.append(r3)
+        if "tfidf_word2vec" in methods:
+            r3 = run_tfidf_w2v_experiment(
+                df, spark, args.k, args.max_features, args.min_df,
+                args.vector_size, args.min_count, args.max_iter)
+            evaluate_clustering(r3, args.k)
+            semantic_analysis(r3)
+            results.append(r3)
 
         # ---- 跨方法对比 ----
-        cross_method_comparison(results)
+        if len(results) > 1:
+            cross_method_comparison(results)
 
         # ---- 保存结果 ----
         save_results(results, args.output)

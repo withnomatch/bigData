@@ -21,7 +21,18 @@ except ImportError:
     from HTMLParser import HTMLParser
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, udf, desc, count, collect_list, first, row_number
+from pyspark.sql.functions import (
+    array_distinct,
+    col,
+    collect_list,
+    count,
+    desc,
+    explode,
+    first,
+    row_number,
+    split,
+    udf,
+)
 from pyspark.sql.types import StringType
 from pyspark.sql.window import Window
 
@@ -34,6 +45,7 @@ from pyspark.ml.feature import (
     Normalizer,
 )
 from pyspark.ml.clustering import KMeans
+from pyspark.ml.evaluation import ClusteringEvaluator
 
 
 # Oracle数据库专业术语列表
@@ -222,7 +234,29 @@ def preprocess_data_optimized(df):
     return df
 
 
-def build_optimized_pipeline(max_features=5000, min_df=5, max_df=0.9):
+def find_high_frequency_terms(df, max_df):
+    """Return terms present in more than max_df of documents."""
+    total_documents = df.count()
+    threshold = float(total_documents) * max_df
+    rows = (
+        df.select(explode(array_distinct(split(col("clean_text"), r"\s+"))).alias("term"))
+        .filter(col("term") != "")
+        .groupBy("term")
+        .count()
+        .filter(col("count") > threshold)
+        .collect()
+    )
+    terms = [row["term"] for row in rows]
+    print(
+        "maxDF=%.2f threshold=%d documents, filtered high-frequency terms=%d"
+        % (max_df, threshold, len(terms))
+    )
+    return terms
+
+
+def build_optimized_pipeline(
+    max_features=5000, min_df=5, max_df=0.9, high_frequency_terms=None
+):
     """构建优化的特征提取Pipeline"""
     print("\n" + "=" * 60)
     print("[Step 3] Building Optimized Feature Extraction Pipeline")
@@ -232,20 +266,23 @@ def build_optimized_pipeline(max_features=5000, min_df=5, max_df=0.9):
     
     tokenizer = Tokenizer(inputCol="clean_text", outputCol="raw_tokens")
     
-    # 使用定制停用词
+    # Spark CountVectorizer has no maxDF parameter. Terms above maxDF are
+    # computed from document frequency and removed before vectorization.
+    stop_words = list(CUSTOM_STOPWORDS)
+    if high_frequency_terms:
+        stop_words.extend(high_frequency_terms)
+
     remover = StopWordsRemover(
         inputCol="raw_tokens",
         outputCol="filtered_tokens",
-        stopWords=CUSTOM_STOPWORDS
+        stopWords=sorted(set(stop_words)),
     )
     
-    # CountVectorizer with maxDF (Spark 2.4+支持)
     cv = CountVectorizer(
         inputCol="filtered_tokens",
         outputCol="raw_features",
         vocabSize=max_features,
         minDF=min_df,
-        maxDF=max_df,  # Spark 2.4+支持maxDF参数
     )
     
     idf = IDF(inputCol="raw_features", outputCol="tfidf_features")
@@ -299,7 +336,7 @@ def run_kmeans(processed_df, k=50, max_iter=30):
     return kmeans_model, predictions, elapsed
 
 
-def evaluate_clustering(predictions):
+def evaluate_clustering(kmeans_model, predictions):
     """评估聚类质量"""
     print("\n" + "=" * 60)
     print("[Step 5] Evaluating Clustering Quality")
@@ -326,11 +363,34 @@ def evaluate_clustering(predictions):
     print("Min Cluster Size: %d" % min_size)
     print("Std Deviation: %.2f" % std_size)
     
-    # 计算一个简单的聚类质量指标
-    # 使用聚类大小的均匀性作为评估指标
-    quality_score = 1.0 - (std_size / avg_cluster_size) if avg_cluster_size > 0 else 0.0
-    
-    return quality_score, avg_cluster_size, std_size
+    evaluator = ClusteringEvaluator(
+        predictionCol="cluster",
+        featuresCol="features",
+        metricName="silhouette",
+        distanceMeasure="squaredEuclidean",
+    )
+    silhouette = evaluator.evaluate(predictions)
+    wssse = kmeans_model.computeCost(predictions)
+    largest_ratio = max_size / float(total_points)
+    cluster_size_cv = std_size / avg_cluster_size if avg_cluster_size > 0 else 0.0
+
+    print("Silhouette Score: %.6f" % silhouette)
+    print("WSSSE: %.6f" % wssse)
+    print("Largest Cluster Ratio: %.6f" % largest_ratio)
+    print("Cluster Size CV: %.6f" % cluster_size_cv)
+
+    return {
+        "silhouette": silhouette,
+        "wssse": wssse,
+        "total_points": total_points,
+        "cluster_count": cluster_count,
+        "avg_cluster_size": avg_cluster_size,
+        "max_cluster_size": max_size,
+        "min_cluster_size": min_size,
+        "std_cluster_size": std_size,
+        "cluster_size_cv": cluster_size_cv,
+        "largest_cluster_ratio": largest_ratio,
+    }
 
 
 def save_results(predictions, output_path):
@@ -354,7 +414,7 @@ def save_results(predictions, output_path):
     print("Cluster summary saved: %s/cluster_summary" % output_path)
 
 
-def run_single_experiment(df, params, k=50):
+def run_single_experiment(df, params, k=50, max_iter=30, high_frequency_terms=None):
     """运行单个参数组合的实验"""
     max_features = params['max_features']
     min_df = params['min_df']
@@ -367,16 +427,24 @@ def run_single_experiment(df, params, k=50):
     start_time = time.time()
     
     # 构建Pipeline
-    pipeline = build_optimized_pipeline(max_features, min_df, max_df)
+    if high_frequency_terms is None:
+        high_frequency_terms = find_high_frequency_terms(df, max_df)
+    pipeline = build_optimized_pipeline(
+        max_features, min_df, max_df, high_frequency_terms
+    )
     
     # 训练Pipeline
     pipeline_model, processed_df, pipeline_time, vocab_size = fit_and_transform(pipeline, df)
     
     # K-Means聚类
-    kmeans_model, predictions, kmeans_time = run_kmeans(processed_df, k=k)
+    processed_df = processed_df.cache()
+    processed_df.count()
+    kmeans_model, predictions, kmeans_time = run_kmeans(
+        processed_df, k=k, max_iter=max_iter
+    )
     
     # 评估
-    quality_score, avg_size, std_size = evaluate_clustering(predictions)
+    metrics = evaluate_clustering(kmeans_model, predictions)
     
     total_time = time.time() - start_time
     
@@ -386,9 +454,16 @@ def run_single_experiment(df, params, k=50):
         'pipeline_time': pipeline_time,
         'kmeans_time': kmeans_time,
         'total_time': total_time,
-        'quality_score': quality_score,
-        'avg_cluster_size': avg_size,
-        'std_cluster_size': std_size,
+        'silhouette': metrics["silhouette"],
+        'wssse': metrics["wssse"],
+        'total_points': metrics["total_points"],
+        'cluster_count': metrics["cluster_count"],
+        'avg_cluster_size': metrics["avg_cluster_size"],
+        'max_cluster_size': metrics["max_cluster_size"],
+        'min_cluster_size': metrics["min_cluster_size"],
+        'std_cluster_size': metrics["std_cluster_size"],
+        'cluster_size_cv': metrics["cluster_size_cv"],
+        'largest_cluster_ratio': metrics["largest_cluster_ratio"],
     }
     
     print("\nExperiment Result:")
@@ -396,10 +471,12 @@ def run_single_experiment(df, params, k=50):
     print("  Pipeline Time: %.2fs" % pipeline_time)
     print("  K-Means Time: %.2fs" % kmeans_time)
     print("  Total Time: %.2fs" % total_time)
-    print("  Quality Score: %.4f" % quality_score)
-    print("  Avg Cluster Size: %.2f" % avg_size)
-    print("  Std Cluster Size: %.2f" % std_size)
-    
+    print("  Silhouette: %.6f" % metrics["silhouette"])
+    print("  WSSSE: %.6f" % metrics["wssse"])
+    print("  Avg Cluster Size: %.2f" % metrics["avg_cluster_size"])
+    print("  Std Cluster Size: %.2f" % metrics["std_cluster_size"])
+
+    processed_df.unpersist()
     return result, predictions
 
 
@@ -428,33 +505,22 @@ def save_comparison_results(results, output_path):
     print("Saving Comparison Results")
     print("=" * 60)
     
-    # 先保存到本地临时文件
-    import tempfile
-    temp_file = tempfile.mktemp(suffix='.json')
-    
-    with open(temp_file, 'w') as f:
-        json.dump(results, f, indent=2)
-    
-    print("Comparison results saved locally: %s" % temp_file)
-    
-    # 如果是HDFS路径，上传到HDFS
+    result_lines = [json.dumps(result, sort_keys=True) for result in results]
+
     if output_path.startswith('hdfs://'):
-        # 提取HDFS路径
-        hdfs_path = output_path + "/comparison_results.json"
-        
-        # 使用hdfs命令上传
-        import subprocess
-        try:
-            subprocess.call(['hdfs', 'dfs', '-put', temp_file, hdfs_path])
-            print("Comparison results uploaded to HDFS: %s" % hdfs_path)
-        except Exception as e:
-            print("Warning: Failed to upload to HDFS: %s" % str(e))
-            print("Results saved locally at: %s" % temp_file)
+        hdfs_path = output_path + "/comparison_results"
+        spark = SparkSession.builder.getOrCreate()
+        spark.createDataFrame(
+            [(line,) for line in result_lines], ["value"]
+        ).coalesce(1).write.mode("overwrite").text(hdfs_path)
+        print("Comparison results saved to HDFS: %s" % hdfs_path)
     else:
-        # 本地路径，直接移动文件
-        import shutil
+        import os
+        if not os.path.isdir(output_path):
+            os.makedirs(output_path)
         final_file = output_path + "/comparison_results.json"
-        shutil.move(temp_file, final_file)
+        with open(final_file, "w") as handle:
+            handle.write("\n".join(result_lines))
         print("Comparison results saved: %s" % final_file)
     
     # 打印结果表格
@@ -462,7 +528,7 @@ def save_comparison_results(results, output_path):
     print("Comparison Results Summary")
     print("=" * 80)
     print("%-15s %-10s %-10s %-12s %-12s %-12s %-12s" % (
-        "vocabSize", "minDF", "maxDF", "vocab", "time", "quality", "avg_size"
+        "vocabSize", "minDF", "maxDF", "vocab", "time", "silhouette", "avg_size"
     ))
     print("-" * 80)
     
@@ -474,19 +540,19 @@ def save_comparison_results(results, output_path):
             params['max_df'],
             result['vocab_size'],
             result['total_time'],
-            result['quality_score'],
+            result['silhouette'],
             result['avg_cluster_size'],
         ))
     
     # 找出最佳参数组合
-    best_result = max(results, key=lambda x: x['quality_score'])
+    best_result = max(results, key=lambda x: x['silhouette'])
     print("\n" + "=" * 80)
     print("Best Parameter Combination:")
     print("=" * 80)
     print("vocabSize: %d" % best_result['params']['max_features'])
     print("minDF: %d" % best_result['params']['min_df'])
     print("maxDF: %.2f" % best_result['params']['max_df'])
-    print("Quality Score: %.4f" % best_result['quality_score'])
+    print("Silhouette Score: %.6f" % best_result['silhouette'])
     print("Total Time: %.2fs" % best_result['total_time'])
 
 
@@ -522,6 +588,8 @@ def main():
         # 加载和预处理数据
         df = load_data(spark, args.input, args.sample_ratio)
         df = preprocess_data_optimized(df)
+        df = df.cache()
+        df.count()
         
         if args.grid_search:
             # 参数网格搜索
@@ -533,11 +601,20 @@ def main():
             print("Total parameter combinations: %d" % len(param_grid))
             
             all_results = []
+            max_df_terms = {}
+            for max_df in sorted(set(item["max_df"] for item in param_grid)):
+                max_df_terms[max_df] = find_high_frequency_terms(df, max_df)
             
             for i, params in enumerate(param_grid):
                 print("\n[%d/%d] Running experiment..." % (i+1, len(param_grid)))
                 
-                result, predictions = run_single_experiment(df, params, args.k)
+                result, predictions = run_single_experiment(
+                    df,
+                    params,
+                    args.k,
+                    args.max_iter,
+                    max_df_terms[params["max_df"]],
+                )
                 all_results.append(result)
                 
                 # 保存中间结果
@@ -548,7 +625,7 @@ def main():
             save_comparison_results(all_results, args.output)
             
             # 使用最佳参数保存最终聚类结果
-            best_result = max(all_results, key=lambda x: x['quality_score'])
+            best_result = max(all_results, key=lambda x: x['silhouette'])
             best_params = best_result['params']
             
             print("\n" + "=" * 60)
@@ -558,10 +635,13 @@ def main():
             pipeline = build_optimized_pipeline(
                 best_params['max_features'],
                 best_params['min_df'],
-                best_params['max_df']
+                best_params['max_df'],
+                max_df_terms[best_params["max_df"]],
             )
             pipeline_model, processed_df, _, _ = fit_and_transform(pipeline, df)
-            kmeans_model, predictions, _ = run_kmeans(processed_df, args.k)
+            kmeans_model, predictions, _ = run_kmeans(
+                processed_df, args.k, args.max_iter
+            )
             
             save_results(predictions, args.output + "/best_clustering")
             
@@ -580,7 +660,9 @@ def main():
                 'max_df': args.max_df,
             }
             
-            result, predictions = run_single_experiment(df, params, args.k)
+            result, predictions = run_single_experiment(
+                df, params, args.k, args.max_iter
+            )
             
             save_results(predictions, args.output)
             

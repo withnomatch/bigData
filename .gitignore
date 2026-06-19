@@ -4,3 +4,6 @@ PJ/__pycache__/
 PJ/local_test_output/
 PJ/f_param_optimization_output/
 *.pyc
+.ssh_client_tmp/
+.tmp_remote.py
+outputs/

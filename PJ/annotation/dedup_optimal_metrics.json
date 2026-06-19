@@ -1,0 +1,476 @@
+{
+  "methodology": {
+    "sample_count": 300,
+    "unique_question_count": 542,
+    "validation_count": 150,
+    "test_count": 150,
+    "split": "stratified 50/50 by three-class reviewer label, seed=42",
+    "selection_rule": "configuration and threshold selected on validation F1",
+    "final_judgement": "held-out test metrics"
+  },
+  "selected_by_validation": {
+    "name": "best_tfidf_answers_k60",
+    "max_features": 3000,
+    "min_df": 3,
+    "max_df": 0.9,
+    "k": 60,
+    "max_iter": 20,
+    "include_answers": true,
+    "algorithm": "spherical_kmeans",
+    "threshold": 0.22,
+    "clustering_metrics": {
+      "cosine_silhouette": 0.020892505090749316,
+      "wssse": 573.2573954218367,
+      "wssse_per_point": 1.0576704712580012,
+      "cluster_count": 60,
+      "largest_cluster_size": 27,
+      "smallest_cluster_size": 2,
+      "largest_cluster_ratio": 0.04981549815498155,
+      "cluster_size_cv": 0.5909706708388761,
+      "normalized_cluster_entropy": 0.9613135807326805,
+      "singleton_clusters": 0
+    },
+    "validation": {
+      "sample_count": 150,
+      "tp": 23,
+      "fp": 20,
+      "fn": 27,
+      "tn": 80,
+      "precision": 0.5348837209302325,
+      "recall": 0.46,
+      "f1": 0.4946236559139785,
+      "average_precision": 0.5901180365244265,
+      "candidate_recall": 0.46,
+      "precision_at_k": {
+        "10": 0.8,
+        "20": 0.55,
+        "50": 0.5,
+        "100": 0.49
+      }
+    },
+    "test": {
+      "sample_count": 150,
+      "tp": 18,
+      "fp": 26,
+      "fn": 32,
+      "tn": 74,
+      "precision": 0.4090909090909091,
+      "recall": 0.36,
+      "f1": 0.3829787234042554,
+      "average_precision": 0.530957722064,
+      "candidate_recall": 0.4,
+      "precision_at_k": {
+        "10": 0.7,
+        "20": 0.5,
+        "50": 0.5,
+        "100": 0.5
+      }
+    },
+    "full_300": {
+      "sample_count": 300,
+      "tp": 41,
+      "fp": 46,
+      "fn": 59,
+      "tn": 154,
+      "precision": 0.47126436781609193,
+      "recall": 0.41,
+      "f1": 0.4385026737967915,
+      "average_precision": 0.5567036052404025,
+      "candidate_recall": 0.43,
+      "precision_at_k": {
+        "10": 0.8,
+        "20": 0.7,
+        "50": 0.56,
+        "100": 0.48
+      }
+    }
+  },
+  "recommended": {
+    "name": "baseline_k50",
+    "max_features": 5000,
+    "min_df": 2,
+    "max_df": 1.0,
+    "k": 50,
+    "max_iter": 30,
+    "include_answers": false,
+    "algorithm": "spherical_kmeans",
+    "threshold": 0.2,
+    "clustering_metrics": {
+      "cosine_silhouette": 0.019747564956762324,
+      "wssse": 618.1527119933481,
+      "wssse_per_point": 1.140503158659314,
+      "cluster_count": 50,
+      "largest_cluster_size": 25,
+      "smallest_cluster_size": 3,
+      "largest_cluster_ratio": 0.046125461254612546,
+      "cluster_size_cv": 0.5930981054362565,
+      "normalized_cluster_entropy": 0.958296153059309,
+      "singleton_clusters": 0
+    },
+    "validation": {
+      "sample_count": 150,
+      "tp": 22,
+      "fp": 32,
+      "fn": 28,
+      "tn": 68,
+      "precision": 0.4074074074074074,
+      "recall": 0.44,
+      "f1": 0.4230769230769231,
+      "average_precision": 0.6037054087106504,
+      "candidate_recall": 0.46,
+      "precision_at_k": {
+        "10": 0.8,
+        "20": 0.7,
+        "50": 0.5,
+        "100": 0.49
+      }
+    },
+    "test": {
+      "sample_count": 150,
+      "tp": 21,
+      "fp": 27,
+      "fn": 29,
+      "tn": 73,
+      "precision": 0.4375,
+      "recall": 0.42,
+      "f1": 0.4285714285714286,
+      "average_precision": 0.591048736945126,
+      "candidate_recall": 0.42,
+      "precision_at_k": {
+        "10": 0.8,
+        "20": 0.7,
+        "50": 0.46,
+        "100": 0.5
+      }
+    },
+    "full_300": {
+      "sample_count": 300,
+      "tp": 43,
+      "fp": 59,
+      "fn": 57,
+      "tn": 141,
+      "precision": 0.4215686274509804,
+      "recall": 0.43,
+      "f1": 0.42574257425742573,
+      "average_precision": 0.5943518465322003,
+      "candidate_recall": 0.44,
+      "precision_at_k": {
+        "10": 1.0,
+        "20": 0.8,
+        "50": 0.6,
+        "100": 0.5
+      }
+    }
+  },
+  "recommendation_note": "The validation-selected answers route did not generalize. The simpler baseline route had the best held-out F1 and is the safer practical recommendation; confirm on a new labeled set.",
+  "all_results": [
+    {
+      "name": "baseline_k50",
+      "max_features": 5000,
+      "min_df": 2,
+      "max_df": 1.0,
+      "k": 50,
+      "max_iter": 30,
+      "include_answers": false,
+      "algorithm": "spherical_kmeans",
+      "threshold": 0.2,
+      "clustering_metrics": {
+        "cosine_silhouette": 0.019747564956762324,
+        "wssse": 618.1527119933481,
+        "wssse_per_point": 1.140503158659314,
+        "cluster_count": 50,
+        "largest_cluster_size": 25,
+        "smallest_cluster_size": 3,
+        "largest_cluster_ratio": 0.046125461254612546,
+        "cluster_size_cv": 0.5930981054362565,
+        "normalized_cluster_entropy": 0.958296153059309,
+        "singleton_clusters": 0
+      },
+      "validation": {
+        "sample_count": 150,
+        "tp": 22,
+        "fp": 32,
+        "fn": 28,
+        "tn": 68,
+        "precision": 0.4074074074074074,
+        "recall": 0.44,
+        "f1": 0.4230769230769231,
+        "average_precision": 0.6037054087106504,
+        "candidate_recall": 0.46,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.7,
+          "50": 0.5,
+          "100": 0.49
+        }
+      },
+      "test": {
+        "sample_count": 150,
+        "tp": 21,
+        "fp": 27,
+        "fn": 29,
+        "tn": 73,
+        "precision": 0.4375,
+        "recall": 0.42,
+        "f1": 0.4285714285714286,
+        "average_precision": 0.591048736945126,
+        "candidate_recall": 0.42,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.7,
+          "50": 0.46,
+          "100": 0.5
+        }
+      },
+      "full_300": {
+        "sample_count": 300,
+        "tp": 43,
+        "fp": 59,
+        "fn": 57,
+        "tn": 141,
+        "precision": 0.4215686274509804,
+        "recall": 0.43,
+        "f1": 0.42574257425742573,
+        "average_precision": 0.5943518465322003,
+        "candidate_recall": 0.44,
+        "precision_at_k": {
+          "10": 1.0,
+          "20": 0.8,
+          "50": 0.6,
+          "100": 0.5
+        }
+      }
+    },
+    {
+      "name": "best_tfidf_k60",
+      "max_features": 3000,
+      "min_df": 3,
+      "max_df": 0.9,
+      "k": 60,
+      "max_iter": 20,
+      "include_answers": false,
+      "algorithm": "spherical_kmeans",
+      "threshold": 0.2,
+      "clustering_metrics": {
+        "cosine_silhouette": 0.026983500602570834,
+        "wssse": 571.7760852808518,
+        "wssse_per_point": 1.0549374267174387,
+        "cluster_count": 60,
+        "largest_cluster_size": 23,
+        "smallest_cluster_size": 2,
+        "largest_cluster_ratio": 0.042435424354243544,
+        "cluster_size_cv": 0.4938173872879064,
+        "normalized_cluster_entropy": 0.97110386528213,
+        "singleton_clusters": 0
+      },
+      "validation": {
+        "sample_count": 150,
+        "tp": 21,
+        "fp": 28,
+        "fn": 29,
+        "tn": 72,
+        "precision": 0.42857142857142855,
+        "recall": 0.42,
+        "f1": 0.42424242424242425,
+        "average_precision": 0.5857845616533417,
+        "candidate_recall": 0.42,
+        "precision_at_k": {
+          "10": 0.7,
+          "20": 0.6,
+          "50": 0.48,
+          "100": 0.48
+        }
+      },
+      "test": {
+        "sample_count": 150,
+        "tp": 20,
+        "fp": 31,
+        "fn": 30,
+        "tn": 69,
+        "precision": 0.39215686274509803,
+        "recall": 0.4,
+        "f1": 0.396039603960396,
+        "average_precision": 0.5489004692500921,
+        "candidate_recall": 0.4,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.5,
+          "50": 0.4,
+          "100": 0.5
+        }
+      },
+      "full_300": {
+        "sample_count": 300,
+        "tp": 41,
+        "fp": 59,
+        "fn": 59,
+        "tn": 141,
+        "precision": 0.41,
+        "recall": 0.41,
+        "f1": 0.41,
+        "average_precision": 0.5611401650022502,
+        "candidate_recall": 0.41,
+        "precision_at_k": {
+          "10": 1.0,
+          "20": 0.75,
+          "50": 0.5,
+          "100": 0.45
+        }
+      }
+    },
+    {
+      "name": "best_tfidf_answers_k60",
+      "max_features": 3000,
+      "min_df": 3,
+      "max_df": 0.9,
+      "k": 60,
+      "max_iter": 20,
+      "include_answers": true,
+      "algorithm": "spherical_kmeans",
+      "threshold": 0.22,
+      "clustering_metrics": {
+        "cosine_silhouette": 0.020892505090749316,
+        "wssse": 573.2573954218367,
+        "wssse_per_point": 1.0576704712580012,
+        "cluster_count": 60,
+        "largest_cluster_size": 27,
+        "smallest_cluster_size": 2,
+        "largest_cluster_ratio": 0.04981549815498155,
+        "cluster_size_cv": 0.5909706708388761,
+        "normalized_cluster_entropy": 0.9613135807326805,
+        "singleton_clusters": 0
+      },
+      "validation": {
+        "sample_count": 150,
+        "tp": 23,
+        "fp": 20,
+        "fn": 27,
+        "tn": 80,
+        "precision": 0.5348837209302325,
+        "recall": 0.46,
+        "f1": 0.4946236559139785,
+        "average_precision": 0.5901180365244265,
+        "candidate_recall": 0.46,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.55,
+          "50": 0.5,
+          "100": 0.49
+        }
+      },
+      "test": {
+        "sample_count": 150,
+        "tp": 18,
+        "fp": 26,
+        "fn": 32,
+        "tn": 74,
+        "precision": 0.4090909090909091,
+        "recall": 0.36,
+        "f1": 0.3829787234042554,
+        "average_precision": 0.530957722064,
+        "candidate_recall": 0.4,
+        "precision_at_k": {
+          "10": 0.7,
+          "20": 0.5,
+          "50": 0.5,
+          "100": 0.5
+        }
+      },
+      "full_300": {
+        "sample_count": 300,
+        "tp": 41,
+        "fp": 46,
+        "fn": 59,
+        "tn": 154,
+        "precision": 0.47126436781609193,
+        "recall": 0.41,
+        "f1": 0.4385026737967915,
+        "average_precision": 0.5567036052404025,
+        "candidate_recall": 0.43,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.7,
+          "50": 0.56,
+          "100": 0.48
+        }
+      }
+    },
+    {
+      "name": "best_tfidf_answers_bisect_k60",
+      "max_features": 3000,
+      "min_df": 3,
+      "max_df": 0.9,
+      "k": 60,
+      "max_iter": 20,
+      "include_answers": true,
+      "algorithm": "bisecting_spherical_kmeans",
+      "threshold": 0.2,
+      "clustering_metrics": {
+        "cosine_silhouette": -0.01763568861254151,
+        "wssse": 594.8511859777522,
+        "wssse_per_point": 1.0975114132430852,
+        "cluster_count": 60,
+        "largest_cluster_size": 16,
+        "smallest_cluster_size": 1,
+        "largest_cluster_ratio": 0.02952029520295203,
+        "cluster_size_cv": 0.43954829875090906,
+        "normalized_cluster_entropy": 0.9730570317431545,
+        "singleton_clusters": 1
+      },
+      "validation": {
+        "sample_count": 150,
+        "tp": 11,
+        "fp": 10,
+        "fn": 39,
+        "tn": 90,
+        "precision": 0.5238095238095238,
+        "recall": 0.22,
+        "f1": 0.3098591549295775,
+        "average_precision": 0.5901180365244265,
+        "candidate_recall": 0.22,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.55,
+          "50": 0.5,
+          "100": 0.49
+        }
+      },
+      "test": {
+        "sample_count": 150,
+        "tp": 11,
+        "fp": 15,
+        "fn": 39,
+        "tn": 85,
+        "precision": 0.4230769230769231,
+        "recall": 0.22,
+        "f1": 0.28947368421052627,
+        "average_precision": 0.530957722064,
+        "candidate_recall": 0.26,
+        "precision_at_k": {
+          "10": 0.7,
+          "20": 0.5,
+          "50": 0.5,
+          "100": 0.5
+        }
+      },
+      "full_300": {
+        "sample_count": 300,
+        "tp": 22,
+        "fp": 25,
+        "fn": 78,
+        "tn": 175,
+        "precision": 0.46808510638297873,
+        "recall": 0.22,
+        "f1": 0.29931972789115646,
+        "average_precision": 0.5567036052404025,
+        "candidate_recall": 0.24,
+        "precision_at_k": {
+          "10": 0.8,
+          "20": 0.7,
+          "50": 0.56,
+          "100": 0.48
+        }
+      }
+    }
+  ]
+}
