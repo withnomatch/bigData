@@ -34,7 +34,9 @@ def main():
         annotation_question_count = 0
 
         if args.annotation_pairs:
-            pairs = spark.read.csv(args.annotation_pairs, header=True)
+            pairs = spark.read.option("multiLine", True).option(
+                "escape", '"'
+            ).csv(args.annotation_pairs, header=True)
             pair_ids = pairs.select(col("question_id_1").alias("_sample_qid")).union(
                 pairs.select(col("question_id_2").alias("_sample_qid"))
             ).distinct()
