@@ -7,6 +7,8 @@ MASTER_NODE="10.176.62.230"
 SPARK_MASTER="spark://${MASTER_NODE}:7077"
 
 HDFS_INPUT="/user/root/data/oracle_database_questions_jsonlines.json"
+HDFS_PAIRS="/user/root/data/dedup_pairs_300_reviewed.csv"
+HDFS_FIXED_SAMPLE="/user/root/data/fixed_eval_sample_10pct_plus_300"
 HDFS_OUTPUT="/user/root/output/complete_clustering"
 
 K=50
@@ -27,6 +29,8 @@ echo "StackOverflow Oracle Question Deduplication"
 echo "============================================================"
 echo "Spark master: ${SPARK_MASTER}"
 echo "Input: hdfs://${MASTER_NODE}:9000${HDFS_INPUT}"
+echo "Annotation pairs: hdfs://${MASTER_NODE}:9000${HDFS_PAIRS}"
+echo "Fixed eval sample: hdfs://${MASTER_NODE}:9000${HDFS_FIXED_SAMPLE}"
 echo "Output: hdfs://${MASTER_NODE}:9000${HDFS_OUTPUT}"
 echo "K: ${K}"
 echo "Sample ratio: ${SAMPLE_RATIO}"
@@ -39,6 +43,29 @@ if [ $? -ne 0 ]; then
     echo "Upload oracle_database_questions_jsonlines.json to HDFS first."
     exit 1
 fi
+
+hdfs dfs -test -e ${HDFS_PAIRS}
+if [ $? -ne 0 ]; then
+    echo "ERROR: annotation pairs do not exist: ${HDFS_PAIRS}"
+    echo "Upload annotation/dedup_pairs_300_reviewed.csv to HDFS first."
+    exit 1
+fi
+
+hdfs dfs -rm -r -f ${HDFS_FIXED_SAMPLE}
+spark-submit \
+    --master ${SPARK_MASTER} \
+    --driver-memory ${DRIVER_MEMORY} \
+    --executor-memory ${EXECUTOR_MEMORY} \
+    --executor-cores ${EXECUTOR_CORES} \
+    --num-executors ${NUM_EXECUTORS} \
+    --conf spark.sql.shuffle.partitions=24 \
+    --conf spark.default.parallelism=24 \
+    create_fixed_sample.py \
+    --input hdfs://node5:9000${HDFS_INPUT} \
+    --annotation-pairs hdfs://node5:9000${HDFS_PAIRS} \
+    --output hdfs://node5:9000${HDFS_FIXED_SAMPLE} \
+    --ratio ${SAMPLE_RATIO} \
+    --seed 42
 
 hdfs dfs -test -e ${HDFS_OUTPUT}
 if [ $? -eq 0 ]; then
@@ -54,13 +81,13 @@ spark-submit \
     --conf spark.sql.shuffle.partitions=24 \
     --conf spark.default.parallelism=24 \
     complete_clustering.py \
-    --input hdfs://node5:9000${HDFS_INPUT} \
+    --input hdfs://node5:9000${HDFS_FIXED_SAMPLE} \
     --output hdfs://node5:9000${HDFS_OUTPUT} \
     --k ${K} \
     --max-features ${MAX_FEATURES} \
     --min-df ${MIN_DF} \
     --max-iter ${MAX_ITER} \
-    --sample-ratio ${SAMPLE_RATIO} \
+    --sample-ratio 1.0 \
     --dedup-top-per-cluster ${DEDUP_TOP_PER_CLUSTER} \
     --similarity-threshold ${SIMILARITY_THRESHOLD}
 

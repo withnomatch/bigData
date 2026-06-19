@@ -48,34 +48,75 @@ def tokens(value):
     ]
 
 
-def reservoir_sample(path, sample_size, seed):
+def normalize_record(row):
+    return {
+        "question_id": str(row.get("question_id", "")),
+        "title": clean(row.get("title") or ""),
+        "body": clean(row.get("body") or ""),
+        "tags": [str(tag) for tag in (row.get("tags") or [])],
+        "answers": " ".join(
+            clean(answer.get("body") or "")
+            for answer in sorted(
+                row.get("answers") or [],
+                key=lambda answer: int(answer.get("score") or 0),
+                reverse=True,
+            )[:2]
+        ),
+    }
+
+
+def annotation_question_ids(pair_rows):
+    return {
+        row[key] for row in pair_rows
+        for key in ("question_id_1", "question_id_2")
+    }
+
+
+def fixed_evaluation_sample(path, sample_size, seed, forced_ids):
     rng = random.Random(seed)
     sample = []
+    sample_ids = set()
+    forced_records = {}
     total = 0
     with path.open(encoding="utf-8") as handle:
         for total, line in enumerate(handle, 1):
             row = json.loads(line)
-            item = {
-                "question_id": str(row.get("question_id", "")),
-                "title": clean(row.get("title") or ""),
-                "body": clean(row.get("body") or ""),
-                "tags": [str(tag) for tag in (row.get("tags") or [])],
-                "answers": " ".join(
-                    clean(answer.get("body") or "")
-                    for answer in sorted(
-                        row.get("answers") or [],
-                        key=lambda answer: int(answer.get("score") or 0),
-                        reverse=True,
-                    )[:2]
-                ),
-            }
+            item = normalize_record(row)
+            question_id = item["question_id"]
+            if question_id in forced_ids:
+                forced_records[question_id] = item
             if len(sample) < sample_size:
                 sample.append(item)
+                sample_ids.add(question_id)
             else:
                 index = rng.randrange(total)
                 if index < sample_size:
+                    sample_ids.discard(sample[index]["question_id"])
                     sample[index] = item
-    return sample, total
+                    sample_ids.add(question_id)
+    missing_forced = sorted(forced_ids - set(forced_records))
+    if missing_forced:
+        raise RuntimeError(
+            "Missing annotation questions in source data: %s"
+            % missing_forced[:10]
+        )
+    added_forced = 0
+    for question_id in sorted(forced_ids):
+        if question_id not in sample_ids:
+            sample.append(forced_records[question_id])
+            sample_ids.add(question_id)
+            added_forced += 1
+    return sample, {
+        "total_records": total,
+        "random_sample_records": min(sample_size, total),
+        "annotation_question_count": len(forced_ids),
+        "annotation_questions_added": added_forced,
+        "final_sample_records": len(sample),
+        "sample_method": (
+            "deterministic reservoir sample with seed 42 plus all "
+            "questions referenced by annotation/dedup_pairs_300_reviewed.csv"
+        ),
+    }
 
 
 def build_documents(records, mode):
@@ -299,38 +340,6 @@ def load_pair_rows():
         return list(csv.DictReader(handle))
 
 
-def load_pair_questions(pair_rows):
-    ids = {
-        row[key] for row in pair_rows
-        for key in ("question_id_1", "question_id_2")
-    }
-    found = {}
-    with DATA_FILE.open(encoding="utf-8") as handle:
-        for line in handle:
-            row = json.loads(line)
-            question_id = str(row.get("question_id", ""))
-            if question_id not in ids:
-                continue
-            found[question_id] = {
-                "question_id": question_id,
-                "title": clean(row.get("title") or ""),
-                "body": clean(row.get("body") or ""),
-                "tags": [str(tag) for tag in (row.get("tags") or [])],
-                "answers": " ".join(
-                    clean(answer.get("body") or "")
-                    for answer in sorted(
-                        row.get("answers") or [],
-                        key=lambda answer: int(answer.get("score") or 0),
-                        reverse=True,
-                    )[:2]
-                ),
-            }
-            if len(found) == len(ids):
-                break
-    ordered_ids = sorted(ids)
-    return [found[question_id] for question_id in ordered_ids], ordered_ids
-
-
 def stratified_pair_split(rows):
     groups = {}
     for index, row in enumerate(rows):
@@ -381,8 +390,8 @@ def dedup_metrics(pair_rows, matrix, labels, id_to_index, indexes, threshold):
     }
 
 
-def evaluate_dedup(config, best_k, pair_rows, pair_records, ordered_ids):
-    documents = build_documents(pair_records, config["mode"])
+def evaluate_dedup(config, best_k, pair_rows, records):
+    documents = build_documents(records, config["mode"])
     matrix, vocabulary_size = tfidf(
         documents, config["max_features"], config["min_df"], config["max_df"]
     )
@@ -391,8 +400,18 @@ def evaluate_dedup(config, best_k, pair_rows, pair_records, ordered_ids):
         matrix, k, config["algorithm"], SEED, config["max_iter"]
     )
     id_to_index = {
-        question_id: index for index, question_id in enumerate(ordered_ids)
+        row["question_id"]: index for index, row in enumerate(records)
     }
+    missing = sorted(
+        question_id
+        for question_id in annotation_question_ids(pair_rows)
+        if question_id not in id_to_index
+    )
+    if missing:
+        raise RuntimeError(
+            "Fixed sample does not contain annotation questions: %s"
+            % missing[:10]
+        )
     validation_indexes, test_indexes = stratified_pair_split(pair_rows)
     best_threshold, best_validation = None, None
     for integer in range(10, 76):
@@ -429,9 +448,22 @@ def evaluate_dedup(config, best_k, pair_rows, pair_records, ordered_ids):
 def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
     total_started = time.perf_counter()
-    print("Loading deterministic reservoir sample...")
-    records, total_records = reservoir_sample(DATA_FILE, SAMPLE_SIZE, SEED)
-    print("total_records=%d sample_records=%d" % (total_records, len(records)))
+    pair_rows = load_pair_rows()
+    print("Loading fixed evaluation sample...")
+    records, sample_info = fixed_evaluation_sample(
+        DATA_FILE, SAMPLE_SIZE, SEED, annotation_question_ids(pair_rows)
+    )
+    print(
+        "total_records=%d random_sample=%d annotation_questions=%d "
+        "annotation_added=%d final_sample=%d"
+        % (
+            sample_info["total_records"],
+            sample_info["random_sample_records"],
+            sample_info["annotation_question_count"],
+            sample_info["annotation_questions_added"],
+            sample_info["final_sample_records"],
+        )
+    )
 
     print("Building baseline TF-IDF...")
     documents = build_documents(records, "baseline")
@@ -527,12 +559,10 @@ def main():
         )
     write_csv(OUTPUT_DIR / "optimization_results.csv", optimization_rows)
 
-    pair_rows = load_pair_rows()
-    pair_records, ordered_ids = load_pair_questions(pair_rows)
     dedup_results = []
     for config in configs:
         result = evaluate_dedup(
-            config, best_k, pair_rows, pair_records, ordered_ids
+            config, best_k, pair_rows, records
         )
         result["name"] = config["name"]
         result["config"] = config
@@ -555,9 +585,12 @@ def main():
     )
     summary = {
         "methodology": {
-            "total_records": total_records,
+            "total_records": sample_info["total_records"],
             "sample_records": len(records),
-            "sample_method": "reservoir sample with seed 42",
+            "random_sample_records": sample_info["random_sample_records"],
+            "annotation_question_count": sample_info["annotation_question_count"],
+            "annotation_questions_added": sample_info["annotation_questions_added"],
+            "sample_method": sample_info["sample_method"],
             "k_search": "40-200 step 5, then +/-4 integer refinement",
             "k_selection": (
                 "highest approximate cosine silhouette subject to largest "
