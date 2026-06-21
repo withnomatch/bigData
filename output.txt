@@ -1,0 +1,402 @@
+[root@node5 ~]# spark-submit     --master spark://10.176.62.230:7077     --driver-memory 2g     --executor-memory 4g     --executor-cores 2     --num-executors 2     /root/d_word2vec_dedup_experiment.py     --input hdfs://node5:9000/user/root/data/fixed_eval_sample_10pct_plus_300     --output hdfs://node5:9000/user/root/output/d_word2vec_experiment     --pairs hdfs://node5:9000/user/root/data/dedup_pairs_300_reviewed.csv     --k 45     --experiments 1,2,3,4,5
+
+======================================================================
+D: Word2Vec / Semantic Feature Optimization Experiment
+======================================================================
+Input: hdfs://node5:9000/user/root/data/fixed_eval_sample_10pct_plus_300
+Output: hdfs://node5:9000/user/root/output/d_word2vec_experiment
+Pairs: hdfs://node5:9000/user/root/data/dedup_pairs_300_reviewed.csv
+K: 45
+TF-IDF: vocab=5000, min_df=5, max_df=0.9
+Word2Vec: vectorSize=100, minCount=5
+Experiments: 1,2,3,4,5
+======================================================================
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+26/06/20 21:43:41 INFO SparkContext: Running Spark version 2.0.0
+26/06/20 21:43:41 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/06/20 21:43:41 INFO SecurityManager: Changing view acls to: root
+26/06/20 21:43:41 INFO SecurityManager: Changing modify acls to: root
+26/06/20 21:43:41 INFO SecurityManager: Changing view acls groups to: 
+26/06/20 21:43:41 INFO SecurityManager: Changing modify acls groups to: 
+26/06/20 21:43:41 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+26/06/20 21:43:42 INFO Utils: Successfully started service 'sparkDriver' on port 48018.
+26/06/20 21:43:42 INFO SparkEnv: Registering MapOutputTracker
+26/06/20 21:43:42 INFO SparkEnv: Registering BlockManagerMaster
+26/06/20 21:43:42 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-4936e3a2-973b-4bf9-808e-54ad2d92a48d
+26/06/20 21:43:42 INFO MemoryStore: MemoryStore started with capacity 912.3 MB
+26/06/20 21:43:42 INFO SparkEnv: Registering OutputCommitCoordinator
+26/06/20 21:43:42 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+26/06/20 21:43:42 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://10.176.62.230:4040
+26/06/20 21:43:42 INFO Utils: Copying /root/d_word2vec_dedup_experiment.py to /tmp/spark-509d15c8-ccc0-40a4-acee-f998b2f8db74/userFiles-3c6fe599-3c24-4afc-87d5-c2004830e575/d_word2vec_dedup_experiment.py
+26/06/20 21:43:42 INFO SparkContext: Added file file:/root/d_word2vec_dedup_experiment.py at spark://10.176.62.230:48018/files/d_word2vec_dedup_experiment.py with timestamp 1782006222572
+26/06/20 21:43:42 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://10.176.62.230:7077...
+26/06/20 21:43:42 INFO TransportClientFactory: Successfully created connection to /10.176.62.230:7077 after 27 ms (0 ms spent in bootstraps)
+26/06/20 21:43:42 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20260620214342-0012
+26/06/20 21:43:42 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 59579.
+26/06/20 21:43:42 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260620214342-0012/0 on worker-20260620025018-10.176.62.232-56531 (10.176.62.232:56531) with 2 cores
+26/06/20 21:43:42 INFO NettyBlockTransferService: Server created on 10.176.62.230:59579
+26/06/20 21:43:42 INFO StandaloneSchedulerBackend: Granted executor ID app-20260620214342-0012/0 on hostPort 10.176.62.232:56531 with 2 cores, 4.0 GB RAM
+26/06/20 21:43:42 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20260620214342-0012/1 on worker-20260620111446-10.176.62.231-54717 (10.176.62.231:54717) with 2 cores
+26/06/20 21:43:42 INFO StandaloneSchedulerBackend: Granted executor ID app-20260620214342-0012/1 on hostPort 10.176.62.231:54717 with 2 cores, 4.0 GB RAM
+26/06/20 21:43:42 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 10.176.62.230, 59579)
+26/06/20 21:43:42 INFO BlockManagerMasterEndpoint: Registering block manager 10.176.62.230:59579 with 912.3 MB RAM, BlockManagerId(driver, 10.176.62.230, 59579)
+26/06/20 21:43:42 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 10.176.62.230, 59579)
+26/06/20 21:43:42 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260620214342-0012/1 is now RUNNING
+26/06/20 21:43:42 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20260620214342-0012/0 is now RUNNING
+26/06/20 21:43:43 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+26/06/20 21:43:43 INFO SharedState: Warehouse path is 'file:/root/spark-warehouse'.
+
+======================================================================
+[Step 1] Loading & Preprocessing Data
+  复用C1预处理: HTML清洗 → title+body合并 → 小写 → 去特殊字符 → 分词 → 停用词
+  W2V二次清理: 在C1的filtered_tokens上去纯数字/超长token/噪声token
+======================================================================
+Total records: 15813
+Valid records after preprocessing: 15813
+
+C1 Top 15 tokens (D1 TF-IDF uses these):
+  values: 294
+  insert: 293
+  afeid: 225
+  01: 222
+  1: 215
+  oracle: 182
+  id: 146
+  table: 145
+  afepartner: 130
+  name: 128
+  select: 127
+  partnerid: 126
+  16: 120
+  0: 118
+  data: 111
+
+W2V Top 15 tokens (D2-D5 Word2Vec uses these):
+  values: 294
+  insert: 293
+  afeid: 225
+  oracle: 182
+  id: 146
+  table: 145
+  afepartner: 130
+  name: 128
+  select: 127
+  partnerid: 126
+  data: 111
+  afe: 103
+  order: 99
+  sql: 92
+  gross: 88
+
+======================================================================
+[D1] TF-IDF Baseline (C1: title+body, vocab=5000, min_df=5, max_df=0.9)
+  C1报告结果: Candidate Recall=0.56, Precision=1.00, Recall=0.03, F1=0.0583
+======================================================================
+Vocabulary size: 5000
+26/06/20 21:45:03 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/20 21:48:50 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeSystemBLAS
+26/06/20 21:48:50 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeRefBLAS
+26/06/20 21:56:26 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+D1 complete, time: 717.13s
+
+----------------------------------------
+Generating duplicate candidates (threshold=0.55, top=80)
+----------------------------------------
+Generated 653 duplicate candidate pairs
+
+======================================================================
+[Evaluation] 300-pair Annotation Evaluation
+======================================================================
+Downloading pairs CSV from HDFS to local: /tmp/tmpO6DF3_.csv
+Columns: ['same_experiment_cluster', 'review_notes', 'tags_2', 'label_source', 'body_excerpt_1', 'predicted_label', 'body_excerpt_2', 'review_status', '\xef\xbb\xbfpair_id', 'experiment_cluster_2', 'experiment_cluster_1', 'reviewer_name', 'predicted_duplicate', 'tags_1', 'question_id_2', 'reviewer_label', 'cosine_similarity', 'title_1', 'title_2', 'question_id_1']
+Using columns: qid1=question_id_1, qid2=question_id_2, label=reviewer_label
+Label distribution:
+  '\xe4\xb8\x8d\xe7\x9b\xb8\xe5\x85\xb3' -> 0: 100
+  '\xe7\x9b\xb8\xe5\x85\xb3\xe4\xbd\x86\xe4\xb8\x8d\xe9\x87\x8d\xe5\xa4\x8d' -> 0: 100
+  '\xe9\x87\x8d\xe5\xa4\x8d' -> 1: 100
+
+Evaluation Results:
+  Pair Count: 300
+  Missing Assignment: 0
+  TP: 1, FP: 0, FN: 99, TN: 200
+  Precision: 1.0000
+  Recall: 0.0100
+  F1: 0.0198
+  Candidate Recall: 0.4700 (47 / 100)
+
+  False Negative Examples (top 5):
+    Q1120706-Q13190890: not_same_cluster
+    Q13679740-Q4244117: same_cluster_but_below_threshold
+    Q13171999-Q8579240: same_cluster_but_below_threshold
+    Q5091642-Q5092067: same_cluster_but_below_threshold
+    Q10221730-Q1799128: same_cluster_but_below_threshold
+
+Saving results for D1_TF-IDF to hdfs://node5:9000/user/root/output/d_word2vec_experiment/d1_tfidf
+Results saved.
+
+======================================================================
+[D2] Word2Vec Average Vector (vectorSize=100, minCount=5)
+======================================================================
+Word2Vec vocabulary size: 18474
+26/06/20 22:19:48 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/20 22:32:17 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+D2 complete, time: 1290.34s
+
+----------------------------------------
+Generating duplicate candidates (threshold=0.55, top=80)
+----------------------------------------
+Generated 83291 duplicate candidate pairs
+
+======================================================================
+[Evaluation] 300-pair Annotation Evaluation
+======================================================================
+Downloading pairs CSV from HDFS to local: /tmp/tmp9vWgwc.csv
+Columns: ['same_experiment_cluster', 'review_notes', 'tags_2', 'label_source', 'body_excerpt_1', 'predicted_label', 'body_excerpt_2', 'review_status', '\xef\xbb\xbfpair_id', 'experiment_cluster_2', 'experiment_cluster_1', 'reviewer_name', 'predicted_duplicate', 'tags_1', 'question_id_2', 'reviewer_label', 'cosine_similarity', 'title_1', 'title_2', 'question_id_1']
+Using columns: qid1=question_id_1, qid2=question_id_2, label=reviewer_label
+Label distribution:
+  '\xe4\xb8\x8d\xe7\x9b\xb8\xe5\x85\xb3' -> 0: 100
+  '\xe7\x9b\xb8\xe5\x85\xb3\xe4\xbd\x86\xe4\xb8\x8d\xe9\x87\x8d\xe5\xa4\x8d' -> 0: 100
+  '\xe9\x87\x8d\xe5\xa4\x8d' -> 1: 100
+
+Evaluation Results:
+  Pair Count: 300
+  Missing Assignment: 0
+  TP: 4, FP: 2, FN: 96, TN: 198
+  Precision: 0.6667
+  Recall: 0.0400
+  F1: 0.0755
+  Candidate Recall: 0.4000 (40 / 100)
+
+  False Negative Examples (top 5):
+    Q1120706-Q13190890: same_cluster_but_below_threshold
+    Q13679740-Q4244117: not_same_cluster
+    Q13171999-Q8579240: not_same_cluster
+    Q5091642-Q5092067: not_same_cluster
+    Q10221730-Q1799128: same_cluster_but_below_threshold
+
+  False Positive Examples (top 5):
+    Q44677013-Q53223221 (label=0)
+    Q7098748-Q27685240 (label=0)
+
+Saving results for D2_Word2Vec to hdfs://node5:9000/user/root/output/d_word2vec_experiment/d2_w2v
+26/06/20 22:46:31 WARN TaskSetManager: Stage 398 contains a task of very large size (466 KB). The maximum recommended task size is 100 KB.
+Results saved.
+
+======================================================================
+[D3] TF-IDF + Word2Vec Concatenated Feature
+======================================================================
+[3a] Training TF-IDF...
+[3b] Training Word2Vec...
+[3c] Concatenating TF-IDF + Word2Vec features...
+[3d] Training K-Means (K=45)...
+26/06/20 22:56:00 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/20 23:34:56 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+D3 complete, time: 2904.60s
+
+----------------------------------------
+Generating duplicate candidates (threshold=0.55, top=80)
+----------------------------------------
+26/06/20 23:34:56 WARN Utils: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.debug.maxToStringFields' in SparkEnv.conf.
+Generated 4441 duplicate candidate pairs
+
+======================================================================
+[Evaluation] 300-pair Annotation Evaluation
+======================================================================
+Downloading pairs CSV from HDFS to local: /tmp/tmp9ZroAk.csv
+Columns: ['same_experiment_cluster', 'review_notes', 'tags_2', 'label_source', 'body_excerpt_1', 'predicted_label', 'body_excerpt_2', 'review_status', '\xef\xbb\xbfpair_id', 'experiment_cluster_2', 'experiment_cluster_1', 'reviewer_name', 'predicted_duplicate', 'tags_1', 'question_id_2', 'reviewer_label', 'cosine_similarity', 'title_1', 'title_2', 'question_id_1']
+Using columns: qid1=question_id_1, qid2=question_id_2, label=reviewer_label
+Label distribution:
+  '\xe4\xb8\x8d\xe7\x9b\xb8\xe5\x85\xb3' -> 0: 100
+  '\xe7\x9b\xb8\xe5\x85\xb3\xe4\xbd\x86\xe4\xb8\x8d\xe9\x87\x8d\xe5\xa4\x8d' -> 0: 100
+  '\xe9\x87\x8d\xe5\xa4\x8d' -> 1: 100
+
+Evaluation Results:
+  Pair Count: 300
+  Missing Assignment: 0
+  TP: 2, FP: 2, FN: 98, TN: 198
+  Precision: 0.5000
+  Recall: 0.0200
+  F1: 0.0385
+  Candidate Recall: 0.3300 (33 / 100)
+
+  False Negative Examples (top 5):
+    Q1120706-Q13190890: same_cluster_but_below_threshold
+    Q13679740-Q4244117: not_same_cluster
+    Q12025748-Q12032776: same_cluster_but_below_threshold
+    Q13171999-Q8579240: not_same_cluster
+    Q5091642-Q5092067: same_cluster_but_below_threshold
+
+  False Positive Examples (top 5):
+    Q9975518-Q9977166 (label=0)
+    Q64934736-Q76800729 (label=0)
+
+Saving results for D3_TF-IDF+W2V_Concat to hdfs://node5:9000/user/root/output/d_word2vec_experiment/d3_tfidf_w2v_concat
+Results saved.
+
+======================================================================
+[D4] TF-IDF Weighted Word2Vec
+======================================================================
+[4a] Training Word2Vec model...
+Word2Vec vocabulary size: 18474
+[4b] Collecting word vectors for broadcast...
+26/06/21 00:28:55 WARN TaskSetManager: Stage 648 contains a task of very large size (5902 KB). The maximum recommended task size is 100 KB.
+Collected 18474 word vectors
+[4c] Training TF-IDF model...
+IDF mapping size: 5000
+[4d] Computing TF-IDF weighted Word2Vec features...
+[4e] Training K-Means (K=45)...
+26/06/21 00:30:13 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/21 01:04:18 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+D4 complete, time: 2659.34s
+
+----------------------------------------
+Generating duplicate candidates (threshold=0.55, top=80)
+----------------------------------------
+Generated 42165 duplicate candidate pairs
+
+======================================================================
+[Evaluation] 300-pair Annotation Evaluation
+======================================================================
+Downloading pairs CSV from HDFS to local: /tmp/tmp4XyJ4b.csv
+Columns: ['same_experiment_cluster', 'review_notes', 'tags_2', 'label_source', 'body_excerpt_1', 'predicted_label', 'body_excerpt_2', 'review_status', '\xef\xbb\xbfpair_id', 'experiment_cluster_2', 'experiment_cluster_1', 'reviewer_name', 'predicted_duplicate', 'tags_1', 'question_id_2', 'reviewer_label', 'cosine_similarity', 'title_1', 'title_2', 'question_id_1']
+Using columns: qid1=question_id_1, qid2=question_id_2, label=reviewer_label
+Label distribution:
+  '\xe4\xb8\x8d\xe7\x9b\xb8\xe5\x85\xb3' -> 0: 100
+  '\xe7\x9b\xb8\xe5\x85\xb3\xe4\xbd\x86\xe4\xb8\x8d\xe9\x87\x8d\xe5\xa4\x8d' -> 0: 100
+  '\xe9\x87\x8d\xe5\xa4\x8d' -> 1: 100
+
+Evaluation Results:
+  Pair Count: 300
+  Missing Assignment: 0
+  TP: 2, FP: 3, FN: 98, TN: 197
+  Precision: 0.4000
+  Recall: 0.0200
+  F1: 0.0381
+  Candidate Recall: 0.3600 (36 / 100)
+
+  False Negative Examples (top 5):
+    Q1120706-Q13190890: not_same_cluster
+    Q13679740-Q4244117: not_same_cluster
+    Q12025748-Q12032776: same_cluster_but_below_threshold
+    Q13171999-Q8579240: same_cluster_but_below_threshold
+    Q5091642-Q5092067: same_cluster_but_below_threshold
+
+  False Positive Examples (top 5):
+    Q41771967-Q46244535 (label=0)
+    Q2019230-Q40715825 (label=0)
+    Q22955263-Q47308853 (label=0)
+
+Saving results for D4_TF-IDF_Weighted_W2V to hdfs://node5:9000/user/root/output/d_word2vec_experiment/d4_tfidf_weighted_w2v
+26/06/21 01:42:45 WARN TaskSetManager: Stage 835 contains a task of very large size (248 KB). The maximum recommended task size is 100 KB.
+Results saved.
+
+======================================================================
+[D5] Title-Body Weighted Fusion (title_w=2.0, body_w=1.0)
+======================================================================
+[5a] Training shared Word2Vec model on full text...
+Shared Word2Vec vocabulary size: 18474
+[5b] Collecting word vectors for broadcast...
+26/06/21 01:51:51 WARN TaskSetManager: Stage 870 contains a task of very large size (5902 KB). The maximum recommended task size is 100 KB.
+Collected 18474 word vectors
+[5c] Computing title-body weighted fusion vectors...
+      title_weight=2.0, body_weight=1.0
+[5d] Training K-Means (K=45)...
+26/06/21 01:52:36 WARN KMeans: The input data is not directly cached, which may hurt performance if its parent RDDs are also uncached.
+26/06/21 02:25:27 WARN KMeans: The input data was not directly cached, which may hurt performance if its parent RDDs are also uncached.
+D5 complete, time: 2561.29s
+
+----------------------------------------
+Generating duplicate candidates (threshold=0.55, top=80)
+----------------------------------------
+Generated 86577 duplicate candidate pairs
+
+======================================================================
+[Evaluation] 300-pair Annotation Evaluation
+======================================================================
+Downloading pairs CSV from HDFS to local: /tmp/tmpSFg7wu.csv
+Columns: ['same_experiment_cluster', 'review_notes', 'tags_2', 'label_source', 'body_excerpt_1', 'predicted_label', 'body_excerpt_2', 'review_status', '\xef\xbb\xbfpair_id', 'experiment_cluster_2', 'experiment_cluster_1', 'reviewer_name', 'predicted_duplicate', 'tags_1', 'question_id_2', 'reviewer_label', 'cosine_similarity', 'title_1', 'title_2', 'question_id_1']
+Using columns: qid1=question_id_1, qid2=question_id_2, label=reviewer_label
+Label distribution:
+  '\xe4\xb8\x8d\xe7\x9b\xb8\xe5\x85\xb3' -> 0: 100
+  '\xe7\x9b\xb8\xe5\x85\xb3\xe4\xbd\x86\xe4\xb8\x8d\xe9\x87\x8d\xe5\xa4\x8d' -> 0: 100
+  '\xe9\x87\x8d\xe5\xa4\x8d' -> 1: 100
+
+Evaluation Results:
+  Pair Count: 300
+  Missing Assignment: 0
+  TP: 0, FP: 5, FN: 100, TN: 195
+  Precision: 0.0000
+  Recall: 0.0000
+  F1: 0.0000
+  Candidate Recall: 0.3700 (37 / 100)
+
+  False Negative Examples (top 5):
+    Q1120706-Q13190890: not_same_cluster
+    Q13679740-Q4244117: same_cluster_but_below_threshold
+    Q12025748-Q12032776: same_cluster_but_below_threshold
+    Q13171999-Q8579240: not_same_cluster
+    Q5091642-Q5092067: same_cluster_but_below_threshold
+
+  False Positive Examples (top 5):
+    Q64934736-Q76800729 (label=0)
+    Q22354101-Q68210234 (label=0)
+    Q5628961-Q20547503 (label=0)
+    Q16458527-Q35554017 (label=0)
+    Q2019230-Q40715825 (label=0)
+
+Saving results for D5_Title_Body_Fusion to hdfs://node5:9000/user/root/output/d_word2vec_experiment/d5_title_body_fusion
+26/06/21 03:01:16 WARN TaskSetManager: Stage 1049 contains a task of very large size (494 KB). The maximum recommended task size is 100 KB.
+Results saved.
+
+======================================================================
+D Experiment Summary
+======================================================================
+
+| 方案 | 语义特征方法 | Candidate Recall | Precision | Recall | F1 | 运行时间 |
+| -- | ------ | ---------------: | --------: | -----: | -: | ---: |
+| D1_TF-IDF | None (TF-IDF baseline) | 0.4700 | 1.0000 | 0.0100 | 0.0198 | 717.1s |
+| D2_Word2Vec | Word2Vec average | 0.4000 | 0.6667 | 0.0400 | 0.0755 | 1290.3s |
+| D3_TF-IDF+W2V_Concat | TF-IDF + W2V concatenation | 0.3300 | 0.5000 | 0.0200 | 0.0385 | 2904.6s |
+| D4_TF-IDF_Weighted_W2V | TF-IDF weighted W2V | 0.3600 | 0.4000 | 0.0200 | 0.0381 | 2659.3s |
+| D5_Title_Body_Fusion | Title(2.0) + Body(1.0) fusion | 0.3700 | 0.0000 | 0.0000 | 0.0000 | 2561.3s |
+
+| 方案 | 最大簇占比 | 簇大小CV | 最大簇 | 最小簇 | 平均簇 |
+| -- | ------: | ------: | ------: | ------: | ------: |
+| D1_TF-IDF | 32.48% | 2.1674 | 5136 | 2 | 351.4 |
+| D2_Word2Vec | 5.88% | 0.5515 | 930 | 1 | 351.4 |
+| D3_TF-IDF+W2V_Concat | 6.06% | 0.6388 | 958 | 12 | 351.4 |
+| D4_TF-IDF_Weighted_W2V | 4.62% | 0.4548 | 731 | 48 | 351.4 |
+| D5_Title_Body_Fusion | 4.29% | 0.4618 | 678 | 1 | 351.4 |
+
+----------------------------------------------------------------------
+False Negative / False Positive Analysis
+----------------------------------------------------------------------
+
+D1_TF-IDF:
+  FN (missed duplicates): 99
+  FP (false alarms): 0
+  Candidate Recall: 0.4700 (47 / 100)
+
+D2_Word2Vec:
+  FN (missed duplicates): 96
+  FP (false alarms): 2
+  Candidate Recall: 0.4000 (40 / 100)
+
+D3_TF-IDF+W2V_Concat:
+  FN (missed duplicates): 98
+  FP (false alarms): 2
+  Candidate Recall: 0.3300 (33 / 100)
+
+D4_TF-IDF_Weighted_W2V:
+  FN (missed duplicates): 98
+  FP (false alarms): 3
+  Candidate Recall: 0.3600 (36 / 100)
+
+D5_Title_Body_Fusion:
+  FN (missed duplicates): 100
+  FP (false alarms): 5
+  Candidate Recall: 0.3700 (37 / 100)
+
+======================================================================
+Total experiment time: 19055.61s
+======================================================================
